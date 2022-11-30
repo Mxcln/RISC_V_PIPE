@@ -39,74 +39,82 @@
 
 #### 执行 `ex.v`
 
-| input      | comments     | output | comments |
-| ---------- | ------------ | ------ | -------- |
-| clk_100MHz | 系统输入时钟 |        |          |
-| arst_n     | 系统复位     |        |          |
-|            |              |        |          |
-|            |              |        |          |
+| in/out | input/output | width | comments     |
+| ------ | ------------ | ----- | ------------ |
+| in     | clk_100MHz   | 1     | 系统输入时钟 |
+| in     | arst_n       | 1     | 系统复位     |
+|        |              |       |              |
+|        |              |       |              |
+|        |              |       |              |
 
 #### 访存 `rd.v`
 
-| input      | comments     | output | comments |
-| ---------- | ------------ | ------ | -------- |
-| clk_100MHz | 系统输入时钟 |        |          |
-| arst_n     | 系统复位     |        |          |
-|            |              |        |          |
-|            |              |        |          |
+| in/out | input/output | width | comments     |
+| ------ | ------------ | ----- | ------------ |
+| in     | clk_100MHz   | 1     | 系统输入时钟 |
+| in     | arst_n       | 1     | 系统复位     |
+|        |              |       |              |
+|        |              |       |              |
+|        |              |       |              |
 
 #### 回写 `wr.v`
 
-| input      | comments     | output | comments |
-| ---------- | ------------ | ------ | -------- |
-| clk_100MHz | 系统输入时钟 |        |          |
-| arst_n     | 系统复位     |        |          |
-|            |              |        |          |
-|            |              |        |          |
+| in/out | input/output | width | comments     |
+| ------ | ------------ | ----- | ------------ |
+| in     | clk_100MHz   | 1     | 系统输入时钟 |
+| in     | arst_n       | 1     | 系统复位     |
+|        |              |       |              |
+|        |              |       |              |
+|        |              |       |              |
 
 #### 通用寄存器 `regs.v`
 
-| input      | comments     | output | comments |
-| ---------- | ------------ | ------ | -------- |
-| clk_100MHz | 系统输入时钟 |        |          |
-| arst_n     | 系统复位     |        |          |
-|            |              |        |          |
-|            |              |        |          |
+| in/out | input/output | width | comments     |
+| ------ | ------------ | ----- | ------------ |
+| in     | clk_100MHz   | 1     | 系统输入时钟 |
+| in     | arst_n       | 1     | 系统复位     |
+|        |              |       |              |
+|        |              |       |              |
+|        |              |       |              |
 
 #### 控制 `ctrl.v`
 
-| input      | comments     | output | comments |
-| ---------- | ------------ | ------ | -------- |
-| clk_100MHz | 系统输入时钟 |        |          |
-| arst_n     | 系统复位     |        |          |
-|            |              |        |          |
-|            |              |        |          |
+| in/out | input/output | width | comments     |
+| ------ | ------------ | ----- | ------------ |
+| in     | clk_100MHz   | 1     | 系统输入时钟 |
+| in     | arst_n       | 1     | 系统复位     |
+|        |              |       |              |
+|        |              |       |              |
+|        |              |       |              |
 
 #### 总线 `bus.v`
 
-| input      | comments     | output | comments |
-| ---------- | ------------ | ------ | -------- |
-| clk_100MHz | 系统输入时钟 |        |          |
-| arst_n     | 系统复位     |        |          |
-|            |              |        |          |
-|            |              |        |          |
+| in/out | input/output | width | comments     |
+| ------ | ------------ | ----- | ------------ |
+| in     | clk_100MHz   | 1     | 系统输入时钟 |
+| in     | arst_n       | 1     | 系统复位     |
+|        |              |       |              |
+|        |              |       |              |
+|        |              |       |              |
 
 ### 外设模块
 
 #### 指令储存 `rom.v`
 
-| input      | comments     | output | comments |
-| ---------- | ------------ | ------ | -------- |
-| clk_100MHz | 系统输入时钟 |        |          |
-| arst_n     | 系统复位     |        |          |
-|            |              |        |          |
-|            |              |        |          |
+| in/out | input/output | width | comments     |
+| ------ | ------------ | ----- | ------------ |
+| in     | clk_100MHz   | 1     | 系统输入时钟 |
+| in     | arst_n       | 1     | 系统复位     |
+|        |              |       |              |
+|        |              |       |              |
+|        |              |       |              |
 
 #### 数据储存 `ram.v`
 
-| input      | comments     | output | comments |
-| ---------- | ------------ | ------ | -------- |
-| clk_100MHz | 系统输入时钟 |        |          |
-| arst_n     | 系统复位     |        |          |
-|            |              |        |          |
-|            |              |        |          |
+| in/out | input/output | width | comments     |
+| ------ | ------------ | ----- | ------------ |
+| in     | clk_100MHz   | 1     | 系统输入时钟 |
+| in     | arst_n       | 1     | 系统复位     |
+|        |              |       |              |
+|        |              |       |              |
+|        |              |       |              |
