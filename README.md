@@ -101,20 +101,26 @@
 
 #### 指令储存 `rom.v`
 
-| in/out | input/output | width | comments     |
-| ------ | ------------ | ----- | ------------ |
-| in     | clk_100MHz   | 1     | 系统输入时钟 |
-| in     | arst_n       | 1     | 系统复位     |
-|        |              |       |              |
-|        |              |       |              |
-|        |              |       |              |
+| in/out | input/output | width | comments             |
+| ------ | ------------ | ----- | -------------------- |
+| in     | clk_100MHz   | 1     | 系统输入时钟         |
+| in     | arst_n       | 1     | 系统复位             |
+| in     | rena_i       | 1     | 读取使能             |
+| in     | raddr_i      | 32    | 需要读取的数据的地址 |
+| in     | wena_i       | 1     | 写入使能             |
+| in     | waddr_i      | 32    | 需要写入的地址       |
+| in     | wdata_i      | 32    | 需要写入的数据       |
+| out    | rdata_o      | 32    | 输出读取的数据       |
 
 #### 数据储存 `ram.v`
 
-| in/out | input/output | width | comments     |
-| ------ | ------------ | ----- | ------------ |
-| in     | clk_100MHz   | 1     | 系统输入时钟 |
-| in     | arst_n       | 1     | 系统复位     |
-|        |              |       |              |
-|        |              |       |              |
-|        |              |       |              |
+| in/out | input/output | width | comments             |
+| ------ | ------------ | ----- | -------------------- |
+| in     | clk_100MHz   | 1     | 系统输入时钟         |
+| in     | arst_n       | 1     | 系统复位             |
+| in     | rena_i       | 1     | 读取使能             |
+| in     | raddr_i      | 32    | 需要读取的数据的地址 |
+| in     | wena_i       | 1     | 写入使能             |
+| in     | waddr_i      | 32    | 需要写入的地址       |
+| in     | wdata_i      | 32    | 需要写入的数据       |
+| out    | rdata_o      | 32    | 输出读取的数据       |
