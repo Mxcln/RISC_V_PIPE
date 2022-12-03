@@ -1,14 +1,14 @@
 # RISCV
 
-这是一个支持RV32I指令的riscv cpu, 采用五级流水线结构：
+这是一个支持 RV32I 指令的 riscv cpu, 采用五级流水线结构：
 
 取指 译码 执行 访存 回写
 
 ![alt 属性文本](/pic/structure.png "riscv cpu流水线结构")
 
-系统采用流水线结构。通过流水线，cpu与外设（rom，ram）连接并能够访问。
+系统采用流水线结构。通过流水线，cpu 与外设（rom，ram）连接并能够访问。
 
-指令集目前采用RV32I (除去ecall与ebreak指令)
+指令集目前采用 RV32I (除去 ecall 与 ebreak 指令)
 
 ![alt 属性文本](/pic/Instruction_Formats.png "RV32I指令结构")
 
@@ -39,72 +39,116 @@
 | out    | inst_o       | 32    | 指令内容       |
 | out    | inst_addr_o  | 32    | 指令地址       |
 
-
 #### 译码 `id.v`
 
-| in/out | input/output  | width | comments                |
-| ------ | ------------- | ----- | ----------------------- |
-| in     | inst_i        | 32    | 指令内容                |
-| in     | inst_addr_i   | 32    | 指令地址                |
-| in     | reg1_rdata_i  | 32    | 通用寄存器1要输入的数据 |
-| in     | reg2_rdata_i  | 32    | 通用寄存器2要输入的数据 |
-| in     | ex_jump_ena_i | 1     | ex跳转标志              |
-| out    | inst_o        | 32    | 指令内容                |
-| out    | inst_addr_o   | 32    | 指令地址                |
-| out    | reg1_raddr_o  | 5     | 读通用寄存器1的地址     |
-| out    | reg2_raddr_o  | 5     | 读通用寄存器2的地址     |
-| out    | reg1_rdata_o  | 32    | 通用寄存器1的数据       |
-| out    | reg2_rdata_o  | 32    | 通用寄存器2的数据       |
-| out    | reg_we_o      | 1     | 写通用寄存器的标志      |
-| out    | reg_waddr_o   | 5     | 写通用寄存器的地址      |
-| out    | op1_o         | 32    | 操作数1                 |
-| out    | op1_o         | 32    | 操作数2                 |
-| out    | op1_jump_o    | 32    | 跳转操作数1             |
-| out    | op1_jump_o    | 32    | 跳转操作数2             |
-
+| in/out | input/output  | width | comments                  |
+| ------ | ------------- | ----- | ------------------------- |
+| in     | inst_i        | 32    | 指令内容                  |
+| in     | inst_addr_i   | 32    | 指令地址                  |
+| in     | reg1_rdata_i  | 32    | 通用寄存器 1 要输入的数据 |
+| in     | reg2_rdata_i  | 32    | 通用寄存器 2 要输入的数据 |
+| in     | ex_jump_ena_i | 1     | ex 跳转标志               |
+| out    | inst_o        | 32    | 指令内容                  |
+| out    | inst_addr_o   | 32    | 指令地址                  |
+| out    | reg1_raddr_o  | 5     | 读通用寄存器 1 的地址     |
+| out    | reg2_raddr_o  | 5     | 读通用寄存器 2 的地址     |
+| out    | reg1_rdata_o  | 32    | 通用寄存器 1 的数据       |
+| out    | reg2_rdata_o  | 32    | 通用寄存器 2 的数据       |
+| out    | reg_we_o      | 1     | 写通用寄存器的标志        |
+| out    | reg_waddr_o   | 5     | 写通用寄存器的地址        |
+| out    | op1_o         | 32    | 操作数 1                  |
+| out    | op1_o         | 32    | 操作数 2                  |
+| out    | op1_jump_o    | 32    | 跳转操作数 1              |
+| out    | op1_jump_o    | 32    | 跳转操作数 2              |
 
 #### 执行时序 `id_ex`
+
+| in/out | input/output | width | comments              |
+| ------ | ------------ | ----- | --------------------- |
+| in     | clk_100MHz   | 1     | 系统输入时钟          |
+| in     | arst_n       | 1     | 系统复位              |
+| in     | inst_i       | 32    | 指令内容              |
+| in     | inst_addr_i  | 32    | 指令地址              |
+| in     | inst_i       | 32    | 指令内容              |
+| in     | inst_addr_i  | 32    | 指令地址              |
+| in     | reg1_rdata_i | 32    | 通用寄存器 1 的数据   |
+| in     | reg2_rdata_i | 32    | 通用寄存器 2 的数据   |
+| in     | reg1_raddr_i | 5     | 读通用寄存器 1 的地址 |
+| in     | reg2_raddr_i | 5     | 读通用寄存器 2 的地址 |
+| in     | reg_we_i     | 1     | 写通用寄存器的标志    |
+| in     | reg_waddr_i  | 5     | 写通用寄存器的地址    |
+| in     | 0p1_i        | 32    | 操作数 1              |
+| in     | 0p1_i        | 32    | 操作数 2              |
+| in     | 0p1_jump_i   | 32    | 跳转操作数 1          |
+| in     | 0p1_jump_i   | 32    | 跳转操作数 2          |
+| out    | inst_o       | 32    | 指令内容              |
+| out    | inst_addr_o  | 32    | 指令地址              |
+| out    | reg1_rdata_o | 32    | 通用寄存器 1 的数据   |
+| out    | reg2_rdata_o | 32    | 通用寄存器 2 的数据   |
+| out    | reg1_raddr_o | 5     | 读通用寄存器 1 的地址 |
+| out    | reg2_raddr_o | 5     | 读通用寄存器 2 的地址 |
+| out    | reg_we_o     | 1     | 写通用寄存器的标志    |
+| out    | reg_waddr_o  | 5     | 写通用寄存器的地址    |
+| out    | op1_o        | 32    | 操作数 1              |
+| out    | op1_o        | 32    | 操作数 2              |
+| out    | op1_jump_o   | 32    | 跳转操作数 1          |
+| out    | op1_jump_o   | 32    | 跳转操作数 2          |
+
+#### 执行 `ex.v`
+
+| in/out | input/output | width | comments            |
+| ------ | ------------ | ----- | ------------------- |
+| in     | inst_i       | 32    | 输入指令            |
+| in     | inst_addr_i  | 32    | 输入指令地址        |
+| in     | reg_w_ena_i  | 1     | 写寄存器的使能信号  |
+| in     | reg_w_addr_i | 5     | 写寄存器的地址      |
+| in     | op1_i        | 32    | 操作数1             |
+| in     | op2_i        | 32    | 操作数2             |
+| in     | reg1_data_i  | 32    | 通用寄存器1的数据   |
+| in     | reg2_data_i  | 32    | 通用寄存器2的数据   |
+| in     | op1_jump_i   | 32    | 跳转操作数1         |
+| in     | op2_jump_i   | 32    | 跳转操作数2         |
+| out    | ram_r_ena_o  | 1     | 访存使能信号        |
+| out    | ram_r_addr_o | 32    | 访存地址            |
+| out    | reg_w_addr_o | 5     | 写寄存器的地址      |
+| out    | inst_o       | 32    | 指令                |
+| out    | reg_w_ena_o  | 1     | 写寄存器的使能信号  |
+| out    | reg_w_data_o | 32    | 写寄存器的数据      |
+| out    | jump_flag_o  | 1     | 跳转使能信号        |
+| out    | jump_addr_o  | 32    | 跳转的位置          |
+| out    | ram_w_addr_o | 32    | 向ram写回的目标地址 |
+| out    | ram_w_data_o | 32    | 向ram写回的数据     |
+| out    | ram_w_ena_o  | 1     | 向ram写回的使能信号 |
+#### 执行-访存 `ex_mem.v`
+
 | in/out | input/output | width | comments            |
 | ------ | ------------ | ----- | ------------------- |
 | in     | clk_100MHz   | 1     | 系统输入时钟        |
 | in     | arst_n       | 1     | 系统复位            |
-| in     | inst_i       | 32    | 指令内容            |
-| in     | inst_addr_i  | 32    | 指令地址            |
-| in     | inst_i       | 32    | 指令内容            |
-| in     | inst_addr_i  | 32    | 指令地址            |
-| in     | reg1_rdata_i | 32    | 通用寄存器1的数据   |
-| in     | reg2_rdata_i | 32    | 通用寄存器2的数据   |
-| in     | reg1_raddr_i | 5     | 读通用寄存器1的地址 |
-| in     | reg2_raddr_i | 5     | 读通用寄存器2的地址 |
-| in     | reg_we_i     | 1     | 写通用寄存器的标志  |
-| in     | reg_waddr_i  | 5     | 写通用寄存器的地址  |
-| in     | 0p1_i        | 32    | 操作数1             |
-| in     | 0p1_i        | 32    | 操作数2             |
-| in     | 0p1_jump_i   | 32    | 跳转操作数1         |
-| in     | 0p1_jump_i   | 32    | 跳转操作数2         |
-| out    | inst_o       | 32    | 指令内容            |
-| out    | inst_addr_o  | 32    | 指令地址            |
-| out    | reg1_rdata_o | 32    | 通用寄存器1的数据   |
-| out    | reg2_rdata_o | 32    | 通用寄存器2的数据   |
-| out    | reg1_raddr_o | 5     | 读通用寄存器1的地址 |
-| out    | reg2_raddr_o | 5     | 读通用寄存器2的地址 |
-| out    | reg_we_o     | 1     | 写通用寄存器的标志  |
-| out    | reg_waddr_o  | 5     | 写通用寄存器的地址  |
-| out    | op1_o        | 32    | 操作数1             |
-| out    | op1_o        | 32    | 操作数2             |
-| out    | op1_jump_o   | 32    | 跳转操作数1         |
-| out    | op1_jump_o   | 32    | 跳转操作数2         |
-
-
-#### 执行 `ex.v`
-
-| in/out | input/output | width | comments     |
-| ------ | ------------ | ----- | ------------ |
-| in     | clk_100MHz   | 1     | 系统输入时钟 |
-| in     | arst_n       | 1     | 系统复位     |
-|        |              |       |              |
-|        |              |       |              |
-|        |              |       |              |
+| in     | hold         | 1     | 暂停流水线          |
+| in     | clear        | 1     | 清刷流水线          |
+| in     | ram_r_ena_i  | 1     | 访存使能信号        |
+| in     | ram_r_addr_i | 32    | 访存地址            |
+| in     | reg_w_addr_  | 5     | 写寄存器的地址      |
+| in     | inst_i       | 32    | 指令                |
+| in     | reg_w_ena_i  | 1     | 写寄存器的使能信号  |
+| in     | reg_w_data_i | 32    | 写寄存器的数据      |
+| in     | jump_flag_i  | 1     | 跳转使能信号        |
+| in     | jump_addr_i  | 32    | 跳转的位置          |
+| in     | ram_w_addr_i | 32    | 向ram写回的目标地址 |
+| in     | ram_w_data_i | 32    | 向ram写回的数据     |
+| in     | ram_w_ena_i  | 1     | 向ram写回的使能信号 |
+| out    | ram_r_ena_o  | 1     | 访存使能信号        |
+| out    | ram_r_addr_o | 32    | 访存地址            |
+| out    | reg_w_addr_o | 5     | 写寄存器的地址      |
+| out    | inst_o       | 32    | 指令                |
+| out    | reg_w_ena_o  | 1     | 写寄存器的使能信号  |
+| out    | reg_w_data_o | 32    | 写寄存器的数据      |
+| out    | jump_flag_o  | 1     | 跳转使能信号        |
+| out    | jump_addr_o  | 32    | 跳转的位置          |
+| out    | ram_w_addr_o | 32    | 向ram写回的目标地址 |
+| out    | ram_w_data_o | 32    | 向ram写回的数据     |
+| out    | ram_w_ena_o  | 1     | 向ram写回的使能信号 |
 
 #### 访存 `mem.v`
 
@@ -128,6 +172,7 @@
 | out    | mem_wdata_o  | 32    | 写入的数据输出                       |
 
 #### 访存-回写 `mem_wb`
+
 | in/out | input/output | width | comments               |
 | ------ | ------------ | ----- | ---------------------- |
 | in     | clk_100MHz   | 1     | 系统输入时钟           |
