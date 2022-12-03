@@ -1,26 +1,20 @@
 
-`define     ADDR_WIDTH      32
-`define     DATA_WIDTH      32
-`define     ADDR_DEEPTH     4096
-`define     ROM_CLR         0
-`define     ZERO_WORD       32'd0
-
-`define     RST_ENA         1'b0
+`include "../define.v"
 
 module rom(
     input   wire    arst_n  ,
     input   wire    rena_i  ,
 
-    input   wire    [`ADDR_WIDTH - 1 : 0]   raddr_i ,
+    input   wire    [`MEM_ADDR]     raddr_i ,
 
-    output  wire    [`DATA_WIDTH - 1 : 0]   rdata_o 
+    output  wire    [`MEM]           rdata_o 
 );
-    reg     [`ADDR_WIDTH-1 : 0]     _rom[0 : `ADDR_DEEPTH - 1] ;
+    reg     [`MEM_ADDR]     _rom[0 : `MEM_DEEPTH - 1] ;
 
-    reg     [`ADDR_WIDTH - 1 : 0]   rdata;
+    reg     [`MEM_ADDR]   rdata;
 
     always@(*) begin
-        if(arst_n == `RST_ENA)
+        if(arst_n == `RST_ENABLE)
             rdata = `ZERO_WORD;
         else
             rdata = _rom[raddr_i[31:2]];
