@@ -6,7 +6,7 @@ module  mem_wb(
 
     input   wire                        hold_ena_i  ,           //暂停(这里只有系统暂停)       
     
-    input   wire    [`INST]             INST_i     ,           //指令输入                  
+    input   wire    [`INST]             inst_i      ,           //指令输入                  
     
     input   wire                        mem_rena_i  ,           //访存使能输入
     input   wire    [`MEM]              mem_rdata_i ,           //访存得到的数据输入               
@@ -20,7 +20,7 @@ module  mem_wb(
     input   wire    [`MEM_ADDR]         mem_waddr_i ,           //写入的地址输入            
     input   wire    [`MEM]              mem_wdata_i ,           //写入的数据输入            
     
-    output  reg     [`INST]             INST_o     ,           //指令输出
+    output  reg     [`INST]             inst_o      ,           //指令输出
 
     output  reg                         mem_rena_o  ,           //访存使能输出
     output  reg     [`MEM]              mem_rdata_o ,           //访存得到的数据输出
@@ -37,7 +37,7 @@ module  mem_wb(
 
     always@(posedge clk_100MHz or negedge arst_n) begin
         if(!arst_n) begin
-            INST_o      <= `ZERO_INST      ;
+            inst_o      <= `ZERO_INST      ;
             mem_rena_o  <= `READ_DISABLE    ;
             mem_rdata_o <= `ZERO_WORD       ;
             mem_raddr_o <= `ZERO_WORD       ;
@@ -48,7 +48,7 @@ module  mem_wb(
             mem_wdata_o <= `ZERO_WORD       ;
         end
         else if(hold_ena_i) begin
-            INST_o      <= INST_o          ;
+            inst_o      <= inst_o          ;
             mem_rena_o  <= mem_rena_o       ;
             mem_rdata_o <= mem_rdata_o      ;
             mem_raddr_o <= mem_raddr_i      ;
@@ -58,7 +58,7 @@ module  mem_wb(
             mem_wdata_o <= mem_wdata_o      ;
         end
         else begin
-            INST_o      <= INST_i          ;
+            inst_o      <= inst_i          ;
             mem_rena_o  <= mem_rena_i       ;
             mem_rdata_o <= mem_rdata_i      ;
             mem_raddr_o <= mem_raddr_i      ;

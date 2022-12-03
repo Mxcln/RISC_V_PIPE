@@ -5,9 +5,9 @@ module rom(
     input   wire    arst_n  ,
     input   wire    rena_i  ,
 
-    input   wire    [`MEM_ADDR]     raddr_i ,
+    input   wire    [`MEM_ADDR]         raddr_i ,
 
-    output  wire    [`MEM]           rdata_o 
+    output  wire    [`MEM]              rdata_o 
 );
     reg     [`MEM_ADDR]     _rom[0 : `MEM_DEEPTH - 1] ;
 

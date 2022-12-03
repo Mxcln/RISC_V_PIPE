@@ -3,7 +3,7 @@
 module wb(
     input   wire                        arst_n      ,           //系统复位
 
-    input   wire    [`INST]             INST_i     ,           //指令输入
+    input   wire    [`INST]             inst_i     ,           //指令输入
 
     input   wire                        mem_rena_i  ,           //访存使能输入
     input   wire    [`MEM]              mem_rdata_i ,           //访存得到的数据输入               
@@ -33,8 +33,8 @@ module wb(
     wire    [4:0]       rd      ;           //读入访存数据
     wire    [6:0]       opcode  ;           //判断是否为I型指令
 
-    assign {l_imm,rs1,funct3,rd,opcode} = INST_i;
-    assign s_imm = {INST_i[31:25],INST_i[11:7]};
+    assign {l_imm,rs1,funct3,rd,opcode} = inst_i;
+    assign s_imm = {inst_i[31:25],inst_i[11:7]};
 
     //写通用寄存器
 

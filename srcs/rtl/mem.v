@@ -4,7 +4,7 @@
 module  mem(
     input   wire                        arst_n  ,               //系统复位                  
     
-    input   wire    [`INST]             INST_i     ,           //指令输入                  
+    input   wire    [`INST]             inst_i      ,           //指令输入                  
     
     input   wire                        mem_rena_i  ,           //访存使能输入
     input   wire    [`MEM]              mem_rdata_i ,           //访存得到的数据输入               
@@ -18,7 +18,7 @@ module  mem(
     input   wire    [`MEM_ADDR]         mem_waddr_i ,           //写入的地址输入            
     input   wire    [`MEM]              mem_wdata_i ,           //写入的数据输入            
     
-    output  wire    [`INST]             INST_o     ,           //指令输出
+    output  wire    [`INST]             inst_o      ,           //指令输出
 
     output  wire                        mem_rena_o  ,           //访存使能输出
     output  wire    [`MEM]              mem_rdata_o ,           //访存得到的数据输出
@@ -41,7 +41,7 @@ module  mem(
     wire    [11:7]      rd;             //读入访存数据
     wire    [6:0]       opcode;         //判断是否为I型指令
 
-    assign {imm,rs1,funct3,rd,opcode} = INST_i;
+    assign {imm,rs1,funct3,rd,opcode} = inst_i;
 
     always@(*) begin
         if(arst_n != `RST_ENABLE && mem_rena_i == `READ_ENABLE) begin
@@ -49,7 +49,7 @@ module  mem(
         end
     end
 
-    assign  INST_o      = INST_i       ;
+    assign  inst_o      = inst_i       ;
 
     assign  mem_rena_o  = mem_rena_i    ;
     assign  mem_rdata_o = mem_rdata     ;

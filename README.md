@@ -155,7 +155,7 @@
 | in/out | input/output | width | comments                             |
 | ------ | ------------ | ----- | ------------------------------------ |
 | in     | arst_n       | 1     | 系统复位                             |
-| in     | instc_i      | 32    | 指令输入                             |
+| in     | inst_i       | 32    | 指令输入                             |
 | in     | mem_rena_i   | 1     | 访存使能输入                         |
 | in     | mem_rdata_i  | 32    | 访存得到的数据输入                   |
 | in     | mem_raddr_i  | 32    | 访存地址输入                         |
@@ -165,9 +165,10 @@
 | in     | mem_wena_i   | 1     | 写入使能输入                         |
 | in     | mem_waddr_i  | 32    | 写入的地址输入                       |
 | in     | mem_wdata_i  | 32    | 写入的数据输入                       |
-| out    | instc_o      | 32    | 指令输出                             |
+| out    | inst_o       | 32    | 指令输出                             |
 | out    | mem_rena_o   | 1     | 访存使能输出                         |
 | out    | mem_rdata_o  | 32    | 访存得到的数据输出                   |
+| out    | mem_raddr_o  | 32    | 访存地址输出                         |
 | out    | reg_wena_o   | 1     | 写入通用寄存器使能输出               |
 | out    | reg_wdata_o  | 32    | 写入通用寄存器数据输出               |
 | out    | reg_waddr_o  | 5     | 写入通用寄存器地址输出               |
@@ -177,38 +178,53 @@
 
 #### 访存-回写 `mem_wb`
 
-| in/out | input/output | width | comments               |
-| ------ | ------------ | ----- | ---------------------- |
-| in     | clk_100MHz   | 1     | 系统输入时钟           |
-| in     | arst_n       | 1     | 系统复位               |
-| in     | hold_ena_i   | 1     | 流水线暂停信号         |
-| in     | instc_i      | 32    | 指令输入               |
-| in     | mem_rena_i   | 1     | 访存使能输入           |
-| in     | mem_rdata_i  | 32    | 访存得到的数据输入     |
-| in     | reg_waddr_i  | 5     | 访存通用寄存器地址输入 |
-| in     | mem_wena_i   | 1     | 写入使能输入           |
-| in     | mem_waddr_i  | 32    | 写入的地址输入         |
-| in     | mem_wdata_i  | 32    | 写入的数据输入         |
-| out    | instc_o      | 32    | 指令输出               |
-| out    | mem_rena_o   | 1     | 访存使能输出           |
-| out    | mem_rdata_o  | 32    | 访存得到的数据输出     |
-| out    | reg_waddr_o  | 5     | 访存通用寄存器地址输出 |
-| out    | mem_wena_o   | 1     | 写入使能输出           |
-| out    | mem_waddr_o  | 32    | 写入的地址输出         |
-| out    | mem_wdata_o  | 32    | 写入的数据输出         |
+| in/out | input/output | width | comments                 |
+| ------ | ------------ | ----- | ------------------------ |
+| in     | clk_100MHz   | 1     | 系统输入时钟             |
+| in     | arst_n       | 1     | 系统复位                 |
+| in     | hold_ena_i   | 1     | 流水线暂停信号           |
+| in     | inst_i       | 32    | 指令输入                 |
+| in     | mem_rena_i   | 1     | 访存使能输入             |
+| in     | mem_rdata_i  | 32    | 访存得到的数据输入       |
+| in     | mem_raddr_i  | 32    | 访存地址输入             |
+| in     | reg_w_ena_i  | 1     | 写入通用寄存器使能输入   |
+| in     | reg_wdata_i  | 32    | 写入通用寄存器的数据输入 |
+| in     | reg_waddr_i  | 5     | 访存通用寄存器地址输入   |
+| in     | mem_wena_i   | 1     | 写入使能输入             |
+| in     | mem_waddr_i  | 32    | 写入的地址输入           |
+| in     | mem_wdata_i  | 32    | 写入的数据输入           |
+| out    | inst_o       | 32    | 指令输出                 |
+| out    | mem_rena_o   | 1     | 访存使能输出             |
+| out    | mem_rdata_o  | 32    | 访存得到的数据输出       |
+| out    | mem_raddr_o  | 32    | 访存地址输出             |
+| out    | reg_wena_o   | 1     | 写入通用寄存器使能输出   |
+| out    | reg_wdata_o  | 32    | 写入通用寄存器数据输出   |
+| out    | reg_waddr_o  | 5     | 写入通用寄存器地址输出   |
+| out    | mem_wena_o   | 1     | 写入使能输出             |
+| out    | mem_waddr_o  | 32    | 写入的地址输出           |
+| out    | mem_wdata_o  | 32    | 写入的数据输出           |
 
 #### 回写 `wb.v`
 
-| in/out | input/output | width | comments               |
-| ------ | ------------ | ----- | ---------------------- |
-| in     | arst_n       | 1     | 系统复位               |
-| in     | instc_i      | 32    | 指令输入               |
-| in     | mem_rena_i   | 1     | 访存使能输入           |
-| in     | mem_rdata_o  | 32    | 访存得到的数据输入     |
-| in     | reg_waddr_i  | 5     | 访存通用寄存器地址输入 |
-| in     | mem_wena_i   | 1     | 写入使能输入           |
-| in     | mem_waddr_i  | 32    | 写入的地址输入         |
-| in     | mem_wdata_i  | 32    | 写入的数据输入         |
+| in/out | input/output | width | comments                 |
+| ------ | ------------ | ----- | ------------------------ |
+| in     | arst_n       | 1     | 系统复位                 |
+| in     | instc_i      | 32    | 指令输入                 |
+| in     | mem_rena_i   | 1     | 访存使能输入             |
+| in     | mem_rdata_i  | 32    | 访存得到的数据输入       |
+| in     | mem_raddr_i  | 32    | 访存地址输入             |
+| in     | reg_w_ena_i  | 1     | 写入通用寄存器使能输入   |
+| in     | reg_wdata_i  | 32    | 写入通用寄存器的数据输入 |
+| in     | reg_waddr_i  | 5     | 访存通用寄存器地址输入   |
+| in     | mem_wena_i   | 1     | 写入使能输入             |
+| in     | mem_waddr_i  | 32    | 写入的地址输入           |
+| in     | mem_wdata_i  | 32    | 写入的数据输入           |
+| out    | reg_wena_o   | 1     | 写入通用寄存器使能输出   |
+| out    | reg_wdata_o  | 32    | 写入通用寄存器数据输出   |
+| out    | reg_waddr_o  | 5     | 写入通用寄存器地址输出   |
+| out    | mem_wena_o   | 1     | 写入使能输出             |
+| out    | mem_waddr_o  | 32    | 写入的地址输出           |
+| out    | mem_wdata_o  | 32    | 写入的数据输出           |
 
 #### 通用寄存器 `regs.v`
 
@@ -259,6 +275,7 @@
 
 | in/out | input/output | width | comments             |
 | ------ | ------------ | ----- | -------------------- |
+| in     | clk_100MHz   | 1     | 系统输入时钟         |
 | in     | arst_n       | 1     | 系统复位             |
 | in     | rena_i       | 1     | 读取使能             |
 | in     | raddr_i      | 32    | 需要读取的数据的地址 |
