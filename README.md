@@ -96,13 +96,59 @@
 
 #### 执行 `ex.v`
 
-| in/out | input/output | width | comments     |
-| ------ | ------------ | ----- | ------------ |
-| in     | clk_100MHz   | 1     | 系统输入时钟 |
-| in     | arst_n       | 1     | 系统复位     |
-|        |              |       |              |
-|        |              |       |              |
-|        |              |       |              |
+| in/out | input/output | width | comments            |
+| ------ | ------------ | ----- | ------------------- |
+| in     | inst_i       | 32    | 输入指令            |
+| in     | inst_addr_i  | 32    | 输入指令地址        |
+| in     | reg_w_ena_i  | 1     | 写寄存器的使能信号  |
+| in     | reg_w_addr_i | 5     | 写寄存器的地址      |
+| in     | op1_i        | 32    | 操作数1             |
+| in     | op2_i        | 32    | 操作数2             |
+| in     | reg1_data_i  | 32    | 通用寄存器1的数据   |
+| in     | reg2_data_i  | 32    | 通用寄存器2的数据   |
+| in     | op1_jump_i   | 32    | 跳转操作数1         |
+| in     | op2_jump_i   | 32    | 跳转操作数2         |
+| out    | ram_r_ena_o  | 1     | 访存使能信号        |
+| out    | ram_r_addr_o | 32    | 访存地址            |
+| out    | reg_w_addr_o | 5     | 写寄存器的地址      |
+| out    | inst_o       | 32    | 指令                |
+| out    | reg_w_ena_o  | 1     | 写寄存器的使能信号  |
+| out    | reg_w_data_o | 32    | 写寄存器的数据      |
+| out    | jump_flag_o  | 1     | 跳转使能信号        |
+| out    | jump_addr_o  | 32    | 跳转的位置          |
+| out    | ram_w_addr_o | 32    | 向ram写回的目标地址 |
+| out    | ram_w_data_o | 32    | 向ram写回的数据     |
+| out    | ram_w_ena_o  | 1     | 向ram写回的使能信号 |
+#### 执行-访存 `ex_mem.v`
+
+| in/out | input/output | width | comments            |
+| ------ | ------------ | ----- | ------------------- |
+| in     | clk_100MHz   | 1     | 系统输入时钟        |
+| in     | arst_n       | 1     | 系统复位            |
+| in     | hold         | 1     | 暂停流水线          |
+| in     | clear        | 1     | 清刷流水线          |
+| in     | ram_r_ena_i  | 1     | 访存使能信号        |
+| in     | ram_r_addr_i | 32    | 访存地址            |
+| in     | reg_w_addr_  | 5     | 写寄存器的地址      |
+| in     | inst_i       | 32    | 指令                |
+| in     | reg_w_ena_i  | 1     | 写寄存器的使能信号  |
+| in     | reg_w_data_i | 32    | 写寄存器的数据      |
+| in     | jump_flag_i  | 1     | 跳转使能信号        |
+| in     | jump_addr_i  | 32    | 跳转的位置          |
+| in     | ram_w_addr_i | 32    | 向ram写回的目标地址 |
+| in     | ram_w_data_i | 32    | 向ram写回的数据     |
+| in     | ram_w_ena_i  | 1     | 向ram写回的使能信号 |
+| out    | ram_r_ena_o  | 1     | 访存使能信号        |
+| out    | ram_r_addr_o | 32    | 访存地址            |
+| out    | reg_w_addr_o | 5     | 写寄存器的地址      |
+| out    | inst_o       | 32    | 指令                |
+| out    | reg_w_ena_o  | 1     | 写寄存器的使能信号  |
+| out    | reg_w_data_o | 32    | 写寄存器的数据      |
+| out    | jump_flag_o  | 1     | 跳转使能信号        |
+| out    | jump_addr_o  | 32    | 跳转的位置          |
+| out    | ram_w_addr_o | 32    | 向ram写回的目标地址 |
+| out    | ram_w_data_o | 32    | 向ram写回的数据     |
+| out    | ram_w_ena_o  | 1     | 向ram写回的使能信号 |
 
 #### 访存 `mem.v`
 
