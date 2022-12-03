@@ -1,7 +1,3 @@
-`define         INST     31:0
-`define         INSTADDR 31:0
-`define         REG      31:0   
-`define         REGADDR  4:0
 `define         MEMADDR  31:0
 
 module ex(

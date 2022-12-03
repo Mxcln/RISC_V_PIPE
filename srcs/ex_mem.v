@@ -1,7 +1,3 @@
-`define         INST        31:0
-`define         INSTADDR    31:0
-`define         REG         31:0   
-`define         REGADDR     31:0
 `define         MEMADDR     31:0
 `define         ZEROADDR    32'h0
 `define         ZERODATA    32'h0
@@ -50,12 +46,12 @@ module ex_mem (
     output  reg                   ram_w_ena_o        //需要写回的使能信号，也需要判断指令类型
 );
     always@(posedge clk_100M or negedge arst_n)
-        if( arst_n | clear )
+        if( !arst_n | clear )
             begin
                 //To mem
                 ram_r_ena_o  <= "DISABLE"    ;
-                ram_r_addr_o <= "ZEROADDR"   ;
-                reg_w_addr_o <= "ZEROADDR"   ;
+                ram_r_addr_o <= "ZEROADDR"   ;  
+                reg_w_addr_o <= "ZEROREG"   ;
                 inst_o       <= "ZERODATA"   ;
                 reg_w_ena_o  <= "ZEROENA"    ;
                 reg_w_data_o <= "ZERODATA"   ;
