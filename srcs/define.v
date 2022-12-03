@@ -3,6 +3,8 @@
 //inst
 `define INST 31:0
 `define INST_ADDR 31:0
+`define ZERO_INST_ADDR 32'b0
+
 //cpureset 
 `define CPU_RESET_ADDR 32'b0
 
@@ -10,13 +12,16 @@
 `define RST_ENABLE 1'b0
 `define HOLD_ENABLE 1'b1
 `define JUMP_ENABLE 1'b1
-`define HOLD_ENABLE 1'b1
+`define JUMP_DISABLE 1'b0
+`define HOLD_DISABLE 1'b0
+`define READ_DISABLE 1'b1
+`define READ_ENABLE 1'b1
 `define WRITE_ENABLE 1'b1
 `define WRITE_DISABLE 1'b1
 //reg
 `define REG 31:0
 `define REG_ADDR 4:0
-`define ZERO_REG 5'h0
+`define ZERO_REG 4'h0
 //op op_jump
 `define MEM_ADDR 31:0   //操作数的位数
 `define ZERO_WORD 32'b0 //操作数的值
@@ -65,7 +70,7 @@
 `define INST_BGE    3'b101
 `define INST_BLTU   3'b110
 `define INST_BGEU   3'b111
-// JAL JALR LUI AUIPC
+// JAL JALR LUI AUIPC 
 `define INST_JAL    7'b1101111
 `define INST_JALR   7'b1100111
 
