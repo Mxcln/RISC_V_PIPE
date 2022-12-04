@@ -16,8 +16,8 @@ module id_ex (
     input wire[`MEM_ADDR] op1_jump_i,     //跳转操作数1
     input wire[`MEM_ADDR] op2_jump_i,      //跳转操作数2
     
-    input wire              hold_ena_i,      //流水线暂停
-    input wire              jump_ena_i,      //冲刷流水线
+    input wire              hold_ena_i,      //系统暂停
+    input wire              jump_ena_i,      //表示冲刷流水线或者跳转信号
 
     output reg[`INST] inst_o,             // 指令内容
     output reg[`INST_ADDR] inst_addr_o,    // 指令地址

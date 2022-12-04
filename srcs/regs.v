@@ -4,10 +4,6 @@
 module regs (
     input wire  clk_100MHz,
     input wire  arst_n,
-    //from ex
-    
-    //from mem
-
     //from wb
     input wire w_ena_i,                      // 写寄存器标志
     input wire[`REG_ADDR] w_addr_i,      // 写寄存器地址
@@ -37,13 +33,7 @@ module regs (
         if (reg1_r_addr_i == `ZERO_REG) begin
             reg1_r_data_o = `ZERO_WORD;
         end 
-        else if(reg1_r_addr_i == ex_addr_i && w_ena_i == `WRITE_ENABLE) begin
-            reg1_r_data_o = ex_data_i;
-        end
-        else if(reg1_r_addr_i == mem_addr_i && w_ena_i == `WRITE_ENABLE) begin
-            reg1_r_data_o = mem_data_i;
-        end
-        else if (reg1_r_addr_i == w_addr_i && w_ena_i == `WRITE_ENABLE) begin
+        else if (reg1_r_addr_i == w_addr_i && w_e_i == `WRITE_ENABLE) begin
             reg1_r_data_o = w_data_i;
         end else begin
             reg1_r_data_o = regs[reg1_r_addr_i];//把读寄存器的地址所对应的data取出来
@@ -54,13 +44,7 @@ module regs (
         if (reg2_r_addr_i == `ZERO_REG) begin
             reg2_r_data_o = `ZERO_WORD;
         end 
-        else if(reg1_r_addr_i == ex_addr_i && w_ena_i == `WRITE_ENABLE) begin
-            reg1_r_data_o = ex_data_i;
-        end
-        else if(reg1_r_addr_i == mem_addr_i && w_ena_i == `WRITE_ENABLE) begin
-            reg1_r_data_o = mem_data_i;
-        end
-        else if (reg2_r_addr_i == w_addr_i && w_ena_i == `WRITE_ENABLE) begin
+        else if (reg2_r_addr_i == w_addr_i && w_e_i == `WRITE_ENABLE) begin
             reg2_r_data_o = w_data_i;
         end else begin
             reg2_r_data_o = regs[reg2_r_addr_i];//把读寄存器的地址所对应的data取出来
