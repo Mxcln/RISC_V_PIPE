@@ -7,15 +7,21 @@
 `include "define.v"
 module forward_unit(
 	
-	input	wire	[`REG_ADDR]			rs1_id_ex_o_i_			, //来自rs1_id_ex_o_i的输出
+	input	wire	[`REG_ADDR]			rs1_id_ex_o_i			, //来自rs1_id_ex_o_i的输出
 	input 	wire	[`REG_ADDR]			rs2_id_ex_o_i			,
 	input 	wire	[`REG_ADDR]			rd_ex_mem_o_i			,
 	input 	wire	[`REG_ADDR]			rd_mem_wb_o_i			,
 	input 	wire 						reg_w_ena_ex_mem_o_i	,
 	input 	wire 						reg_w_ena_mem_wb_o_i	,
-	input 	wire 						memwrite_id_ex_o_i		,
-    input 	wire 						ram_w_ena_id_ex_o_i		,
-	input 	wire 						ram_r_ex_mem_o_i		,
+    input 	wire 						mem_w_ena_id_ex_o_i		,
+	input 	wire 						mem_r_ena_ex_mem_o_i	,
+
+	input 	wire	[`REG_ADDR]			rs1_id_ex_i_i			,
+	input 	wire	[`REG_ADDR]			rs2_id_ex_i_i			,
+	input 	wire	[`REG_ADDR]			rd_id_ex_o_i			,
+	input 	wire						mem_r_ena_id_ex_o_i		,
+	input 	wire						mem_w_ena_id_ex_i_i		,
+	input 	wire						reg_w_ena_id_ex_o_i		,
 
 	output  wire	[1:0]				forwardA_o				,
 	output  wire	[1:0]				forwardB_o				,
@@ -24,24 +30,21 @@ module forward_unit(
 	
     );
 
-	assign forwardA[1] = (reg_w_ena_ex_mem_o_i && (rd_ex_mem_o_i != 5'b0) && (rd_ex_mem_o_i == rs1_id_ex_o_i));	
-	assign forwardA[0] = (reg_w_ena_mem_wb_o_i && (rd_mem_wb_o_i != 5'd0) && (rd_mem_wb_o_i == rs1_id_ex_o_i));
-	assign forwardB[1] = (reg_w_ena_ex_mem_o_i && (rd_ex_mem_o_i != 5'b0) && (rd_ex_mem_o_i == rs2_id_ex_o_i));
-	assign forwardB[0] = (reg_w_ena_mem_wb_o_i && (rd_mem_wb_o_i != 5'd0) && (rd_mem_wb_o_i == rs2_id_ex_o_i));
-	assign forwardC    = (reg_w_ena_ex_mem_o_i && (rd_ex_mem_o_i != 5'd0) && (rd_ex_mem_o_i != rs1_id_ex_o_i)&& (rd_ex_mem_o_i == rs2_id_ex_o_i)&& ram_w_ena_id_ex_o_i && ram_r_ex_mem_o_i );
+	assign forwardA_o[1] = (reg_w_ena_ex_mem_o_i && (rd_ex_mem_o_i != 5'b0) && (rd_ex_mem_o_i == rs1_id_ex_o_i));	
+	assign forwardA_o[0] = (reg_w_ena_mem_wb_o_i && (rd_mem_wb_o_i != 5'd0) && (rd_mem_wb_o_i == rs1_id_ex_o_i));
+	assign forwardB_o[1] = (reg_w_ena_ex_mem_o_i && (rd_ex_mem_o_i != 5'b0) && (rd_ex_mem_o_i == rs2_id_ex_o_i));
+	assign forwardB_o[0] = (reg_w_ena_mem_wb_o_i && (rd_mem_wb_o_i != 5'd0) && (rd_mem_wb_o_i == rs2_id_ex_o_i));
+	assign forwardC_o    = (reg_w_ena_ex_mem_o_i && (rd_ex_mem_o_i != 5'd0) && (rd_ex_mem_o_i != rs1_id_ex_o_i)&& (rd_ex_mem_o_i == rs2_id_ex_o_i)&& mem_w_ena_id_ex_o_i && mem_r_ena_ex_mem_o_i );
 
-	//load-use load后紧跟sw且需要停顿
-	assign hazard_hold = 	MemRead_id_ex_o_i & RegWrite_id_ex_o_i & (Rd_id_ex_o_i!=5'd0)   //load
-							&(!MemWrite_id_ex_i)     //非store
-							& ((Rd_id_ex_o_i ==Rs1_id_ex_i) | (Rd_id_ex_o_i ==Rs2_id_ex_i))
+	//load后紧跟sw且需要停顿
+	assign hazard_hold_o = 	mem_r_ena_id_ex_o_i & reg_w_ena_id_ex_o_i & (rd_id_ex_o_i != 5'd0)   //load
+							&(!mem_w_ena_id_ex_i_i)     //非store
+							& ((rd_id_ex_o_i == rs1_id_ex_i_i) | (rd_id_ex_o_i == rs2_id_ex_i_i))
 							|
-							MemRead_id_ex_o_i & RegWrite_id_ex_o_i & (Rd_id_ex_o_i!=5'd0)     //load
-							&(MemWrite_id_ex_i)     //store
-							& (Rd_id_ex_o_i ==Rs1_id_ex_i);
-
-
+							mem_r_ena_id_ex_o_i & reg_w_ena_id_ex_o_i & (rd_id_ex_o_i != 5'd0)   //load
+							&(mem_w_ena_id_ex_i_i)     //store
+							& (rd_id_ex_o_i == rs1_id_ex_i_i);
 endmodule
-
 
 
 

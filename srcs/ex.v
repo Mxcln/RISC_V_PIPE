@@ -18,6 +18,8 @@ module ex(
     input   wire                    mem_r_ena_i ,
     input   wire                    mem_w_ena_i ,
 
+    input   wire                    forwardC_i,
+
     //to    mem                                     //向访存模块发出指令
     output  wire                    mem_r_ena_o   ,   //需要访问mem读取数据的信号
     output  reg     [`MEM_ADDR]     mem_r_addr_o,    //需要读取的信号地址
@@ -26,6 +28,7 @@ module ex(
     output  reg                     reg_w_ena_o,    //将写寄存器的使能信号
     output  reg     [`INST]         reg_w_data_o,   //输出写回寄存器的数据，即不需要访存的数据    
 
+    output  wire                     forwardC_o,
     //to    ctrl
  
     output  reg                     jump_flag_o,    //是否跳转
@@ -66,6 +69,8 @@ assign op1_jump_add_op2_jump_res = op1_jump_i + op2_jump_i ;
 
 assign  mem_r_ena_o = mem_r_ena_i;
 assign  mem_w_ena_o = mem_w_ena_i;
+
+assign  forwardC_o = forwardC_i;
 
 always@(*)begin
     reg_w_ena_o = reg_w_ena_i ;
