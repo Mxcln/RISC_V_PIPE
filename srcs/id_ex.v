@@ -11,6 +11,10 @@ module id_ex (
     input wire[`REG] reg2_r_data_i,        // 通用寄存器2数据
     input wire reg_w_ena_i,                  // 写通用寄存器标志
     input wire[`REG_ADDR] reg_w_addr_i,     // 写通用寄存器地址
+
+    input   wire            mem_r_ena_i ,
+    input   wire            mem_w_ena_i ,
+
     input wire[`MEM_ADDR] op1_i,          //操作数1
     input wire[`MEM_ADDR] op2_i,          //操作数2
     input wire[`MEM_ADDR] op1_jump_i,     //跳转操作数1
@@ -25,6 +29,10 @@ module id_ex (
     output reg[`REG] reg2_r_data_o,        // 通用寄存器2数据
     output reg reg_w_e_o,                  // 写通用寄存器标志
     output reg[`REG_ADDR] reg_w_addr_o,     // 写通用寄存器地址
+
+    output  reg             mem_r_ena_o ,
+    output  reg             mem_w_ena_o ,
+
     output reg[`MEM_ADDR] op1_o,          //操作数1
     output reg[`MEM_ADDR] op2_o,          //操作数2
     output reg[`MEM_ADDR] op1_jump_o,     //跳转操作数1
@@ -38,6 +46,8 @@ module id_ex (
             reg2_r_data_o <= `ZERO_WORD;
             reg_w_e_o <= `WRITE_DISABLE;
             reg_w_addr_o <= `ZERO_REG;
+            mem_r_ena_o  <= `READ_DISABLE;
+            mem_w_ena_o <= `WRITE_DISABLE;
             op1_o <= `ZERO_WORD;
             op2_o <= `ZERO_WORD;
             op1_jump_o <= `ZERO_WORD;
@@ -50,6 +60,8 @@ module id_ex (
             reg2_r_data_o <= reg2_r_data_o;
             reg_w_e_o <= reg_w_e_o;
             reg_w_addr_o <= reg_w_addr_o;
+            mem_r_ena_o  <= mem_r_ena_o;
+            mem_w_ena_o <= mem_w_ena_o;
             op1_o <= op1_o;
             op2_o <= op2_o;
             op1_jump_o <= op1_jump_o;
@@ -63,6 +75,8 @@ module id_ex (
             reg2_r_data_o <= `ZERO_WORD;
             reg_w_e_o <= `WRITE_DISABLE;
             reg_w_addr_o <= `ZERO_REG;
+            mem_r_ena_o  <= `READ_DISABLE;
+            mem_w_ena_o <= `WRITE_DISABLE;
             op1_o <= `ZERO_WORD;
             op2_o <= `ZERO_WORD;
             op1_jump_o <= `ZERO_WORD;
@@ -75,6 +89,8 @@ module id_ex (
             reg2_r_data_o <= reg2_r_data_i;
             reg_w_e_o <= reg_w_ena_i;
             reg_w_addr_o <= reg_w_addr_i;
+            mem_r_ena_o <= mem_r_ena_i;
+            mem_w_ena_o <= mem_w_ena_i;
             op1_o <= op1_i;
             op2_o <= op2_i;
             op1_jump_o <= op1_jump_i;

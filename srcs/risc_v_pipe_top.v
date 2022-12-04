@@ -185,7 +185,25 @@ module risc_v_pipe_top(
 
 
     //wb模块：写回（通用寄存器或RAM），组合逻辑
-    
+    wb  u_wb(
+        .arst_n             ( arst_n ),
+        .inst_i             (  ), 
+        .mem_rena_i         (  ),
+        .mem_rdata_i        (  ),
+        .mem_raddr_i        (  ),
+        .reg_wena_i         (  ),
+        .reg_wdata_i        (  ),
+        .reg_waddr_i        (  ),
+        .mem_wena_i         (  ),
+        .mem_waddr_i        (  ),
+        .mem_wdata_i        (  ),
+        .reg_wena_o         ( wb_w_ena ),
+        .reg_wdata_o        ( wb_w_addr ),
+        .reg_waddr_o        ( wb_w_data ),
+        .mem_wena_o         (  ),
+        .mem_waddr_o        (  ),
+        .mem_wdata_o        (  )
+    );
 
 
 

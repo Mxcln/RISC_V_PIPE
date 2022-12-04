@@ -6,67 +6,39 @@
 //e.在发生加载——使用型冒险的时候，如果是load后跟着store指令，并且load指令的rd与store指令的rs1 不同而与rs2相同，则不需要停顿，只需要将MEM/WB 寄存器的数据前递到MEM阶段。
 `include "define.v"
 module forward_unit(
-	input [`REG]rs1_id_ex_o, //来自rs1_id_ex_o的输出
-	input [`REG]rs2_id_ex_o,
-	input [`REG]rd_ex_mem_o,
-	input [`REG]rd_mem_wb_o,
-	input wire reg_w_ena_ex_mem_o,
-	input wire reg_w_ena_mem_wb_o,
-	input wire memwrite_id_ex_o,
-    input wire ram_w_ena_id_ex_o,
-	input wire ram_r_ex_mem_o,
-	output  [1:0]forwardA,
-	output  [1:0]forwardB,
-	output forwardC
+	
+	input	wire	[`REG_ADDR]			rs1_id_ex_o_i_			, //来自rs1_id_ex_o_i的输出
+	input 	wire	[`REG_ADDR]			rs2_id_ex_o_i			,
+	input 	wire	[`REG_ADDR]			rd_ex_mem_o_i			,
+	input 	wire	[`REG_ADDR]			rd_mem_wb_o_i			,
+	input 	wire 						reg_w_ena_ex_mem_o_i	,
+	input 	wire 						reg_w_ena_mem_wb_o_i	,
+	input 	wire 						memwrite_id_ex_o_i		,
+    input 	wire 						ram_w_ena_id_ex_o_i		,
+	input 	wire 						ram_r_ex_mem_o_i		,
+
+	output  wire	[1:0]				forwardA_o				,
+	output  wire	[1:0]				forwardB_o				,
+	output 	wire						forwardC_o				,
+	output	wire						hazard_hold_o
 	
     );
-	assign forwardA[1]=(reg_w_ena_ex_mem_o && (rd_ex_mem_o != 5'b0) && (rd_ex_mem_o == rs1_id_ex_o));	
-	assign forwardA[0]=(reg_w_ena_mem_wb_o && (rd_mem_wb_o != 5'd0) && (rd_mem_wb_o == rs1_id_ex_o));
-	assign forwardB[1]=(reg_w_ena_ex_mem_o && (rd_ex_mem_o != 5'b0) && (rd_ex_mem_o == rs2_id_ex_o));
-	assign forwardB[0]=(reg_w_ena_mem_wb_o && (rd_mem_wb_o != 5'd0) && (rd_mem_wb_o == rs2_id_ex_o));
-	assign forwardC=(reg_w_ena_ex_mem_o && (rd_ex_mem_o != 5'd0) && (rd_ex_mem_o != rs1_id_ex_o)&& (rd_ex_mem_o == rs2_id_ex_o)&& ram_w_ena_id_ex_o && ram_r_ex_mem_o );
-	
-endmodule
-module forward_unit(
-	input [4:0]Rs1_id_ex_o,
-	input [4:0]Rs2_id_ex_o,
-	input [4:0]Rd_ex_mem_o,
-	input [4:0]Rd_mem_wb_o,
-	input RegWrite_ex_mem_o,
-	input RegWrite_mem_wb_o,
-	input MemWrite_id_ex_o,
-	input MemRead_ex_mem_o,
-	
-	output  [1:0]forwardA,
-	output  [1:0]forwardB,
-	output forwardC,
-	
-	
-	input [4:0]Rs1_id_ex_i,
-	input [4:0]Rs2_id_ex_i,
-	input [4:0]Rd_id_ex_o,
-	input MemRead_id_ex_o,
-	input MemWrite_id_ex_i,
-	input RegWrite_id_ex_o,
-	
-	output load_use_flag
-	
-    );
-	assign forwardA[1]=(RegWrite_ex_mem_o &&(Rd_ex_mem_o!=5'd0)&&(Rd_ex_mem_o==Rs1_id_ex_o));
-	assign forwardA[0]=(RegWrite_mem_wb_o && (Rd_mem_wb_o !=5'd0) &&(Rd_mem_wb_o==Rs1_id_ex_o));
-	assign forwardB[1]=(RegWrite_ex_mem_o &&(Rd_ex_mem_o!=5'd0)&&(Rd_ex_mem_o==Rs2_id_ex_o));
-	assign forwardB[0]=(RegWrite_mem_wb_o && (Rd_mem_wb_o !=5'd0) &&(Rd_mem_wb_o==Rs2_id_ex_o));
-	//load后紧跟sw但是不需要停顿
-	assign forwardC=(RegWrite_ex_mem_o &&(Rd_ex_mem_o!=5'd0)&&(Rd_ex_mem_o!=Rs1_id_ex_o)&& (Rd_ex_mem_o==Rs2_id_ex_o)&& MemWrite_id_ex_o && MemRead_ex_mem_o );
+
+	assign forwardA[1] = (reg_w_ena_ex_mem_o_i && (rd_ex_mem_o_i != 5'b0) && (rd_ex_mem_o_i == rs1_id_ex_o_i));	
+	assign forwardA[0] = (reg_w_ena_mem_wb_o_i && (rd_mem_wb_o_i != 5'd0) && (rd_mem_wb_o_i == rs1_id_ex_o_i));
+	assign forwardB[1] = (reg_w_ena_ex_mem_o_i && (rd_ex_mem_o_i != 5'b0) && (rd_ex_mem_o_i == rs2_id_ex_o_i));
+	assign forwardB[0] = (reg_w_ena_mem_wb_o_i && (rd_mem_wb_o_i != 5'd0) && (rd_mem_wb_o_i == rs2_id_ex_o_i));
+	assign forwardC    = (reg_w_ena_ex_mem_o_i && (rd_ex_mem_o_i != 5'd0) && (rd_ex_mem_o_i != rs1_id_ex_o_i)&& (rd_ex_mem_o_i == rs2_id_ex_o_i)&& ram_w_ena_id_ex_o_i && ram_r_ex_mem_o_i );
+
 	//load-use load后紧跟sw且需要停顿
-	assign load_use_flag= 	MemRead_id_ex_o & RegWrite_id_ex_o & (Rd_id_ex_o!=5'd0)   //load
+	assign hazard_hold = 	MemRead_id_ex_o_i & RegWrite_id_ex_o_i & (Rd_id_ex_o_i!=5'd0)   //load
 							&(!MemWrite_id_ex_i)     //非store
-							& ((Rd_id_ex_o ==Rs1_id_ex_i) | (Rd_id_ex_o ==Rs2_id_ex_i))
+							& ((Rd_id_ex_o_i ==Rs1_id_ex_i) | (Rd_id_ex_o_i ==Rs2_id_ex_i))
 							|
-							MemRead_id_ex_o & RegWrite_id_ex_o & (Rd_id_ex_o!=5'd0)     //load
+							MemRead_id_ex_o_i & RegWrite_id_ex_o_i & (Rd_id_ex_o_i!=5'd0)     //load
 							&(MemWrite_id_ex_i)     //store
-							& (Rd_id_ex_o ==Rs1_id_ex_i);
-							
+							& (Rd_id_ex_o_i ==Rs1_id_ex_i);
+
 
 endmodule
 
