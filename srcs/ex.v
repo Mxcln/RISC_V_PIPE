@@ -1,12 +1,13 @@
 `include "define.v"
-
 module ex(
     input   wire                    arst_n,         //异步复位信号
 
     //from  id                                      //来自译码信号
-    input   wire    [`INST]      inst_i,         //接受信号的内容         
+    input   wire    [`INST]       inst_b,          //前一个信号，用于判断冒险
+    input   wire    [`REG_ADDR]   reg_b,            //前一个信号的地址
+    input   wire    [`INST]       inst_i,         //接受信号的内容         
     input   wire    [`INST_ADDR]  inst_addr_i,    //接受信号的地址
-    input   wire                 reg_w_ena_i,    //写寄存器使能信号
+    input   wire                  reg_w_ena_i,    //写寄存器使能信号
     input   wire    [`REG_ADDR]   reg_w_addr_i,   //写通用寄存器的地址
     input   wire    [`REG]       reg1_data_i,   //通用寄存器1的输入数据     
     input   wire    [`REG]       reg2_data_i,   //通用寄存器2的输入数据
@@ -18,20 +19,23 @@ module ex(
     //to    mem                                     //向访存模块发出指令
     output  reg                 ram_r_ena_o   ,   //需要访问Ram读取数据的信号
     output  reg     [`MEM_ADDR]   ram_r_addr_o,    //需要读取的信号地址
-    output  reg    [`REG_ADDR]   reg_w_addr_o,    //需要写回的寄存器地址
-    output  reg    [`INST]      inst_o,         //将指令传到下一级，让访存和写回操作判定需要读写类型
+    output  reg     [`REG_ADDR]   reg_w_addr_o,    //需要写回的寄存器地址
+    output  reg     [`INST]      inst_o,         //将指令传到下一级，让访存和写回操作判定需要读写类型
     output  reg                 reg_w_ena_o,    //将写寄存器的使能信号
-    output  reg    [`INST]      reg_w_data_o,   //输出写回寄存器的数据，即不需要访存的数据    
+    output  reg     [`INST]      reg_w_data_o,   //输出写回寄存器的数据，即不需要访存的数据    
 
     //to    ctrl
  
     output  reg                 jump_flag_o,    //是否跳转
-    output  reg    [`INST_ADDR]  jump_addr_o,     //跳转的位置;  
+    output  reg     [`INST_ADDR]  jump_addr_o,     //跳转的位置;  
     
     //to    wb
     output  reg     [`MEM_ADDR]   ram_w_addr_o,    //需要写的地址                                  
-    output  reg    [`REG]       ram_w_data_o,    //需要写回的寄存器数据
-    output  reg                 ram_w_ena_o       //需要写回的使能信号
+    output  reg     [`REG]       ram_w_data_o,    //需要写回的寄存器数据
+    output  reg                 ram_w_ena_o,       //需要写回的使能信号
+
+    //for risk
+    output  wire                hold_risk 
 );
 wire    [6:0]   opcode ;                          //指令段
 wire    [2:0]   funct3 ;                          //三位函数段，确定哪一种大的函数
@@ -362,4 +366,7 @@ always@(*)begin
     end
     endcase
 end
+
+always@(*)
+
 endmodule
