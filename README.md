@@ -76,7 +76,7 @@
 | in     | reg2_r_data_i | 32    | 通用寄存器 2 的数据   |
 | in     | reg1_r_addr_i | 5     | 读通用寄存器 1 的地址 |
 | in     | reg2_r_addr_i | 5     | 读通用寄存器 2 的地址 |
-| in     | reg_w_e_i     | 1     | 写通用寄存器的标志    |
+| in     | reg_w_ena_i   | 1     | 写通用寄存器的标志    |
 | in     | reg_w_addr_i  | 5     | 写通用寄存器的地址    |
 | in     | 0p1_i         | 32    | 操作数 1              |
 | in     | 0p1_i         | 32    | 操作数 2              |

@@ -27,7 +27,14 @@ module risc_v_pipe_top(
     wire                    ctrl_jump_ena   ;       //跳转信号
     wire    [`INST_ADDR]    ctrl_jump_addr  ;       //跳转指令地址
 
-    wire    []
+    wire                    wb_w_ena        ;       //写入通用寄存器的使能
+    wire    [`REG_ADDR]     wb_w_addr       ;       //写入通用寄存器的地址
+    wire    [`REG]          wb_w_data       ;       //写入通用寄存器的数据
+
+    wire    [`REG_ADDR]     id_reg1_r_addr  ;       //id输出的第一个操作数的地址
+    wire    [`REG_ADDR]     id_reg2_r_addr  ;       //id输出的第二个操作数的地址
+    wire    [`REG]          reg_reg1_r_addr  ;      //id输入的第一个操作数的地址
+    wire    [`REG]          reg_reg2_r_addr  ;      //id输入的第二个操作数的地址
 
     wire    [`INST_ADDR]    pc_pc_addr      ;       //当前指令地址
 
@@ -56,11 +63,15 @@ module risc_v_pipe_top(
         .clk_100MHz         ( clk_100MHz        ),
         .arst_n             ( arst_n            ),
 
-        .reg1_raddr_i       ( reg1_raddr_i      ),
-        .reg2_raddr_i       ( reg2_raddr_i      ),
+        .w_ena_i            ( wb_w_ena          ),
+        .w_addr_i           ( wb_w_addr         ),
+        .w_data_i           ( wb_w_data         ),
 
-        .reg1_rdata_o       ( reg1_rdata_o      ),
-        .reg2_rdata_o       ( reg2_rdata_o      )
+        .reg1_raddr_i       ( id_reg1_raddr_i   ),
+        .reg2_raddr_i       ( id_reg2_raddr_i   ),
+
+        .reg1_rdata_o       ( reg_reg1_rdata_o  ),
+        .reg2_rdata_o       ( reg_reg2_rdata_o  )
     );
 
 
@@ -112,13 +123,70 @@ module risc_v_pipe_top(
 
 
     //mem模块：访存，组合逻辑
+    mem u_mem(
+        .arst_n             ( arst_n),
 
+        .inst_i             ( ),
+
+        .mem_rena_i         (  ),       
+        .mem_rdata_i        (  ),
+        .mem_raddr_i        (  ),
+
+        .reg_wena_i         (  ),
+        .reg_wdata_i        (  ),
+        .reg_waddr_i        (  ),
+
+        .mem_wena_i         (  ),
+        .mem_waddr_i        (  ),
+        .mem_wdata_i        (  ),
+
+        .inst_o             (  ),  
+
+        .mem_rena_o         (  ),
+        .mem_rdata_o        (  ),
+        .mem_raddr_o        (  ),
+
+        .reg_wena_o         (  ),
+        .reg_wdata_o        (  ),
+        .reg_waddr_o        (  ),
+
+        .mem_wena_o         (  ),
+        .mem_waddr_o        (  ),
+        .mem_wdata_o        (  )
+    );
 
 
     //mem_wb模块：mem与wb之间的连接寄存器，时序逻辑
-
+    mem_wb  u_mem_wb(
+        .clk_100MHz         (  ),
+        .arst_n             (  ),
+        .hold_ena_i         (  ),
+        .inst_i             (  ),
+        .mem_rena_i         (  ),
+        .mem_rdata_i        (  ),
+        .mem_raddr_i        (  ),
+        .reg_wena_i         (  ),
+        .reg_wdata_i        (  ),
+        .reg_waddr_i        (  ),
+        .mem_wena_i         (  ),
+        .mem_waddr_i        (  ),
+        .mem_wdata_i        (  ),
+        .inst_o             (  ),
+        .mem_rena_o         (  ),
+        .mem_rdata_o        (  ),
+        .mem_raddr_o        (  ),
+        .reg_wena_o         (  ),
+        .reg_wdata_o        (  ),
+        .reg_waddr_o        (  ),
+        .mem_wena_o         (  ),
+        .mem_waddr_o        (  ),
+        .mem_wdata_o        (  )
+    );
 
 
     //wb模块：写回（通用寄存器或RAM），组合逻辑
+    
+
+
 
 endmodule
