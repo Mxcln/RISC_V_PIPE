@@ -55,7 +55,9 @@
 | out    | reg2_r_addr_o | 5     | 读通用寄存器 2 的地址     |
 | out    | reg1_r_data_o | 32    | 通用寄存器 1 的数据       |
 | out    | reg2_r_data_o | 32    | 通用寄存器 2 的数据       |
-| out    | reg_w_e_o     | 1     | 写通用寄存器的标志        |
+| out    | reg_w_ena_o   | 1     | 写通用寄存器的标志        |
+| out    | mem_w_ena_o   | 1     | 向 mem 写回的使能信号     |
+| out    | mem_r_ena_o   | 1     | 访存使能信号              |
 | out    | reg_w_addr_o  | 5     | 写通用寄存器的地址        |
 | out    | op1_o         | 32    | 操作数 1                  |
 | out    | op1_o         | 32    | 操作数 2                  |
@@ -76,7 +78,7 @@
 | in     | reg2_r_data_i | 32    | 通用寄存器 2 的数据   |
 | in     | reg1_r_addr_i | 5     | 读通用寄存器 1 的地址 |
 | in     | reg2_r_addr_i | 5     | 读通用寄存器 2 的地址 |
-| in     | reg_w_e_i     | 1     | 写通用寄存器的标志    |
+| in     | reg_w_ena_i   | 1     | 写通用寄存器的标志    |
 | in     | reg_w_addr_i  | 5     | 写通用寄存器的地址    |
 | in     | 0p1_i         | 32    | 操作数 1              |
 | in     | 0p1_i         | 32    | 操作数 2              |
@@ -88,7 +90,9 @@
 | out    | reg2_r_data_o | 32    | 通用寄存器 2 的数据   |
 | out    | reg1_r_addr_o | 5     | 读通用寄存器 1 的地址 |
 | out    | reg2_r_addr_o | 5     | 读通用寄存器 2 的地址 |
-| out    | reg_w_e_o     | 1     | 写通用寄存器的标志    |
+| out    | reg_w_ena_o   | 1     | 写通用寄存器的标志    |
+| out    | mem_w_ena_o   | 1     | 向 mem 写回的使能信号 |
+| out    | mem_r_ena_o   | 1     | 访存使能信号          |
 | out    | reg_w_addr_o  | 5     | 写通用寄存器的地址    |
 | out    | op1_o         | 32    | 操作数 1              |
 | out    | op1_o         | 32    | 操作数 2              |
@@ -109,17 +113,20 @@
 | in     | reg2_data_i  | 32    | 通用寄存器 2 的数据   |
 | in     | op1_jump_i   | 32    | 跳转操作数 1          |
 | in     | op2_jump_i   | 32    | 跳转操作数 2          |
-| out    | ram_r_ena_o  | 1     | 访存使能信号          |
-| out    | ram_r_addr_o | 32    | 访存地址              |
+| in     | reg_w_ena_i  | 1     | 写通用寄存器的标志    |
+| in     | mem_w_ena_i  | 1     | 向 mem 写回的使能信号 |
+| in     | mem_r_ena_i  | 1     | 访存使能信号          |
+| out    | mem_r_ena_o  | 1     | 访存使能信号          |
+| out    | mem_r_addr_o | 32    | 访存地址              |
 | out    | reg_w_addr_o | 5     | 写寄存器的地址        |
 | out    | inst_o       | 32    | 指令                  |
 | out    | reg_w_ena_o  | 1     | 写寄存器的使能信号    |
 | out    | reg_w_data_o | 32    | 写寄存器的数据        |
 | out    | jump_flag_o  | 1     | 跳转使能信号          |
 | out    | jump_addr_o  | 32    | 跳转的位置            |
-| out    | ram_w_addr_o | 32    | 向 ram 写回的目标地址 |
-| out    | ram_w_data_o | 32    | 向 ram 写回的数据     |
-| out    | ram_w_ena_o  | 1     | 向 ram 写回的使能信号 |
+| out    | mem_w_addr_o | 32    | 向 mem 写回的目标地址 |
+| out    | mem_w_data_o | 32    | 向 mem 写回的数据     |
+| out    | mem_w_ena_o  | 1     | 向 mem 写回的使能信号 |
 
 #### 执行-访存 `ex_mem.v`
 
@@ -129,28 +136,28 @@
 | in     | arst_n       | 1     | 系统复位              |
 | in     | hold         | 1     | 暂停流水线            |
 | in     | clear        | 1     | 清刷流水线            |
-| in     | ram_r_ena_i  | 1     | 访存使能信号          |
-| in     | ram_r_addr_i | 32    | 访存地址              |
+| in     | mem_r_ena_i  | 1     | 访存使能信号          |
+| in     | mem_r_addr_i | 32    | 访存地址              |
 | in     | reg*w_addr*  | 5     | 写寄存器的地址        |
 | in     | inst_i       | 32    | 指令                  |
 | in     | reg_w_ena_i  | 1     | 写寄存器的使能信号    |
 | in     | reg_w_data_i | 32    | 写寄存器的数据        |
 | in     | jump_flag_i  | 1     | 跳转使能信号          |
 | in     | jump_addr_i  | 32    | 跳转的位置            |
-| in     | ram_w_addr_i | 32    | 向 ram 写回的目标地址 |
-| in     | ram_w_data_i | 32    | 向 ram 写回的数据     |
-| in     | ram_w_ena_i  | 1     | 向 ram 写回的使能信号 |
-| out    | ram_r_ena_o  | 1     | 访存使能信号          |
-| out    | ram_r_addr_o | 32    | 访存地址              |
+| in     | mem_w_addr_i | 32    | 向 mem 写回的目标地址 |
+| in     | mem_w_data_i | 32    | 向 mem 写回的数据     |
+| in     | mem_w_ena_i  | 1     | 向 mem 写回的使能信号 |
+| out    | mem_r_ena_o  | 1     | 访存使能信号          |
+| out    | mem_r_addr_o | 32    | 访存地址              |
 | out    | reg_w_addr_o | 5     | 写寄存器的地址        |
 | out    | inst_o       | 32    | 指令                  |
 | out    | reg_w_ena_o  | 1     | 写寄存器的使能信号    |
 | out    | reg_w_data_o | 32    | 写寄存器的数据        |
 | out    | jump_flag_o  | 1     | 跳转使能信号          |
 | out    | jump_addr_o  | 32    | 跳转的位置            |
-| out    | ram_w_addr_o | 32    | 向 ram 写回的目标地址 |
-| out    | ram_w_data_o | 32    | 向 ram 写回的数据     |
-| out    | ram_w_ena_o  | 1     | 向 ram 写回的使能信号 |
+| out    | mem_w_addr_o | 32    | 向 mem 写回的目标地址 |
+| out    | mem_w_data_o | 32    | 向 mem 写回的数据     |
+| out    | mem_w_ena_o  | 1     | 向 mem 写回的使能信号 |
 
 #### 访存 `mem.v`
 
@@ -260,7 +267,6 @@
 | out    | pc_hold_o      | 1     | pc与pc_id的暂停                |
 | out    | pc_id_clr_o    | 1     | pc_id的冲刷信号（跳转时）      |
 | out    | id_ex_clr_o    | 1     | id_ex的冲刷信号（数据冒险时）  |
-
 
 
 #### 数据总线 `bus.v`
