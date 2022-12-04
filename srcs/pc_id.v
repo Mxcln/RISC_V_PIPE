@@ -7,9 +7,9 @@ module pc_id (
     input wire[`INST]       inst_i,
     input wire[`INST_ADDR]  inst_addr_i,
     
-    input wire              hold_ena_i,      //流水线暂停
-    input wire              jump_ena_i,      //冲刷流水线
-
+    input wire              hold_ena_i,      //系统暂停或者冲刷流水线时暂停
+    input wire              jump_ena_i,      //跳转信号
+                            
     output reg[`INST]       inst_o,
     output reg[`INST_ADDR]  inst_addr_o
 
@@ -19,7 +19,7 @@ module pc_id (
             inst_o <= `CPU_RESET_ADDR ;
             inst_addr_o <= `CPU_RESET_ADDR ;
         end
-        else if (hold_ena_i == `HOLD_ENABLE) begin          //?
+        else if (hold_ena_i == `HOLD_ENABLE) begin         
             inst_o <= inst_o ;
             inst_addr_o <= inst_addr_o ;
         end
