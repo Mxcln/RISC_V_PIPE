@@ -4,13 +4,13 @@ module pc_id (
     input wire clk_100MHz,
     input wire arst_n,
 
-    input wire[`INST]      inst_i,
+    input wire[`INST]       inst_i,
     input wire[`INST_ADDR]  inst_addr_i,
     
-    input wire             hold_ena_i,
-    input wire             jump_ena_i,
+    input wire              hold_ena_i,      //流水线暂停
+    input wire              jump_ena_i,      //冲刷流水线
 
-    output reg[`INST]      inst_o,
+    output reg[`INST]       inst_o,
     output reg[`INST_ADDR]  inst_addr_o
 
 );
@@ -20,8 +20,8 @@ module pc_id (
             inst_addr_o <= `CPU_RESET_ADDR ;
         end
         else if (hold_ena_i == `HOLD_ENABLE) begin          //?
-            inst_o <= `CPU_RESET_ADDR ;
-            inst_addr_o <= `CPU_RESET_ADDR ;
+            inst_o <= inst_o ;
+            inst_addr_o <= inst_addr_o ;
         end
         else if (jump_ena_i == `JUMP_ENABLE) begin
             inst_o <= `CPU_RESET_ADDR ;
