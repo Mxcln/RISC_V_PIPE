@@ -243,11 +243,16 @@
 | in     | clk_100MHz     | 1     | 系统输入时钟                   |
 | in     | arst_n         | 1     | 系统复位                       |
 | in     | hold           | 1     | 系统暂停                       |
+| in     | ex_hold_risk_i | 1     | 流水线冲刷（解决冒险）         |
 | in     | ex_jump_i      | 1     | 执行时的跳转信号               |
 | in     | ex_jump_addr_i | 32    | 执行模块输入的跳转地址         |
-| out    | hold_ena_o     | 1     | 系统暂停                       |
+| out    | hold_ena_o     | 1     | 系统暂停（除了pc与pc_id）      |
 | out    | jump_ena_o     | 1     | 跳转使能（注意后续模块的清零） |
 | out    | jump_addr_o    | 1     | 跳转地址                       |
+| out    | pc_hold_o      | 1     | pc与pc_id的暂停                |
+| out    | pc_id_clr_o    | 1     | pc_id的冲刷信号（跳转时）      |
+| out    | id_ex_clr_o    | 1     | id_ex的冲刷信号（数据冒险时）  |
+
 
 
 #### 数据总线 `bus.v`
