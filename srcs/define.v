@@ -3,6 +3,8 @@
 //inst
 `define INST 31:0
 `define INST_ADDR 31:0
+`define ZERO_INST 32'b0
+`define ZERO_INST_ADDR 32'b0
 //cpureset 
 `define CPU_RESET_ADDR 32'b0
 
@@ -10,10 +12,12 @@
 `define RST_ENABLE 1'b0
 `define HOLD_ENABLE 1'b1
 `define JUMP_ENABLE 1'b1
-`define HOLD_ENABLE 1'b1
 `define WRITE_ENABLE 1'b1
 `define WRITE_DISABLE 1'b1
+`define READ_ENABLE 1'b1
+`define READ_DISABLE 1'b0
 //reg
+`define REG_NUM 0:31
 `define REG 31:0
 `define REG_ADDR 4:0
 `define ZERO_REG 5'h0
