@@ -31,7 +31,7 @@ module ex_mem (
     output  reg                 forwardC_o,
     
     //to    wb
-    output  reg     [`REG_ADDR]   mem_w_addr_o,    //需要写的地址                                  
+    output  reg     [`MEM_ADDR]   mem_w_addr_o,    //需要写的地址                                  
     output  reg     [`REG]       mem_w_data_o,    //需要写回的寄存器数据
     output  reg                   mem_w_ena_o        //需要写回的使能信号，也需要判断指令类型
 );

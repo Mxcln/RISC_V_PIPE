@@ -28,8 +28,6 @@ module ctrl(
 
     assign  pc_hold_o   =   hold | hazard_hold_i;
 
-    assign  pc_id_hold_o =  hold | hazard_hold_i;
-
     assign  pc_id_clr_o =   ex_jump_i;
 
     assign  id_ex_clr_o =   hazard_hold_i;

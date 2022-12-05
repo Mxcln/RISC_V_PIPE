@@ -3,17 +3,17 @@
 `include "define.v"
 
 module ex_stage(
-    input   wire    [`REG]      id_ex_reg1_r_addr_i ,
-    input   wire    [`REG]      id_ex_reg2_r_addr_i ,
-    input   wire    [`REG]      ex_mem_reg_w_addr_i ,
-    input   wire    [`REG]      mem_wb_reg_w_addr_i ,    
+    input   wire    [`REG_ADDR] id_ex_reg1_r_addr_i ,
+    input   wire    [`REG_ADDR] id_ex_reg2_r_addr_i ,
+    input   wire    [`REG_ADDR] ex_mem_reg_w_addr_i ,
+    input   wire    [`REG_ADDR] mem_wb_reg_w_addr_i ,    
     input   wire                ex_mem_reg_w_ena_i  ,
     input   wire                mem_wb_reg_w_ena_i  ,
     input   wire                id_ex_mem_w_ena_i   ,
     input   wire                ex_mem_mem_r_ena_i  ,    
-    input   wire    [`REG]      id_reg1_r_addr_i    ,
-    input   wire    [`REG]      id_reg2_r_addr_i    ,
-    input   wire    [`REG]      id_ex_reg_w_addr_i  ,
+    input   wire    [`REG_ADDR] id_reg1_r_addr_i    ,
+    input   wire    [`REG_ADDR] id_reg2_r_addr_i    ,
+    input   wire    [`REG_ADDR] id_ex_reg_w_addr_i  ,
     input   wire                id_ex_mem_r_ena_i   ,
     input   wire                id_mem_r_ena_i      ,
     input   wire                id_ex_reg_w_ena_i   ,
@@ -21,6 +21,7 @@ module ex_stage(
     input   wire    [`REG]      ex_mem_reg_w_data_i ,
     input   wire    [`REG]      mem_wb_reg_w_data_i ,
     input   wire    [`REG]      id_ex_reg1_r_data_i ,
+    input   wire    [`REG]      id_ex_reg2_r_data_i ,
 
     output  wire                forwardC_o          ,
     output  wire                hazard_hold_o       ,
@@ -28,6 +29,13 @@ module ex_stage(
     output  wire    [`REG]      ex_in_reg2_r_data_o
 
 );
+
+    wire    [1:0]   forwardA    ;
+    wire    [1:0]   forwardB    ;
+
+
+
+
     //forward_unit模块：解决数据冲突
     forward_unit u_forward_unit(
         .rs1_id_ex_o_i          ( id_ex_reg1_r_addr_i ),          		
