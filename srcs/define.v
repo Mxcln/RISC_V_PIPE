@@ -19,6 +19,7 @@
 `define     READ_ENABLE         1'b1
 `define     WRITE_ENABLE        1'b1
 `define     WRITE_DISABLE       1'b0
+`define     FORWARDC_DISABLE    1'b0
 //reg
 `define     REG_NUM             0:31
 `define     REG                 31:0
