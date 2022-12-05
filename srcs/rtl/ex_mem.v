@@ -38,19 +38,19 @@ module ex_mem (
     always@(posedge clk_100MHz or negedge arst_n) begin
         if( !arst_n )
             begin
-                //To mem
-                mem_r_ena_o  <= "WRITE_DISABLE"    ;
-                mem_r_addr_o <= "ZERO_WORD"   ;  
-                reg_w_addr_o <= "ZERO_WORD"   ;
-                inst_o       <= "ZERO_INST_ADDR"   ;
-                reg_w_ena_o  <= "WRITE_ENABLE"    ;
-                reg_w_data_o <= "ZERO_WORD"   ;
-                forwardC_o   <= "FORWARDC_DISABLE";
+              //To mem
+                mem_r_ena_o  <= `WRITE_DISABLE    ;
+                mem_r_addr_o <= `ZERO_WORD   ;  
+                reg_w_addr_o <= `ZERO_WORD   ;
+                inst_o       <= `ZERO_INST_ADDR   ;
+                reg_w_ena_o  <= `WRITE_DISABLE    ;
+                reg_w_data_o <= `ZERO_WORD   ;
+                forwardC_o   <= `FORWARDC_DISABLE;
                 
                 //To wb
-                mem_w_ena_o   <= "WRITE_ENABLE"    ;
-                mem_w_addr_o  <= "ZERO_WORD"   ;
-                mem_w_data_o  <= "ZERO_WORD"   ;
+                mem_w_ena_o   <= `WRITE_DISABLE    ;
+                mem_w_addr_o  <= `ZERO_WORD   ;
+                mem_w_data_o  <= `ZERO_WORD   ;
             end
         else if (hold)
             begin
@@ -76,7 +76,7 @@ module ex_mem (
                 inst_o       <= inst_i     ;
                 reg_w_ena_o  <= reg_w_ena_i    ;
                 reg_w_data_o <= reg_w_data_i   ;
-                forwardC_o   <= forwardC_o ;
+                forwardC_o   <= forwardC_i ;
                         
                 //To wb
                 mem_w_ena_o     <= mem_w_ena_i    ;

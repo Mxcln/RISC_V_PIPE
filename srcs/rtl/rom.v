@@ -17,14 +17,8 @@ module rom(
 
     reg     [`MEM_ADDR]   r_data;
 
-    always@(posedge clk_100MHz or negedge arst_n) begin
-        if(arst_n == `RST_ENABLE) begin : block
-            integer i;
-            for(i = 0; i < `MEM_DEEPTH; i = i + 1) begin
-                _rom[i] <= `ZERO_WORD;
-            end
-        end
-        else if(w_ena_i) begin
+    always@(posedge clk_100MHz) begin
+        if(w_ena_i) begin
             _rom[w_addr_i[31:2]] <= w_data_i;
         end
     end
