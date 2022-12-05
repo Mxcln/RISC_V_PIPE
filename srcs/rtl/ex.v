@@ -25,7 +25,7 @@ module ex(
     output  wire                    mem_r_ena_o   ,   //需要访问mem读取数据的信号
     output  reg     [`MEM_ADDR]     mem_r_addr_o,    //需要读取的信号地址
     output  reg      [`REG_ADDR]     reg_w_addr_o,    //需要写回的寄存器地址
-    output  wireg    [`INST]         inst_o,         //将指令传到下一级，让访存和写回操作判定需要读写类型
+    output  wire    [`INST]         inst_o,         //将指令传到下一级，让访存和写回操作判定需要读写类型
     output  reg                     reg_w_ena_o,    //将写寄存器的使能信号
     output  reg      [`INST]         reg_w_data_o,   //输出写回寄存器的数据，即不需要访存的数据    
 
@@ -256,9 +256,10 @@ always@(*)begin
     `INST_TYPE_S:begin                  //写回指令
                 jump_flag_o = `JUMP_DISABLE;
                 jump_addr_o = `ZERO_WORD;
-                reg_w_data_o = reg2_r_data_i;
+                reg_w_data_o =`ZERO_WORD;
                 mem_w_addr_o = op1_add_op2_res;
-                mem_r_addr_o = op1_add_op2_res;           
+                mem_r_addr_o = op1_add_op2_res;    
+                mem_w_data_o = reg2_r_data_i;       
     end
     `INST_TYPE_B:begin                  //条件跳转指令
         case(funct3)
