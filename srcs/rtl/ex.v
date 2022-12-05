@@ -99,7 +99,7 @@ always@(*)begin
                 mem_w_addr_o = `ZERO_WORD;
                 reg_w_data_o = {32{(op1_ge_op2_signed)}} & 32'h1;
             end
-            `INST_SLTI: begin
+            `INST_SLTIU: begin
                 jump_flag_o = `JUMP_DISABLE;
                 jump_addr_o = `ZERO_WORD;
                 mem_w_data_o = `ZERO_WORD;
@@ -304,7 +304,7 @@ always@(*)begin
                         jump_flag_o = !op1_ge_op2_unsigned ;
                         jump_addr_o = op1_jump_add_op2_jump_res;
                     end
-            `INST_BGEU: begin
+            `INST_BLTU: begin
                         mem_w_data_o = `ZERO_WORD;
                         mem_r_addr_o = `ZERO_WORD;
                         mem_w_addr_o = `ZERO_WORD;
