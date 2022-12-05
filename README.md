@@ -101,32 +101,32 @@
 
 #### 执行 `ex.v`
 
-| in/out | input/output | width | comments              |
-| ------ | ------------ | ----- | --------------------- |
-| in     | inst_i       | 32    | 输入指令              |
-| in     | inst_addr_i  | 32    | 输入指令地址          |
-| in     | reg_w_ena_i  | 1     | 写寄存器的使能信号    |
-| in     | reg_w_addr_i | 5     | 写寄存器的地址        |
-| in     | op1_i        | 32    | 操作数 1              |
-| in     | op2_i        | 32    | 操作数 2              |
-| in     | reg1_data_i  | 32    | 通用寄存器 1 的数据   |
-| in     | reg2_data_i  | 32    | 通用寄存器 2 的数据   |
-| in     | op1_jump_i   | 32    | 跳转操作数 1          |
-| in     | op2_jump_i   | 32    | 跳转操作数 2          |
-| in     | reg_w_ena_i  | 1     | 写通用寄存器的标志    |
-| in     | mem_w_ena_i  | 1     | 向 mem 写回的使能信号 |
-| in     | mem_r_ena_i  | 1     | 访存使能信号          |
-| out    | mem_r_ena_o  | 1     | 访存使能信号          |
-| out    | mem_r_addr_o | 32    | 访存地址              |
-| out    | reg_w_addr_o | 5     | 写寄存器的地址        |
-| out    | inst_o       | 32    | 指令                  |
-| out    | reg_w_ena_o  | 1     | 写寄存器的使能信号    |
-| out    | reg_w_data_o | 32    | 写寄存器的数据        |
-| out    | jump_flag_o  | 1     | 跳转使能信号          |
-| out    | jump_addr_o  | 32    | 跳转的位置            |
-| out    | mem_w_addr_o | 32    | 向 mem 写回的目标地址 |
-| out    | mem_w_data_o | 32    | 向 mem 写回的数据     |
-| out    | mem_w_ena_o  | 1     | 向 mem 写回的使能信号 |
+| in/out | input/output  | width | comments              |
+| ------ | ------------- | ----- | --------------------- |
+| in     | inst_i        | 32    | 输入指令              |
+| in     | inst_addr_i   | 32    | 输入指令地址          |
+| in     | reg_w_ena_i   | 1     | 写寄存器的使能信号    |
+| in     | reg_w_addr_i  | 5     | 写寄存器的地址        |
+| in     | op1_i         | 32    | 操作数 1              |
+| in     | op2_i         | 32    | 操作数 2              |
+| in     | reg1_r_data_i | 32    | 通用寄存器 1 的数据   |
+| in     | reg2_r_data_i | 32    | 通用寄存器 2 的数据   |
+| in     | op1_jump_i    | 32    | 跳转操作数 1          |
+| in     | op2_jump_i    | 32    | 跳转操作数 2          |
+| in     | reg_w_ena_i   | 1     | 写通用寄存器的标志    |
+| in     | mem_w_ena_i   | 1     | 向 mem 写回的使能信号 |
+| in     | mem_r_ena_i   | 1     | 访存使能信号          |
+| out    | mem_r_ena_o   | 1     | 访存使能信号          |
+| out    | mem_r_addr_o  | 32    | 访存地址              |
+| out    | reg_w_addr_o  | 5     | 写寄存器的地址        |
+| out    | inst_o        | 32    | 指令                  |
+| out    | reg_w_ena_o   | 1     | 写寄存器的使能信号    |
+| out    | reg_w_data_o  | 32    | 写寄存器的数据        |
+| out    | jump_flag_o   | 1     | 跳转使能信号          |
+| out    | jump_addr_o   | 32    | 跳转的位置            |
+| out    | mem_w_addr_o  | 32    | 向 mem 写回的目标地址 |
+| out    | mem_w_data_o  | 32    | 向 mem 写回的数据     |
+| out    | mem_w_ena_o   | 1     | 向 mem 写回的使能信号 |
 
 #### 执行-访存 `ex_mem.v`
 
@@ -165,25 +165,25 @@
 | ------ | ------------ | ----- | ------------------------------------ |
 | in     | arst_n       | 1     | 系统复位                             |
 | in     | inst_i       | 32    | 指令输入                             |
-| in     | mem_rena_i   | 1     | 访存使能输入                         |
-| in     | mem_rdata_i  | 32    | 访存得到的数据输入                   |
-| in     | mem_raddr_i  | 32    | 访存地址输入                         |
+| in     | mem_r_ena_i  | 1     | 访存使能输入                         |
+| in     | mem_r_data_i | 32    | 访存得到的数据输入                   |
+| in     | mem_r_addr_i | 32    | 访存地址输入                         |
 | in     | reg_w_ena_i  | 1     | 写入通用寄存器使能输入               |
-| in     | reg_wdata_i  | 32    | 写入通用寄存器的数据（访存或者执行） |
-| in     | reg_waddr_i  | 5     | 访存通用寄存器地址输入               |
-| in     | mem_wena_i   | 1     | 写入使能输入                         |
-| in     | mem_waddr_i  | 32    | 写入的地址输入                       |
-| in     | mem_wdata_i  | 32    | 写入的数据输入                       |
+| in     | reg_w_data_i | 32    | 写入通用寄存器的数据（访存或者执行） |
+| in     | reg_w_addr_i | 5     | 访存通用寄存器地址输入               |
+| in     | mem_w_ena_i  | 1     | 写入使能输入                         |
+| in     | mem_w_addr_i | 32    | 写入的地址输入                       |
+| in     | mem_w_data_i | 32    | 写入的数据输入                       |
 | out    | inst_o       | 32    | 指令输出                             |
-| out    | mem_rena_o   | 1     | 访存使能输出                         |
-| out    | mem_rdata_o  | 32    | 访存得到的数据输出                   |
-| out    | mem_raddr_o  | 32    | 访存地址输出                         |
-| out    | reg_wena_o   | 1     | 写入通用寄存器使能输出               |
-| out    | reg_wdata_o  | 32    | 写入通用寄存器数据输出               |
-| out    | reg_waddr_o  | 5     | 写入通用寄存器地址输出               |
-| out    | mem_wena_o   | 1     | 写入使能输出                         |
-| out    | mem_waddr_o  | 32    | 写入的地址输出                       |
-| out    | mem_wdata_o  | 32    | 写入的数据输出                       |
+| out    | mem_r_ena_o  | 1     | 访存使能输出                         |
+| out    | mem_r_data_o | 32    | 访存得到的数据输出                   |
+| out    | mem_r_addr_o | 32    | 访存地址输出                         |
+| out    | reg_w_ena_o  | 1     | 写入通用寄存器使能输出               |
+| out    | reg_w_data_o | 32    | 写入通用寄存器数据输出               |
+| out    | reg_w_addr_o | 5     | 写入通用寄存器地址输出               |
+| out    | mem_w_ena_o  | 1     | 写入使能输出                         |
+| out    | mem_w_addr_o | 32    | 写入的地址输出                       |
+| out    | mem_w_data_o | 32    | 写入的数据输出                       |
 
 #### 访存-回写 `mem_wb`
 
@@ -193,25 +193,25 @@
 | in     | arst_n       | 1     | 系统复位                 |
 | in     | hold_ena_i   | 1     | 流水线暂停信号           |
 | in     | inst_i       | 32    | 指令输入                 |
-| in     | mem_rena_i   | 1     | 访存使能输入             |
-| in     | mem_rdata_i  | 32    | 访存得到的数据输入       |
-| in     | mem_raddr_i  | 32    | 访存地址输入             |
+| in     | mem_r_ena_i  | 1     | 访存使能输入             |
+| in     | mem_r_data_i | 32    | 访存得到的数据输入       |
+| in     | mem_r_addr_i | 32    | 访存地址输入             |
 | in     | reg_w_ena_i  | 1     | 写入通用寄存器使能输入   |
-| in     | reg_wdata_i  | 32    | 写入通用寄存器的数据输入 |
-| in     | reg_waddr_i  | 5     | 访存通用寄存器地址输入   |
-| in     | mem_wena_i   | 1     | 写入使能输入             |
-| in     | mem_waddr_i  | 32    | 写入的地址输入           |
-| in     | mem_wdata_i  | 32    | 写入的数据输入           |
+| in     | reg_w_data_i | 32    | 写入通用寄存器的数据输入 |
+| in     | reg_w_addr_i | 5     | 访存通用寄存器地址输入   |
+| in     | mem_w_ena_i  | 1     | 写入使能输入             |
+| in     | mem_w_addr_i | 32    | 写入的地址输入           |
+| in     | mem_w_data_i | 32    | 写入的数据输入           |
 | out    | inst_o       | 32    | 指令输出                 |
-| out    | mem_rena_o   | 1     | 访存使能输出             |
-| out    | mem_rdata_o  | 32    | 访存得到的数据输出       |
-| out    | mem_raddr_o  | 32    | 访存地址输出             |
-| out    | reg_wena_o   | 1     | 写入通用寄存器使能输出   |
-| out    | reg_wdata_o  | 32    | 写入通用寄存器数据输出   |
-| out    | reg_waddr_o  | 5     | 写入通用寄存器地址输出   |
-| out    | mem_wena_o   | 1     | 写入使能输出             |
-| out    | mem_waddr_o  | 32    | 写入的地址输出           |
-| out    | mem_wdata_o  | 32    | 写入的数据输出           |
+| out    | mem_r_ena_o  | 1     | 访存使能输出             |
+| out    | mem_r_data_o | 32    | 访存得到的数据输出       |
+| out    | mem_r_addr_o | 32    | 访存地址输出             |
+| out    | reg_w_ena_o  | 1     | 写入通用寄存器使能输出   |
+| out    | reg_w_data_o | 32    | 写入通用寄存器数据输出   |
+| out    | reg_w_addr_o | 5     | 写入通用寄存器地址输出   |
+| out    | mem_w_ena_o  | 1     | 写入使能输出             |
+| out    | mem_w_addr_o | 32    | 写入的地址输出           |
+| out    | mem_w_data_o | 32    | 写入的数据输出           |
 
 #### 回写 `wb.v`
 
@@ -219,21 +219,21 @@
 | ------ | ------------ | ----- | ------------------------ |
 | in     | arst_n       | 1     | 系统复位                 |
 | in     | instc_i      | 32    | 指令输入                 |
-| in     | mem_rena_i   | 1     | 访存使能输入             |
-| in     | mem_rdata_i  | 32    | 访存得到的数据输入       |
-| in     | mem_raddr_i  | 32    | 访存地址输入             |
+| in     | mem_r_ena_i  | 1     | 访存使能输入             |
+| in     | mem_r_data_i | 32    | 访存得到的数据输入       |
+| in     | mem_r_addr_i | 32    | 访存地址输入             |
 | in     | reg_w_ena_i  | 1     | 写入通用寄存器使能输入   |
-| in     | reg_wdata_i  | 32    | 写入通用寄存器的数据输入 |
-| in     | reg_waddr_i  | 5     | 访存通用寄存器地址输入   |
-| in     | mem_wena_i   | 1     | 写入使能输入             |
-| in     | mem_waddr_i  | 32    | 写入的地址输入           |
-| in     | mem_wdata_i  | 32    | 写入的数据输入           |
-| out    | reg_wena_o   | 1     | 写入通用寄存器使能输出   |
-| out    | reg_wdata_o  | 32    | 写入通用寄存器数据输出   |
-| out    | reg_waddr_o  | 5     | 写入通用寄存器地址输出   |
-| out    | mem_wena_o   | 1     | 写入使能输出             |
-| out    | mem_waddr_o  | 32    | 写入的地址输出           |
-| out    | mem_wdata_o  | 32    | 写入的数据输出           |
+| in     | reg_w_data_i | 32    | 写入通用寄存器的数据输入 |
+| in     | reg_w_addr_i | 5     | 访存通用寄存器地址输入   |
+| in     | mem_w_ena_i  | 1     | 写入使能输入             |
+| in     | mem_w_addr_i | 32    | 写入的地址输入           |
+| in     | mem_w_data_i | 32    | 写入的数据输入           |
+| out    | reg_w_ena_o  | 1     | 写入通用寄存器使能输出   |
+| out    | reg_w_data_o | 32    | 写入通用寄存器数据输出   |
+| out    | reg_w_addr_o | 5     | 写入通用寄存器地址输出   |
+| out    | mem_w_ena_o  | 1     | 写入使能输出             |
+| out    | mem_w_addr_o | 32    | 写入的地址输出           |
+| out    | mem_w_data_o | 32    | 写入的数据输出           |
 
 #### 通用寄存器 `regs.v`
 
@@ -286,9 +286,9 @@
 | in/out | input/output | width | comments             |
 | ------ | ------------ | ----- | -------------------- |
 | in     | arst_n       | 1     | 系统复位             |
-| in     | rena_i       | 1     | 读取使能             |
-| in     | raddr_i      | 32    | 需要读取的数据的地址 |
-| out    | rdata_o      | 32    | 输出读取的数据       |
+| in     | r_ena_i      | 1     | 读取使能             |
+| in     | r_addr_i     | 32    | 需要读取的数据的地址 |
+| out    | r_data_o     | 32    | 输出读取的数据       |
 
 #### 数据储存 `ram.v`
 
@@ -296,9 +296,9 @@
 | ------ | ------------ | ----- | -------------------- |
 | in     | clk_100MHz   | 1     | 系统输入时钟         |
 | in     | arst_n       | 1     | 系统复位             |
-| in     | rena_i       | 1     | 读取使能             |
-| in     | raddr_i      | 32    | 需要读取的数据的地址 |
-| in     | wena_i       | 1     | 写入使能             |
-| in     | waddr_i      | 32    | 需要写入的地址       |
-| in     | wdata_i      | 32    | 需要写入的数据       |
-| out    | rdata_o      | 32    | 输出读取的数据       |
+| in     | r_ena_i      | 1     | 读取使能             |
+| in     | r_addr_i     | 32    | 需要读取的数据的地址 |
+| in     | w_ena_i      | 1     | 写入使能             |
+| in     | w_addr_i     | 32    | 需要写入的地址       |
+| in     | w_data_i     | 32    | 需要写入的数据       |
+| out    | r_data_o     | 32    | 输出读取的数据       |

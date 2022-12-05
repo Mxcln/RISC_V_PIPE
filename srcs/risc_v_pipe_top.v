@@ -13,7 +13,7 @@ module risc_v_pipe_top(
     output  wire                    ram_w_ena_o     ,
     output  wire    [`MEM_ADDR]     ram_w_addr_o    ,
     output  wire    [`MEM]          ram_w_data_o    ,
-    output  wire    [`MEM_ADDR]     rom_r_addr_i
+    output  wire    [`MEM_ADDR]     rom_r_addr_o
 );
 
     wire                    ex_hold_risk    ;       //ex输出的数据冒险信号
@@ -27,16 +27,105 @@ module risc_v_pipe_top(
     wire                    ctrl_jump_ena   ;       //跳转信号
     wire    [`INST_ADDR]    ctrl_jump_addr  ;       //跳转指令地址
 
-    wire                    wb_w_ena        ;       //写入通用寄存器的使能
-    wire    [`REG_ADDR]     wb_w_addr       ;       //写入通用寄存器的地址
-    wire    [`REG]          wb_w_data       ;       //写入通用寄存器的数据
+    wire                    wb_reg_w_ena    ;       //写入通用寄存器的使能
+    wire    [`REG_ADDR]     wb_reg_w_addr   ;       //写入通用寄存器的地址
+    wire    [`REG]          wb_reg_w_data   ;       //写入通用寄存器的数据
 
+    wire    [`INST]         origin_inst     ;       //从rom中读到的指令
+    wire    [`INST_ADDR]    origin_inst_addr;       //从rom中读到的指令地址
+    wire    [`INST]         pc_id_inst      ;       //从pc_id中输出的指令
+    wire    [`INST_ADDR]    pc_id_inst_addr ;       //从pc_id中输出的指令地址   
+    
+
+    wire    [`INST_ADDR]    pc_pc_addr      ;       //当前指令地址
+
+    wire    [`INST]         id_inst         ;       //从id中输出的指令
+    wire    [`INST_ADDR]    id_inst_addr    ;       //从id中输出的指令地址
     wire    [`REG_ADDR]     id_reg1_r_addr  ;       //id输出的第一个操作数的地址
     wire    [`REG_ADDR]     id_reg2_r_addr  ;       //id输出的第二个操作数的地址
     wire    [`REG]          reg_reg1_r_addr  ;      //id输入的第一个操作数的地址
     wire    [`REG]          reg_reg2_r_addr  ;      //id输入的第二个操作数的地址
+    wire    [`REG]          id_reg1_r_data  ;
+    wire    [`REG]          id_reg2_r_data  ;   
+    wire                    id_reg_w_ena    ;
+    wire    [`REG_ADDR]     id_reg_w_addr   ;
+    wire                    id_mem_w_ena    ;
+    wire                    id_mem_r_ena    ;
+    wire    [`REG]          id_op1          ;
+    wire    [`REG]          id_op2          ;
+    wire    [`REG]          id_op1_jump     ;
+    wire    [`REG]          id_op2_jump     ;
 
-    wire    [`INST_ADDR]    pc_pc_addr      ;       //当前指令地址
+    wire    [`INST]         id_ex_inst      ;       //从id_ex中输出的指令
+    wire    [`INST_ADDR]    id_ex_inst_addr ;       //从id_ex中输出的指令地址
+    wire    [`REG]          id_ex_reg1_r_data  ;
+    wire    [`REG]          id_ex_reg2_r_data  ;
+    wire                    id_ex_reg_w_ena    ;
+    wire    [`REG_ADDR]     id_ex_reg_w_addr   ;
+    wire                    id_ex_mem_w_ena    ;
+    wire                    id_ex_mem_r_ena    ;
+    wire    [`REG]          id_ex_op1          ;
+    wire    [`REG]          id_ex_op2          ;
+    wire    [`REG]          id_ex_op1_jump     ;
+    wire    [`REG]          id_ex_op2_jump     ;
+
+    wire    [`INST]         ex_inst         ;       //从ex中输出的指令
+    wire                    ex_reg_w_ena    ;
+    wire    [`REG_ADDR]     ex_reg_w_addr   ;
+    wire                    ex_mem_r_ena    ;
+    wire    [`MEM_ADDR]     ex_mem_r_addr   ;
+    wire                    ex_mem_w_ena    ;
+    wire    [`MEM_ADDR]     ex_mem_w_addr   ;
+    wire    [`MEM]          ex_mem_w_data   ;
+
+    wire                    ex_mem_mem_r_ena    ;      
+    wire    [`MEM_ADDR]     ex_mem_mem_r_addr   ;      
+    wire    [`REG_ADDR]     ex_mem_reg_w_addr   ;      
+    wire    [`INST]         ex_mem_inst         ;      
+    wire                    ex_mem_reg_w_ena    ;      
+    wire    [`MEM]          ex_mem_reg_w_data   ;     
+    wire    [`MEM_ADDR]     ex_mem_mem_w_addr   ;      
+    wire    [`MEM]          ex_mem_mem_w_data   ;      
+    wire                    ex_mem_mem_w_ena    ;      
+
+    wire    [`INST]         mem_inst            ;       //从mem中输出的指令  
+    wire                    mem_mem_r_ena       ;
+    wire    [`MEM]          mem_mem_r_data      ;
+    wire    [`MEM_ADDR]     mem_mem_r_addr      ;
+    wire                    mem_reg_w_ena       ;
+    wire    [`MEM]          mem_reg_w_data      ;
+    wire    [`MEM_ADDR]     mem_reg_w_addr      ;
+    wire                    mem_mem_w_ena       ;
+    wire    [`MEM_ADDR]     mem_mem_w_addr      ;
+    wire    [`MEM]          mem_mem_w_data      ;     
+
+    wire    [`INST]         mem_wb_inst            ;       //从mem_wb中输出的指令  
+    wire                    mem_wb_mem_r_ena       ;
+    wire    [`MEM]          mem_wb_mem_r_data      ;
+    wire    [`MEM_ADDR]     mem_wb_mem_r_addr      ;
+    wire                    mem_wb_reg_w_ena       ;
+    wire    [`MEM]          mem_wb_reg_w_data      ;
+    wire    [`MEM_ADDR]     mem_wb_reg_w_addr      ;
+    wire                    mem_wb_mem_w_ena       ;
+    wire    [`MEM_ADDR]     mem_wb_mem_w_addr      ;
+    wire    [`MEM]          mem_wb_mem_w_data      ; 
+
+    wire                    wb_mem_w_ena    ;
+    wire    [`MEM_ADDR]     wb_mem_w_addr   ;
+    wire    [`MEM]          wb_mem_w_data   ;
+
+    assign  origin_inst         = rom_r_data_i  ;
+    assign  origin_inst_addr    = pc_pc_addr    ;    
+
+    assign  ram_r_ena_o     = mem_mem_r_ena     ;
+    assign  ram_r_addr_o    = mem_mem_r_addr    ;
+    assign  ram_w_ena_o     = wb_mem_w_ena      ;
+    assign  ram_w_addr_o    = wb_mem_w_addr     ;
+    assign  ram_w_data_o    = wb_mem_w_data     ;  
+
+    assign  rom_r_addr_o    = pc_pc_addr        ;  
+
+    
 
 
     //ctrl模块：流水线控制模块，组合逻辑
@@ -67,11 +156,11 @@ module risc_v_pipe_top(
         .w_addr_i           ( wb_w_addr         ),
         .w_data_i           ( wb_w_data         ),
 
-        .reg1_raddr_i       ( id_reg1_raddr_i   ),
-        .reg2_raddr_i       ( id_reg2_raddr_i   ),
+        .reg1_r_addr_i       ( id_reg1_r_addr     ),
+        .reg2_r_addr_i       ( id_reg2_r_addr     ),
 
-        .reg1_rdata_o       ( reg_reg1_rdata_o  ),
-        .reg2_rdata_o       ( reg_reg2_rdata_o  )
+        .reg1_r_data_o       ( reg_reg1_r_data    ),
+        .reg2_r_data_o       ( reg_reg2_r_data    )
     );
 
 
@@ -93,116 +182,231 @@ module risc_v_pipe_top(
         .clk_100MHz         ( clk_100MHz        ),
         .arst_n             ( arst_n            ),
 
-        .inst_i             ( inst_i            ),
-        .inst_addr_i        ( inst_addr_i       ),
-        .hold_ena_i         ( hold_ena_i        ),
-        .jump_ena_i         ( jump_ena_i        ),
+        .inst_i             ( origin_inst       ),
+        .inst_addr_i        ( origin_inst_addr  ),
+        .hold_ena_i         ( ctrl_pc_hold      ),
+        .jump_ena_i         ( ctrl_pc_id_clr    ),
 
-        .inst_o             ( inst_o            ),
-        .inst_addr_o        ( inst_addr_o       )
+        .inst_o             ( pc_id_inst        ),
+        .inst_addr_o        ( pc_id_inst_addr   )
     );
 
 
     //id模块：译码，组合逻辑
     id  u_id (
         .arst_n             ( arst_n            ),
-        .inst_i             ( inst_i            ),
+        .inst_i             ( pc_id_inst        ),
+        .inst_addr_i        ( pc_id_inst_addr   ),
+
+        .reg1_r_data_i      ( reg_reg1_r_data   ),
+        .reg2_r_data_i      ( reg_reg2_r_data   ),
+
+        .ex_jump_ena_i      ( ctrl_jump_ena     ),
+
+        .reg1_r_addr_o      ( id_reg1_r_addr    ),
+        .reg2_r_addr_o      ( id_reg2_r_addr    ),
+        
+        .inst_o             ( id_inst           ),
+        .inst_addr_o        ( id_inst_addr      ),
+
+        .reg1_r_data_o      ( id_reg1_r_data    ),
+        .reg2_r_data_o      ( id_reg2_r_data    ),
+        .reg_w_ena_o        ( id_reg_w_ena      ),
+        .reg_w_addr_o       ( id_reg_w_addr     ),
+
+        .mem_w_ena_o        ( id_mem_w_ena      ),
+        .mem_r_ena_o        ( id_mem_r_ena      ),
+
+        .op1_o              ( id_op1            ),
+        .op2_o              ( id_op2            ),
+        .op1_jump_o         ( id_op1_jump       ),
+        .op2_jump_o         ( id_op2_jump       )
     );
 
 
     //id_ex模块：id与ex之间的连接寄存器，时序逻辑
+    id_ex   u_id_ex(
+        .clk_100MHz         ( clk_100MHz    ),
+        .arst_n             ( arst_n        ),
 
+        .inst_i             ( id_inst      ), 
+        .inst_addr_i        ( id_inst_addr      ), 
+        .reg1_r_data_i      ( id_reg1_r_data      ),
+        .reg2_r_data_i      ( id_reg2_r_data      ),
+        .reg_w_ena_i        ( id_reg_w_ena      ), 
+        .reg_w_addr_i       ( id_reg_w_addr      ), 
+        .mem_r_ena_i        ( id_mem_r_ena      ),
+        .mem_w_ena_i        ( id_mem_w_ena      ),
+        .op1_i              ( id_op1      ), 
+        .op2_i              ( id_op2      ), 
+        .op1_jump_i         ( id_op1_jump      ), 
+        .op2_jump_i         ( id_op2_jump      ), 
+        .hold_ena_i         ( ctrl_hold_ena      ), 
+        .jump_ena_i         ( ctrl_id_ex_clr      ), 
+
+        .inst_o             ( id_ex_inst        ), 
+        .inst_addr_o        ( id_ex_inst_addr   ), 
+        .reg1_r_data_o      ( id_ex_reg1_r_data ),
+        .reg2_r_data_o      ( id_ex_reg2_r_data ),
+        .reg_w_e_o          ( id_ex_reg_w_ena   ), 
+        .reg_w_addr_o       ( id_ex_reg_w_addr  ), 
+        .mem_r_ena_o        ( id_ex_mem_w_ena   ),
+        .mem_w_ena_o        ( id_ex_mem_r_ena   ),
+        .op1_o              ( id_ex_op1         ), 
+        .op2_o              ( id_ex_op2         ), 
+        .op1_jump_o         ( id_ex_op1_jump    ), 
+        .op2_jump_o         ( id_ex_op2_jump    ) 
+    );
 
 
     //ex模块：执行模块，组合逻辑
+    ex u_ex(
+        .arst_n             ( arst_n        ),      
+             
+        .inst_i             ( id_ex_inst        ),     
+        .inst_addr_i        ( id_ex_inst_addr   ),     
+        .reg_w_ena_i        ( id_ex_reg_w_ena   ),     
+        .reg_w_addr_i       ( id_ex_reg_w_addr  ),     
+        .reg1_r_data_i      ( id_ex_reg1_r_data ),     
+        .reg2_r_data_i      ( id_ex_reg2_r_data ),     
+        .op1_i              ( id_ex_op1         ),     
+        .op2_i              ( id_ex_op2         ),     
+        .op1_jump_i         ( id_ex_op1_jump    ),     
+        .op2_jump_i         ( id_ex_op2_jump    ),     
+        .mem_r_ena_i        ( id_ex_mem_r_ena   ),     
+        .mem_w_ena_i        ( id_ex_mem_w_ena   ),     
 
+        .mem_r_ena_o        ( ex_mem_r_ena      ),     
+        .mem_r_addr_o       ( ex_mem_r_addr     ),     
+        .reg_w_addr_o       ( ex_reg_w_addr     ),     
+        .inst_o             ( ex_inst           ),     
+        .reg_w_ena_o        ( ex_reg_w_ena      ),     
+        .reg_w_data_o       ( ex_reg_w_data     ),     
+        .jump_flag_o        ( ex_jump_ena       ),     
+        .jump_addr_o        ( ex_jump_addr      ),     
+        .mem_w_addr_o       ( ex_mem_w_addr     ),     
+        .mem_w_data_o       ( ex_mem_w_data     ),     
+        .mem_w_ena_o        ( ex_mem_w_ena      )                  
+    );
 
 
     //ex_mem模块：ex与mem之间的连接寄存器，时序逻辑
+    ex_mem u_ex_mem(
+        .clk_100MHz         ( clk_100MHz        ),
+        .arst_n             ( arst_n            ),
+        .hold               ( ctrl_hold_ena     ),
 
+        .mem_r_ena_i        ( ex_mem_r_ena      ),  
+        .mem_r_addr_i       ( ex_mem_r_addr     ),  
+        .reg_w_addr_i       ( ex_reg_w_addr     ),  
+        .inst_i             ( ex_inst           ),  
+        .reg_w_ena_i        ( ex_reg_w_ena      ),  
+        .reg_w_data_i       ( ex_reg_w_data     ),  
+        .mem_w_ena_i        ( ex_mem_w_ena      ),  
+        .mem_w_addr_i       ( ex_mem_w_addr     ),  
+        .mem_w_data_i       ( ex_mem_w_data     ),   
 
+        .mem_r_ena_o        ( ex_mem_mem_r_ena  ),  
+        .mem_r_addr_o       ( ex_mem_mem_r_addr ),  
+        .reg_w_addr_o       ( ex_mem_reg_w_addr ),  
+        .inst_o             ( ex_mem_inst       ),  
+        .reg_w_ena_o        ( ex_mem_reg_w_ena  ),  
+        .reg_w_data_o       ( ex_mem_reg_w_data ), 
+        .mem_w_addr_o       ( ex_mem_mem_w_addr ),  
+        .mem_w_data_o       ( ex_mem_mem_w_data ),  
+        .mem_w_ena_o        ( ex_mem_mem_w_ena  )           
+    );
+     
 
     //mem模块：访存，组合逻辑
     mem u_mem(
         .arst_n             ( arst_n),
 
-        .inst_i             ( ),
+        .inst_i             ( ex_mem_inst ),
 
-        .mem_rena_i         (  ),       
-        .mem_rdata_i        (  ),
-        .mem_raddr_i        (  ),
+        .mem_r_ena_i        ( ex_mem_mem_r_ena  ),       
+        .mem_r_data_i       ( ram_r_data_i      ),
+        .mem_r_addr_i       ( ex_mem_mem_r_addr ),
 
-        .reg_wena_i         (  ),
-        .reg_wdata_i        (  ),
-        .reg_waddr_i        (  ),
+        .reg_w_ena_i        ( ex_mem_reg_w_ena  ),
+        .reg_w_data_i       ( ex_mem_reg_w_data ),
+        .reg_w_addr_i       ( ex_mem_reg_w_addr ),
 
-        .mem_wena_i         (  ),
-        .mem_waddr_i        (  ),
-        .mem_wdata_i        (  ),
+        .mem_w_ena_i        ( ex_mem_mem_w_ena  ),
+        .mem_w_addr_i       ( ex_mem_mem_w_addr ),
+        .mem_w_data_i       ( ex_mem_mem_w_data ),
 
-        .inst_o             (  ),  
+        .inst_o             ( mem_inst          ),  
 
-        .mem_rena_o         (  ),
-        .mem_rdata_o        (  ),
-        .mem_raddr_o        (  ),
+        .mem_r_ena_o        ( mem_mem_r_ena     ),
+        .mem_r_data_o       ( mem_mem_r_data    ),
+        .mem_r_addr_o       ( mem_mem_r_addr    ),
 
-        .reg_wena_o         (  ),
-        .reg_wdata_o        (  ),
-        .reg_waddr_o        (  ),
+        .reg_w_ena_o        ( mem_reg_w_ena     ),
+        .reg_w_data_o       ( mem_reg_w_data    ),
+        .reg_w_addr_o       ( mem_reg_w_addr    ),
 
-        .mem_wena_o         (  ),
-        .mem_waddr_o        (  ),
-        .mem_wdata_o        (  )
+        .mem_w_ena_o        ( mem_mem_w_ena     ),
+        .mem_w_addr_o       ( mem_mem_w_addr    ),
+        .mem_w_data_o       ( mem_mem_w_data    )
     );
 
 
     //mem_wb模块：mem与wb之间的连接寄存器，时序逻辑
     mem_wb  u_mem_wb(
-        .clk_100MHz         (  ),
-        .arst_n             (  ),
-        .hold_ena_i         (  ),
-        .inst_i             (  ),
-        .mem_rena_i         (  ),
-        .mem_rdata_i        (  ),
-        .mem_raddr_i        (  ),
-        .reg_wena_i         (  ),
-        .reg_wdata_i        (  ),
-        .reg_waddr_i        (  ),
-        .mem_wena_i         (  ),
-        .mem_waddr_i        (  ),
-        .mem_wdata_i        (  ),
-        .inst_o             (  ),
-        .mem_rena_o         (  ),
-        .mem_rdata_o        (  ),
-        .mem_raddr_o        (  ),
-        .reg_wena_o         (  ),
-        .reg_wdata_o        (  ),
-        .reg_waddr_o        (  ),
-        .mem_wena_o         (  ),
-        .mem_waddr_o        (  ),
-        .mem_wdata_o        (  )
+        .clk_100MHz         ( clk_100MHz    ),
+        .arst_n             ( arst_n        ),
+        .hold_ena_i         ( ctrl_hold_ena ),
+
+        .inst_i             ( mem_inst          ),
+        .mem_r_ena_i        ( mem_mem_r_ena     ),
+        .mem_r_data_i       ( mem_mem_r_data    ),
+        .mem_r_addr_i       ( mem_mem_r_addr    ),
+        .reg_w_ena_i        ( mem_reg_w_ena     ),
+        .reg_w_data_i       ( mem_reg_w_data    ),
+        .reg_w_addr_i       ( mem_reg_w_addr    ),
+        .mem_w_ena_i        ( mem_mem_w_ena     ),
+        .mem_w_addr_i       ( mem_mem_w_addr    ),
+        .mem_w_data_i       ( mem_mem_w_data    ),
+
+        .inst_o             ( mem_wb_inst         ),
+        .mem_r_ena_o        ( mem_wb_mem_r_ena    ),
+        .mem_r_data_o       ( mem_wb_mem_r_data   ),
+        .mem_r_addr_o       ( mem_wb_mem_r_addr   ),
+        .reg_w_ena_o        ( mem_wb_reg_w_ena    ),
+        .reg_w_data_o       ( mem_wb_reg_w_data   ),
+        .reg_w_addr_o       ( mem_wb_reg_w_addr   ),
+        .mem_w_ena_o        ( mem_wb_mem_w_ena    ),
+        .mem_w_addr_o       ( mem_wb_mem_w_addr   ),
+        .mem_w_data_o       ( mem_wb_mem_w_data   )
     );
 
 
-    //wb模块：写回（通用寄存器或RAM），组合逻辑
+    //wb模块：写回（通用寄存器或mem），组合逻辑
     wb  u_wb(
-        .arst_n             ( arst_n ),
-        .inst_i             (  ), 
-        .mem_rena_i         (  ),
-        .mem_rdata_i        (  ),
-        .mem_raddr_i        (  ),
-        .reg_wena_i         (  ),
-        .reg_wdata_i        (  ),
-        .reg_waddr_i        (  ),
-        .mem_wena_i         (  ),
-        .mem_waddr_i        (  ),
-        .mem_wdata_i        (  ),
-        .reg_wena_o         ( wb_w_ena ),
-        .reg_wdata_o        ( wb_w_addr ),
-        .reg_waddr_o        ( wb_w_data ),
-        .mem_wena_o         (  ),
-        .mem_waddr_o        (  ),
-        .mem_wdata_o        (  )
+        .arst_n             ( arst_n                ),
+
+        .inst_i             ( mem_wb_inst           ), 
+
+        .mem_r_ena_i        ( mem_wb_mem_r_ena      ),
+        .mem_r_data_i       ( mem_wb_mem_r_data     ),
+        .mem_r_addr_i       ( mem_wb_mem_r_addr     ),
+
+        .reg_w_ena_i        ( mem_wb_reg_w_ena      ),
+        .reg_w_data_i       ( mem_wb_reg_w_data     ),
+        .reg_w_addr_i       ( mem_wb_reg_w_addr     ),
+
+        .mem_w_ena_i        ( mem_wb_mem_w_ena      ),
+        .mem_w_addr_i       ( mem_wb_mem_w_addr     ),
+        .mem_w_data_i       ( mem_wb_mem_w_data     ),
+
+        .reg_w_ena_o        ( wb_reg_w_ena          ),
+        .reg_w_data_o       ( wb_reg_w_addr         ),
+        .reg_w_addr_o       ( wb_reg_w_data         ),
+
+        .mem_w_ena_o        ( wb_mem_w_ena          ),
+        .mem_w_addr_o       ( wb_mem_w_addr         ),
+        .mem_w_data_o       ( wb_mem_w_data         )
     );
 
 

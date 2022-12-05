@@ -28,27 +28,27 @@ module  risc_v_soc(
         .ram_w_ena_o        ( ram_w_ena         ),
         .ram_w_addr_o       ( ram_w_addr        ),
         .ram_w_data_o       ( ram_w_data        ),
-        .rom_r_addr_i       ( rom_r_addr        )
+        .rom_r_addr_o       ( rom_r_addr        )
     );
 
     ram u_ram(
         .clk_100MHz         ( clk_100MHz        ),
         .arst_n             ( arst_n            ),
 
-        .rena_i             ( ram_r_ena         ),
-        .raddr_i            ( ram_r_addr        ),
-        .wena_i             ( ram_w_ena         ),
-        .waddr_i            ( ram_w_addr        ),
-        .wdata_i            ( ram_w_data        ),
-        .rdata_o            ( ram_r_data        )
+        .r_ena_i            ( ram_r_ena         ),
+        .r_addr_i           ( ram_r_addr        ),
+        .w_ena_i            ( ram_w_ena         ),
+        .w_addr_i           ( ram_w_addr        ),
+        .w_data_i           ( ram_w_data        ),
+        .r_data_o           ( ram_r_data        )
     );
 
     rom u_rom(
         .clk_100MHz         ( clk_100MHz        ),
         .arst_n             ( arst_n            ),
 
-        .raddr_i            ( rom_r_addr        ),
-        .rdata_o            ( rom_r_data        )
+        .r_addr_i           ( rom_r_addr        ),
+        .r_data_o           ( rom_r_data        )
     );
 
 

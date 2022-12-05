@@ -6,7 +6,7 @@
 `define INST_TYPE_I_2 7'b0000011
 //译码电路，纯组合逻辑
 module id (
-    input wire arst_n,
+    input wire                  arst_n,
     //from if_id
     input wire [`INST]          inst_i,             //指令内容
     input wire [`INST_ADDR]     inst_addr_i,        //指令地址
@@ -16,18 +16,18 @@ module id (
     //from ex
     input wire                  ex_jump_ena_i,      //ex跳转指令
     //to regs
-    output reg [`REG_ADDR]       reg1_r_addr_o,     // 读通用寄存器1地址
-    output reg [`REG_ADDR]       reg2_r_addr_o,     // 读通用寄存器2地址
+    output reg [`REG_ADDR]      reg1_r_addr_o,     // 读通用寄存器1地址
+    output reg [`REG_ADDR]      reg2_r_addr_o,     // 读通用寄存器2地址
     //to ex
-    output reg [`INST]           inst_o,            // 指令内容
-    output reg [`INST_ADDR]      inst_addr_o,       // 指令地址
+    output reg [`INST]          inst_o,            // 指令内容
+    output reg [`INST_ADDR]     inst_addr_o,       // 指令地址
     
-    output reg [`REG]            reg1_r_data_o,     // 通用寄存器1数据
-    output reg [`REG]            reg2_r_data_o,     // 通用寄存器2数据
-    output reg                   reg_w_ena_o,       // 写通用寄存器标志
-    output reg [`REG_ADDR]       reg_w_addr_o,      // 写通用寄存器地址
-    output  reg                  mem_w_ena_o,       //需要写回的使能信号
-    output  reg                  mem_r_ena_o,       //需要访问Ram读取数据的信号
+    output reg [`REG]           reg1_r_data_o,     // 通用寄存器1数据
+    output reg [`REG]           reg2_r_data_o,     // 通用寄存器2数据
+    output reg                  reg_w_ena_o,       // 写通用寄存器标志
+    output reg [`REG_ADDR]      reg_w_addr_o,      // 写通用寄存器地址
+    output  reg                 mem_w_ena_o,       //需要写回的使能信号
+    output  reg                 mem_r_ena_o,       //需要访问Ram读取数据的信号
 
     output reg [`MEM_ADDR]      op1_o,              //操作数1
     output reg [`MEM_ADDR]      op2_o,              //操作数2

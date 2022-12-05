@@ -8,8 +8,8 @@ module ex(
     input   wire    [`INST_ADDR]    inst_addr_i,    //接受信号的地址
     input   wire                    reg_w_ena_i,    //写寄存器使能信号
     input   wire    [`REG_ADDR]     reg_w_addr_i,   //写通用寄存器的地址
-    input   wire    [`REG]          reg1_data_i,   //通用寄存器1的输入数据     
-    input   wire    [`REG]          reg2_data_i,   //通用寄存器2的输入数据
+    input   wire    [`REG]          reg1_r_data_i,   //通用寄存器1的输入数据     
+    input   wire    [`REG]          reg2_r_data_i,   //通用寄存器2的输入数据
     input   wire    [`REG]          op1_i,          //数据操作数1
     input   wire    [`REG]          op2_i,          //数据操作数2
     input   wire    [`MEM_ADDR]     op1_jump_i,     //跳转操作的地址操作数1        
@@ -58,9 +58,9 @@ assign op1_add_op2_res = op1_i + op2_i ;
 assign op1_ge_op2_signed = $signed(op1_i) < $signed(op2_i) ;
 assign op1_ge_op2_unsigned = op1_i < op2_i ;
 assign sri_shift_mask = 32'hffffffff >> inst_i[24:20];
-assign sri_shift = reg1_data_i >> inst_i[24:20];
-assign sr_shift_mask = 32'hffffffff >> reg2_data_i[4:0];
-assign sr_shift = reg1_data_i >> reg2_data_i[4:0];
+assign sri_shift = reg1_r_data_i >> inst_i[24:20];
+assign sr_shift_mask = 32'hffffffff >> reg2_r_data_i[4:0];
+assign sr_shift = reg1_r_data_i >> reg2_r_data_i[4:0];
 assign op1_jump_add_op2_jump_res = op1_jump_i + op2_jump_i ;
 
 
@@ -127,7 +127,7 @@ always@(*)begin
                     mem_w_data_o = `ZERO_WORD;
                     mem_r_addr_o = `ZERO_WORD;
                     mem_w_addr_o = `ZERO_WORD;
-                    reg_w_data_o = reg1_data_i << inst_i[24:20] ;
+                    reg_w_data_o = reg1_r_data_i << inst_i[24:20] ;
             end
             `INST_SRI: begin    
                     jump_flag_o = `JUMP_DISABLE;
@@ -136,7 +136,7 @@ always@(*)begin
                     mem_r_addr_o = `ZERO_WORD;
                     mem_w_addr_o = `ZERO_WORD;
                     if(inst_i[30] == 1'b1 )begin //高位补符号位右移
-                    reg_w_data_o = sri_shift | ( {32{reg1_data_i[31]}} & ~sri_shift_mask ) ;
+                    reg_w_data_o = sri_shift | ( {32{reg1_r_data_i[31]}} & ~sri_shift_mask ) ;
                 end
                     else                         //高位补0右移   
                     reg_w_data_o = sri_shift ;
@@ -204,7 +204,7 @@ always@(*)begin
                 mem_r_addr_o = `ZERO_WORD;
                 mem_w_addr_o = `ZERO_WORD;
                 if (inst_i[30] == 1'b1) begin
-                        reg_w_data_o = sr_shift | ({32{reg1_data_i[31]}} & (~sr_shift_mask));
+                        reg_w_data_o = sr_shift | ({32{reg1_r_data_i[31]}} & (~sr_shift_mask));
                 end else begin
                         reg_w_data_o = sr_shift ;
                         end
@@ -246,7 +246,7 @@ always@(*)begin
     `INST_TYPE_S:begin                  //写回指令
                 jump_flag_o = `JUMP_DISABLE;
                 jump_addr_o = `ZERO_WORD;
-                reg_w_data_o = reg2_data_i;
+                reg_w_data_o = reg2_r_data_i;
                 mem_w_addr_o = op1_add_op2_res;
                 mem_r_addr_o = op1_add_op2_res;           
     end
