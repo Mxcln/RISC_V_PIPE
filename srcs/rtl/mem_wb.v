@@ -52,7 +52,7 @@ module  mem_wb(
             inst_o      <= inst_o          ;
             mem_r_ena_o  <= mem_r_ena_o       ;
             mem_r_data_o <= mem_r_data_o      ;
-            mem_r_addr_o <= mem_r_addr_i      ;
+            mem_r_addr_o <= mem_r_addr_o      ;
             reg_w_ena_o  <= reg_w_ena_o       ;
             reg_w_data_o <= reg_w_data_o      ;
             reg_w_addr_o <= reg_w_addr_o      ;
@@ -65,9 +65,9 @@ module  mem_wb(
             mem_r_ena_o  <= mem_r_ena_i       ;
             mem_r_data_o <= mem_r_data_i      ;
             mem_r_addr_o <= mem_r_addr_i      ;
-            reg_w_ena_o  <= reg_w_ena_o       ;
-            reg_w_data_o <= reg_w_data_o      ;
-            reg_w_addr_o <= reg_w_addr_o      ;
+            reg_w_ena_o  <= reg_w_ena_i       ;
+            reg_w_data_o <= reg_w_data_i      ;
+            reg_w_addr_o <= reg_w_addr_i      ;
             mem_w_ena_o  <= mem_w_ena_i       ;
             mem_w_addr_o <= mem_w_addr_i      ;
             mem_w_data_o <= mem_w_data_i      ;
