@@ -15,7 +15,7 @@ module id (
     input wire [`REG]           reg2_r_data_i,      //读寄存器2数据
     //from ex
     input wire                  ex_jump_ena_i,      //ex跳转指令
-    //to regs
+    //to regs & ex
     output reg [`REG_ADDR]      reg1_r_addr_o,     // 读通用寄存器1地址
     output reg [`REG_ADDR]      reg2_r_addr_o,     // 读通用寄存器2地址
     //to ex
