@@ -47,7 +47,7 @@ module ram(
                 _ram[i] <= `ZERO_WORD;
             end
         end
-        if(arst_n != `RST_ENABLE) begin
+        else if(w_ena_i) begin
             _ram[w_addr_i[31:2]] <= w_data_i;
         end
     end

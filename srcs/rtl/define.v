@@ -1,4 +1,4 @@
-
+`default_nettype none
 
 //inst  
 `define     INST                31:0

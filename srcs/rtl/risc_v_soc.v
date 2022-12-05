@@ -13,6 +13,10 @@ module  risc_v_soc(
     wire                    ram_w_ena   ;
     wire    [`MEM_ADDR]     ram_w_addr  ;
     wire    [`MEM]          ram_w_data  ;
+
+    // wire                    rom_w_ena   ;
+    // wire    [`MEM_ADDR]     rom_w_addr  ;
+    // wire    [`MEM]          rom_w_data  ;
     wire    [`MEM_ADDR]     rom_r_addr  ;
 
 
@@ -44,8 +48,12 @@ module  risc_v_soc(
     );
 
     rom u_rom(
+        .clk_100MHz         ( clk_100MHz        ),
         .arst_n             ( arst_n            ),
         .r_addr_i           ( rom_r_addr        ),
+        .w_ena_i            ( `WRITE_DISABLE    ),
+        .w_addr_i           ( `ZERO_WORD        ),
+        .w_data_i           ( `ZERO_WORD        ),
         .r_data_o           ( rom_r_data        )
     );
 

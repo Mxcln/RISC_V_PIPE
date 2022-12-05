@@ -19,6 +19,9 @@ module risc_v_pipe_top(
     wire                    ex_hold_risk    ;       //ex输出的数据冒险信号
     wire                    ex_jump_ena     ;       //ex输出的跳转信号
     wire    [`INST_ADDR]    ex_jump_addr    ;       //ex输出的跳转地址
+
+    wire    [`REG]          reg_reg1_r_data ;
+    wire    [`REG]          reg_reg2_r_data ;
     
     wire                    ctrl_hold_ena   ;       //除了pc ,pc_id 的暂停信号（也就是系统暂停）
     wire                    ctrl_pc_hold    ;       //pc,pc_id 的暂停信号（系统暂停以及数据冒险的暂停）
@@ -43,8 +46,8 @@ module risc_v_pipe_top(
     wire    [`INST_ADDR]    id_inst_addr    ;       //从id中输出的指令地址
     wire    [`REG_ADDR]     id_reg1_r_addr  ;       //id输出的第一个操作数的地址
     wire    [`REG_ADDR]     id_reg2_r_addr  ;       //id输出的第二个操作数的地址
-    wire    [`REG]          reg_reg1_r_addr  ;      //id输入的第一个操作数的地址
-    wire    [`REG]          reg_reg2_r_addr  ;      //id输入的第二个操作数的地址
+    wire    [`REG_ADDR]     reg_reg1_r_addr  ;      //id输入的第一个操作数的地址
+    wire    [`REG_ADDR]     reg_reg2_r_addr  ;      //id输入的第二个操作数的地址
     wire    [`REG]          id_reg1_r_data  ;
     wire    [`REG]          id_reg2_r_data  ;   
     wire                    id_reg_w_ena    ;
@@ -74,13 +77,14 @@ module risc_v_pipe_top(
     wire    [1:0]           forwardA        ;
     wire    [1:0]           forwardB        ;
     wire                    forwardC        ;
-    wire                    hazard_hold_o   ;
+    wire                    hazard_hold     ;
 
     wire    [`REG]          ex_in_reg1_r_data;
     wire    [`REG]          ex_in_reg2_r_data;
 
     wire    [`INST]         ex_inst         ;       //从ex中输出的指令
     wire                    ex_reg_w_ena    ;
+    wire    [`REG]          ex_reg_w_data   ;
     wire    [`REG_ADDR]     ex_reg_w_addr   ;
     wire                    ex_mem_r_ena    ;
     wire    [`MEM_ADDR]     ex_mem_r_addr   ;
@@ -108,7 +112,7 @@ module risc_v_pipe_top(
     wire    [`MEM_ADDR]     mem_mem_r_addr      ;
     wire                    mem_reg_w_ena       ;
     wire    [`MEM]          mem_reg_w_data      ;
-    wire    [`MEM_ADDR]     mem_reg_w_addr      ;
+    wire    [`REG_ADDR]     mem_reg_w_addr      ;
     wire                    mem_mem_w_ena       ;
     wire    [`MEM_ADDR]     mem_mem_w_addr      ;
     wire    [`MEM]          mem_mem_w_data      ;     
@@ -119,7 +123,7 @@ module risc_v_pipe_top(
     wire    [`MEM_ADDR]     mem_wb_mem_r_addr      ;
     wire                    mem_wb_reg_w_ena       ;
     wire    [`MEM]          mem_wb_reg_w_data      ;
-    wire    [`MEM_ADDR]     mem_wb_reg_w_addr      ;
+    wire    [`REG_ADDR]     mem_wb_reg_w_addr      ;
     wire                    mem_wb_mem_w_ena       ;
     wire    [`MEM_ADDR]     mem_wb_mem_w_addr      ;
     wire    [`MEM]          mem_wb_mem_w_data      ; 
@@ -166,9 +170,9 @@ module risc_v_pipe_top(
         .clk_100MHz         ( clk_100MHz        ),
         .arst_n             ( arst_n            ),
 
-        .w_ena_i            ( wb_w_ena          ),
-        .w_addr_i           ( wb_w_addr         ),
-        .w_data_i           ( wb_w_data         ),
+        .w_ena_i            ( wb_reg_w_ena        ),
+        .w_addr_i           ( wb_reg_w_addr       ),
+        .w_data_i           ( wb_reg_w_data       ),
 
         .reg1_r_addr_i       ( id_reg1_r_addr     ),
         .reg2_r_addr_i       ( id_reg2_r_addr     ),
@@ -294,6 +298,7 @@ module risc_v_pipe_top(
         .ex_mem_reg_w_data_i    ( ex_mem_reg_w_data ),
         .mem_wb_reg_w_data_i    ( mem_wb_reg_w_data ),
         .id_ex_reg1_r_data_i    ( id_ex_reg1_r_data ),
+        .id_ex_reg2_r_data_i    ( id_ex_reg2_r_data ),
         
         .forwardC_o             ( forwardC          ),
         .hazard_hold_o          ( hazard_hold       ),
@@ -504,8 +509,8 @@ module risc_v_pipe_top(
         .mem_w_data_i       ( mem_wb_mem_w_data     ),
 
         .reg_w_ena_o        ( wb_reg_w_ena          ),
-        .reg_w_data_o       ( wb_reg_w_addr         ),
-        .reg_w_addr_o       ( wb_reg_w_data         ),
+        .reg_w_data_o       ( wb_reg_w_data         ),
+        .reg_w_addr_o       ( wb_reg_w_addr         ),
 
         .mem_w_ena_o        ( wb_mem_w_ena          ),
         .mem_w_addr_o       ( wb_mem_w_addr         ),
