@@ -19,12 +19,12 @@ module regs (
     //写寄存器
     integer i;
     always @(posedge clk_100MHz or negedge arst_n) begin
-        //if (arst_n == `RST_ENABLE) begin
+        if (arst_n == `RST_ENABLE) begin
         for (i = 0; i < 32 ;i = i + 1) begin
             regs[i] = `ZERO_WORD;
         end
-        //end
-        if ((w_ena_i == `WRITE_ENABLE) && (w_addr_i != `ZERO_REG)) begin
+        end
+        else if ((w_ena_i == `WRITE_ENABLE) && (w_addr_i != `ZERO_REG)) begin
             regs[w_addr_i] <= w_data_i;
         end
     end

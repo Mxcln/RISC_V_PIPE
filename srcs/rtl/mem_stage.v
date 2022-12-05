@@ -1,3 +1,4 @@
+
 module mem_stage(
 	input       [31:0]      rd2_data_mem_i_i,           //要写进ram的rs2地址对应的数据从ex_mem模块先经过mem_stage
 	input       [31:0]      load_mem_wb_o_i,            //

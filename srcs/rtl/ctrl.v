@@ -1,4 +1,4 @@
-`include "../define.v"
+`include "define.v"
 
 
 module ctrl(
@@ -6,7 +6,7 @@ module ctrl(
     input   wire            arst_n      ,
     input   wire            hold        ,
 
-    input   wire                        hazard_hold     ,   //ex前端数据选择模块输出的解决数据冒险所需要的流水线冲刷信号
+    input   wire                        hazard_hold_i     ,   //ex前端数据选择模块输出的解决数据冒险所需要的流水线冲刷信号
     input   wire                        ex_jump_i       ,   //ex模块输出的跳转信号
     input   wire    [`MEM_ADDR]         ex_jump_addr_i  ,   //ex模块输出的跳转地址
     
@@ -26,12 +26,12 @@ module ctrl(
 
     assign  jump_addr_o =   ex_jump_addr_i;
 
-    assign  pc_hold_o   =   hold | hazard_hold;
+    assign  pc_hold_o   =   hold | hazard_hold_i;
 
-    assign  pc_id_hold_o =  hold | hazard_hold;
+    assign  pc_id_hold_o =  hold | hazard_hold_i;
 
     assign  pc_id_clr_o =   ex_jump_i;
 
-    assign  id_ex_clr_o =   hazard_hold;
+    assign  id_ex_clr_o =   hazard_hold_i;
 
 endmodule

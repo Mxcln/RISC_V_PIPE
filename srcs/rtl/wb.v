@@ -1,4 +1,4 @@
-`include "../define.v"
+`include "define.v"
 
 module wb(
     input   wire                        arst_n      ,           //系统复位

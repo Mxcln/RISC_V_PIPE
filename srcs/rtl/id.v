@@ -6,7 +6,6 @@
 `define INST_TYPE_I_2 7'b0000011
 //译码电路，纯组合逻辑
 module id (
-    input wire                  arst_n,
     //from if_id
     input wire [`INST]          inst_i,             //指令内容
     input wire [`INST_ADDR]     inst_addr_i,        //指令地址

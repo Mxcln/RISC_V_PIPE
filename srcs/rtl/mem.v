@@ -1,5 +1,5 @@
 
-`include "../define.v"
+`include "define.v"
 
 module  mem(
     input   wire                        arst_n  ,               //系统复位                  

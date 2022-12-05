@@ -1,7 +1,7 @@
 `include "define.v" 
 module ex_mem (
     input   wire                    arst_n,         //异步复位信号
-    input   wire                    clk_100M,            //时钟信号100M
+    input   wire                    clk_100MHz,            //时钟信号100M
     input   wire                    hold,           //暂停
 //输入信号
     //to    mem                                     //向访存模块发出指令
@@ -35,7 +35,7 @@ module ex_mem (
     output  reg     [`REG]       mem_w_data_o,    //需要写回的寄存器数据
     output  reg                   mem_w_ena_o        //需要写回的使能信号，也需要判断指令类型
 );
-    always@(posedge clk_100M or negedge arst_n) begin
+    always@(posedge clk_100MHz or negedge arst_n) begin
         if( !arst_n )
             begin
                 //To mem

@@ -1,4 +1,4 @@
-`include "../define.v"
+`include "define.v"
 
 module  mem_wb(
     input   wire                        clk_100MHz  ,           //系统清零

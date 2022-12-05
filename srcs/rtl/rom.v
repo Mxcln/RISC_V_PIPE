@@ -1,9 +1,8 @@
 
-`include "../define.v"
+`include "define.v"
 
 module rom(
     input   wire    arst_n  ,
-    input   wire    r_ena_i  ,
 
     input   wire    [`MEM_ADDR]         r_addr_i ,
 

@@ -208,7 +208,6 @@ module risc_v_pipe_top(
 
     //id模块：译码，组合逻辑
     id  u_id (
-        .arst_n             ( arst_n            ),
         .inst_i             ( pc_id_inst        ),
         .inst_addr_i        ( pc_id_inst_addr   ),
 

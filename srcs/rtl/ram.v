@@ -1,5 +1,5 @@
 
-`include "../define.v"
+`include "define.v"
 
 module ram(
     input   wire    clk_100MHz  ,
