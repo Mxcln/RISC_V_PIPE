@@ -44,8 +44,11 @@ module  mem(
     assign {imm,rs1,funct3,rd,opcode} = inst_i;
 
     always@(*) begin
-        if(arst_n != `RST_ENABLE && mem_r_ena_i == `READ_ENABLE) begin
-            mem_r_data <= mem_r_data_i;
+        if(arst_n == `RST_ENABLE && mem_r_ena_i == `READ_ENABLE) begin
+            mem_r_data = mem_r_data_i;
+        end
+        else begin
+            mem_r_data = `ZERO_WORD;
         end
     end
 
