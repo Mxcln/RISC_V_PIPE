@@ -26,12 +26,7 @@ module id (
     output reg                  reg_w_ena_o,       // 写通用寄存器标志
     output reg [`REG_ADDR]      reg_w_addr_o,      // 写通用寄存器地址
     output  reg                 mem_w_ena_o,       //需要写回的使能信号
-    output  reg                 mem_r_ena_o,       //需要访问Ram读取数据的信号
-
-    output reg [`MEM_ADDR]      op1_o,              //操作数1
-    output reg [`MEM_ADDR]      op2_o,              //操作数2
-    output reg [`MEM_ADDR]      op1_jump_o,         //跳转操作数1
-    output reg [`MEM_ADDR]      op2_jump_o          //跳转操作数2
+    output  reg                 mem_r_ena_o        //需要访问Ram读取数据的信号
 
 );
     wire [6:0] opcode = inst_i[6:0];
@@ -46,11 +41,6 @@ module id (
 
         reg1_r_data_o = reg1_r_data_i;
         reg2_r_data_o = reg2_r_data_i;
-        
-        op1_o = `ZERO_WORD;
-        op2_o = `ZERO_WORD;
-        op1_jump_o = `ZERO_WORD;
-        op2_jump_o = `ZERO_WORD;
 
         reg_w_ena_o = `WRITE_DISABLE;
         mem_w_ena_o = `WRITE_DISABLE;
@@ -67,8 +57,6 @@ module id (
                             reg_w_addr_o = rd;
                             reg1_r_addr_o = rs1;
                             reg2_r_addr_o = rs2;
-                            op1_o = reg1_r_data_i;
-                            op2_o = reg2_r_data_i;
                         end
                         //如果 不属于这些 则指令出错，执行空指令
                         // reg_addr =32'b0 的位置应该是不存数据的？
@@ -94,8 +82,6 @@ module id (
                         reg_w_addr_o = rd;
                         reg1_r_addr_o = rs1;
                         reg2_r_addr_o = `ZERO_REG;
-                        op1_o = reg1_r_data_i;
-                        op2_o = {{20{inst_i[31]}}, inst_i[31:20]};
                         //op2_o 将立即数扩展为32位指令
                     end
                     default: begin
@@ -114,8 +100,6 @@ module id (
                         reg_w_addr_o = rd;
                         reg1_r_addr_o = rs1;
                         reg2_r_addr_o = `ZERO_REG;
-                        op1_o = reg1_r_data_i;
-                        op2_o = {{20{inst_i[31]}}, inst_i[31:20]};
                     end
                     default: begin
                         reg_w_addr_o = `ZERO_REG;
@@ -133,8 +117,6 @@ module id (
                         reg_w_addr_o=`ZERO_REG;
                         reg1_r_addr_o = rs1;
                         reg2_r_addr_o = rs2;    //可以写reg2_r_addr_o = `ZERO_REG ;
-                        op1_o = reg1_r_data_i;
-                        op2_o = {{20{inst_i[31]}}, inst_i[31:25], inst_i[11:7]};
                     end
                     default: begin
                         reg_w_addr_o = `ZERO_REG;
@@ -152,10 +134,6 @@ module id (
                         mem_w_ena_o = `WRITE_DISABLE;
                         mem_r_ena_o = `READ_DISABLE;
                         reg_w_addr_o = `ZERO_REG;
-                        op1_o = reg1_r_data_i;
-                        op2_o = reg2_r_data_i;
-                        op1_jump_o = inst_addr_i;
-                        op2_jump_o = {{20{inst_i[31]}}, inst_i[7], inst_i[30:25], inst_i[11:8], 1'b0};
                         //认为立即数imm最高位位0？
                     end
                     default: begin
@@ -172,10 +150,6 @@ module id (
                 reg_w_addr_o = rd;
                 reg1_r_addr_o = `ZERO_REG;
                 reg2_r_addr_o = `ZERO_REG;
-                op1_o = inst_addr_i;
-                op2_o = 32'h4;
-                op1_jump_o = inst_addr_i;
-                op2_jump_o = {{12{inst_i[31]}}, inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0};
                 //认为imm立即数的最高位为0，J型指令
             end
             `INST_JALR: begin
@@ -185,10 +159,6 @@ module id (
                 reg_w_addr_o = rd;
                 reg1_r_addr_o = rs1;
                 reg2_r_addr_o = `ZERO_REG;
-                op1_o = inst_addr_i;
-                op2_o = 32'h4;
-                op1_jump_o = reg1_r_data_i;
-                op2_jump_o = {{20{inst_i[31]}}, inst_i[31:20]};
             end
             `INST_LUI: begin
                 reg_w_ena_o = `WRITE_ENABLE;
@@ -197,8 +167,6 @@ module id (
                 reg_w_addr_o = rd;
                 reg1_r_addr_o = `ZERO_REG;
                 reg2_r_addr_o = `ZERO_REG;
-                op1_o = {inst_i[31:12], 12'b0};
-                op2_o = `ZERO_WORD;
             end
             `INST_AUIPC: begin
                 reg_w_ena_o = `WRITE_ENABLE;
@@ -207,8 +175,6 @@ module id (
                 reg_w_addr_o = rd;
                 reg1_r_addr_o = `ZERO_REG;
                 reg2_r_addr_o = `ZERO_REG;
-                op1_o = inst_addr_i;
-                op2_o = {inst_i[31:12], 12'b0};
             end
             default: begin
                         reg1_r_addr_o = `ZERO_REG;

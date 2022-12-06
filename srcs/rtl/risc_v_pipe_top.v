@@ -54,10 +54,6 @@ module risc_v_pipe_top(
     wire    [`REG_ADDR]     id_reg_w_addr   ;
     wire                    id_mem_w_ena    ;
     wire                    id_mem_r_ena    ;
-    wire    [`REG]          id_op1          ;
-    wire    [`REG]          id_op2          ;
-    wire    [`REG]          id_op1_jump     ;
-    wire    [`REG]          id_op2_jump     ;
 
     wire    [`INST]         id_ex_inst          ;       //从id_ex中输出的指令
     wire    [`INST_ADDR]    id_ex_inst_addr     ;       //从id_ex中输出的指令地址
@@ -69,10 +65,6 @@ module risc_v_pipe_top(
     wire    [`REG_ADDR]     id_ex_reg_w_addr    ;
     wire                    id_ex_mem_w_ena     ;
     wire                    id_ex_mem_r_ena     ;
-    wire    [`REG]          id_ex_op1           ;
-    wire    [`REG]          id_ex_op2           ;
-    wire    [`REG]          id_ex_op1_jump      ;
-    wire    [`REG]          id_ex_op2_jump      ;
 
     wire    [1:0]           forwardA        ;
     wire    [1:0]           forwardB        ;
@@ -232,12 +224,7 @@ module risc_v_pipe_top(
         .reg_w_addr_o       ( id_reg_w_addr     ),
 
         .mem_w_ena_o        ( id_mem_w_ena      ),
-        .mem_r_ena_o        ( id_mem_r_ena      ),
-
-        .op1_o              ( id_op1            ),
-        .op2_o              ( id_op2            ),
-        .op1_jump_o         ( id_op1_jump       ),
-        .op2_jump_o         ( id_op2_jump       )
+        .mem_r_ena_o        ( id_mem_r_ena      )
     );
 
 
@@ -256,10 +243,6 @@ module risc_v_pipe_top(
         .reg_w_addr_i       ( id_reg_w_addr      ), 
         .mem_r_ena_i        ( id_mem_r_ena      ),
         .mem_w_ena_i        ( id_mem_w_ena      ),
-        .op1_i              ( id_op1      ), 
-        .op2_i              ( id_op2      ), 
-        .op1_jump_i         ( id_op1_jump      ), 
-        .op2_jump_i         ( id_op2_jump      ), 
         .hold_ena_i         ( ctrl_hold_ena      ), 
         .jump_ena_i         ( ctrl_id_ex_clr      ), 
 
@@ -272,11 +255,7 @@ module risc_v_pipe_top(
         .reg_w_ena_o        ( id_ex_reg_w_ena   ), 
         .reg_w_addr_o       ( id_ex_reg_w_addr  ), 
         .mem_r_ena_o        ( id_ex_mem_r_ena   ),
-        .mem_w_ena_o        ( id_ex_mem_w_ena   ),
-        .op1_o              ( id_ex_op1         ), 
-        .op2_o              ( id_ex_op2         ), 
-        .op1_jump_o         ( id_ex_op1_jump    ), 
-        .op2_jump_o         ( id_ex_op2_jump    ) 
+        .mem_w_ena_o        ( id_ex_mem_w_ena   )
     );
 
     //ex_stage模块：解决数据冲突需要的ex前导模块
@@ -358,11 +337,7 @@ module risc_v_pipe_top(
         .reg_w_ena_i        ( id_ex_reg_w_ena   ),     
         .reg_w_addr_i       ( id_ex_reg_w_addr  ),     
         .reg1_r_data_i      ( ex_in_reg1_r_data ),     
-        .reg2_r_data_i      ( ex_in_reg2_r_data ),     
-        .op1_i              ( id_ex_op1         ),     
-        .op2_i              ( id_ex_op2         ),     
-        .op1_jump_i         ( id_ex_op1_jump    ),     
-        .op2_jump_i         ( id_ex_op2_jump    ),     
+        .reg2_r_data_i      ( ex_in_reg2_r_data ),    
         .mem_r_ena_i        ( id_ex_mem_r_ena   ),     
         .mem_w_ena_i        ( id_ex_mem_w_ena   ),     
 

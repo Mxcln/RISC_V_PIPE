@@ -44,7 +44,6 @@
 
 | in/out | input/output  | width | comments                  |
 | ------ | ------------- | ----- | ------------------------- |
-| in     | arst_n        | 1     | 系统复位                  |
 | in     | inst_i        | 32    | 指令内容                  |
 | in     | inst_addr_i   | 32    | 指令地址                  |
 | in     | reg1_r_data_i | 32    | 通用寄存器 1 要输入的数据 |
@@ -60,10 +59,6 @@
 | out    | mem_w_ena_o   | 1     | 向 mem 写回的使能信号     |
 | out    | mem_r_ena_o   | 1     | 访存使能信号              |
 | out    | reg_w_addr_o  | 5     | 写通用寄存器的地址        |
-| out    | op1_o         | 32    | 操作数 1                  |
-| out    | op1_o         | 32    | 操作数 2                  |
-| out    | op1_jump_o    | 32    | 跳转操作数 1              |
-| out    | op1_jump_o    | 32    | 跳转操作数 2              |
 
 #### 执行时序 `id_ex`
 
@@ -81,10 +76,6 @@
 | in     | reg_w_addr_i  | 5     | 写通用寄存器的地址    |
 | in     | mem_r_ean_i   | 1     | 向 mem 写回的使能信号 |
 | in     | mem_w_ena_i   | 1     | 访存使能信号          |
-| in     | op1_i         | 32    | 操作数 1              |
-| in     | op2_i         | 32    | 操作数 2              |
-| in     | op1_jump_i    | 32    | 跳转操作数 1          |
-| in     | op2_jump_i    | 32    | 跳转操作数 2          |
 | in     | hold_ena_i    | 1     | 暂停信号              |
 | in     | jump_ena_i    | 1     | 跳转（冲刷）信号      |
 | out    | inst_o        | 32    | 指令内容              |
@@ -97,10 +88,6 @@
 | out    | mem_w_ena_o   | 1     | 向 mem 写回的使能信号 |
 | out    | mem_r_ena_o   | 1     | 访存使能信号          |
 | out    | reg_w_addr_o  | 5     | 写通用寄存器的地址    |
-| out    | op1_o         | 32    | 操作数 1              |
-| out    | op1_o         | 32    | 操作数 2              |
-| out    | op1_jump_o    | 32    | 跳转操作数 1          |
-| out    | op1_jump_o    | 32    | 跳转操作数 2          |
 
 #### 
 
@@ -112,12 +99,8 @@
 | in     | inst_addr_i   | 32    | 输入指令地址          |
 | in     | reg_w_ena_i   | 1     | 写寄存器的使能信号    |
 | in     | reg_w_addr_i  | 5     | 写寄存器的地址        |
-| in     | op1_i         | 32    | 操作数 1              |
-| in     | op2_i         | 32    | 操作数 2              |
 | in     | reg1_r_data_i | 32    | 通用寄存器 1 的数据   |
 | in     | reg2_r_data_i | 32    | 通用寄存器 2 的数据   |
-| in     | op1_jump_i    | 32    | 跳转操作数 1          |
-| in     | op2_jump_i    | 32    | 跳转操作数 2          |
 | in     | reg_w_ena_i   | 1     | 写通用寄存器的标志    |
 | in     | mem_w_ena_i   | 1     | 向 mem 写回的使能信号 |
 | in     | mem_r_ena_i   | 1     | 访存使能信号          |
