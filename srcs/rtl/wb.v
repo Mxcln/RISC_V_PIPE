@@ -60,9 +60,7 @@ module wb(
         end
 
         //不是L型指令的情况，将ex输入的结果写入通用寄存器
-        else if(reg_w_ena_i) begin
-            reg_w_data_o = reg_w_data_i ;
-        end
+        
 
         //是L型指令：根据funct3决定写入的数据
         else if(mem_r_ena_i) begin
@@ -103,7 +101,9 @@ module wb(
                 end
             endcase
         end
-
+        else if(reg_w_ena_i) begin
+            reg_w_data_o = reg_w_data_i ;
+        end
         else begin
             reg_w_data_o = `ZERO_WORD ;
         end
