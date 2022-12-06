@@ -3,19 +3,16 @@ module ex(
     input   wire                    arst_n,         //异步复位信号
 
     //from  id                                      //来自译码信号
-    input   wire    [`INST]       inst_b,          //前一个信号，用于判断冒险
-    input   wire    [`REG_ADDR]   reg_b,            //前一个信号的地址
-    input   wire    [`INST]          inst_i,         //接受信号的内容         
+    input   wire    [`INST]         inst_b,          //前一个信号，用于判断冒险
+    input   wire    [`REG_ADDR]     reg_b,            //前一个信号的地址
+    input   wire    [`INST]         inst_i,         //接受信号的内容         
     input   wire    [`INST_ADDR]    inst_addr_i,    //接受信号的地址
-    input   wire                     reg_w_ena_i,    //写寄存器使能信号
+    input   wire                    reg_w_ena_i,    //写寄存器使能信号
     input   wire    [`REG_ADDR]     reg_w_addr_i,   //写通用寄存器的地址
     input   wire    [`REG]          reg1_r_data_i,   //通用寄存器1的输入数据     
     input   wire    [`REG]          reg2_r_data_i,   //通用寄存器2的输入数据
-    input   wire    [`REG]          op1_i,          //数据操作数1
-    input   wire    [`REG]          op2_i,          //数据操作数2
-    input   wire    [`MEM_ADDR]     op1_jump_i,     //跳转操作的地址操作数1        
-    input   wire    [`MEM_ADDR]     op2_jump_i,     //跳转操作的地址操作数2
-
+    input   wire    [`REG_ADDR]     reg1_r_addr_i,   //通用寄存器1的输入数据     
+    input   wire    [`REG_ADDR]     reg2_r_addr_i,   //通用寄存器2的输入数据     
     input   wire                    mem_r_ena_i ,
     input   wire                    mem_w_ena_i ,
 
@@ -44,6 +41,11 @@ module ex(
     output  wire                hold_risk 
 );
 
+reg    [`REG]          op1;          //数据操作数1
+reg    [`REG]          op2;          //数据操作数2
+reg    [`MEM_ADDR]     op1_jump;     //跳转操作的地址操作数1        
+reg    [`MEM_ADDR]     op2_jump;     //跳转操作的地址操作数2
+
 wire    [6:0]   opcode ;                          //指令段
 wire    [2:0]   funct3 ;                          //三位函数段，确定哪一种大的函数
 wire    [6:0]   funct7 ;                          //七位函数段，确定哪一种确定函数
@@ -61,14 +63,14 @@ assign opcode = inst_i[6:0];
 assign funct3 = inst_i[14:12];
 assign funct7 = inst_i[31:25];
 assign rd     = inst_i[11:7];
-assign op1_add_op2_res = op1_i + op2_i ;
-assign op1_ge_op2_signed = $signed(op1_i) < $signed(op2_i) ;
-assign op1_ge_op2_unsigned = op1_i < op2_i ;
+assign op1_add_op2_res = op1 + op2 ;
+assign op1_ge_op2_signed = $signed(op1) < $signed(op2) ;
+assign op1_ge_op2_unsigned = op1 < op2 ;
 assign sri_shift_mask = 32'hffffffff >> inst_i[24:20];
 assign sri_shift = reg1_r_data_i >> inst_i[24:20];
 assign sr_shift_mask = 32'hffffffff >> reg2_r_data_i[4:0];
 assign sr_shift = reg1_r_data_i >> reg2_r_data_i[4:0];
-assign op1_jump_add_op2_jump_res = op1_jump_i + op2_jump_i ;
+assign op1_jump_add_op2_jump_res = op1_jump + op2_jump ;
 
 
 assign  mem_r_ena_o = mem_r_ena_i;
@@ -80,8 +82,14 @@ assign  inst_o = inst_i;
 always@(*)begin
     reg_w_ena_o = reg_w_ena_i ;
     reg_w_addr_o = reg_w_addr_i ;
+    op1 = `ZERO_WORD;
+    op2 = `ZERO_WORD;
+    op1_jump = `ZERO_WORD;
+    op2_jump = `ZERO_WORD;
     case(opcode)
     `INST_TYPE_I_1:begin
+        op1 = reg1_r_data_i;
+        op2 = {{20{inst_i[31]}}, inst_i[31:20]};
         case(funct3)
             `INST_ADDI:begin 
                 jump_flag_o = `JUMP_DISABLE;
@@ -113,7 +121,7 @@ always@(*)begin
                     mem_w_data_o = `ZERO_WORD;
                     mem_r_addr_o = `ZERO_WORD;
                     mem_w_addr_o = `ZERO_WORD;
-                    reg_w_data_o = op1_i ^ op2_i;
+                    reg_w_data_o = op1 ^ op2;
             end
             `INST_ORI: begin
                     jump_flag_o = `JUMP_DISABLE;
@@ -121,7 +129,7 @@ always@(*)begin
                     mem_w_data_o = `ZERO_WORD;
                     mem_r_addr_o = `ZERO_WORD;
                     mem_w_addr_o = `ZERO_WORD;
-                    reg_w_data_o = op1_i | op2_i;
+                    reg_w_data_o = op1 | op2;
             end
             `INST_ANDI: begin
                     jump_flag_o = `JUMP_DISABLE;
@@ -129,7 +137,7 @@ always@(*)begin
                     mem_w_data_o = `ZERO_WORD;
                     mem_r_addr_o = `ZERO_WORD;
                     mem_w_addr_o = `ZERO_WORD;
-                    reg_w_data_o = op1_i & op2_i;
+                    reg_w_data_o = op1 & op2;
             end
             `INST_SLLI: begin   //低位补零左移
                     jump_flag_o = `JUMP_DISABLE;
@@ -159,9 +167,13 @@ always@(*)begin
                         mem_w_addr_o = `ZERO_WORD;
                         reg_w_data_o = `ZERO_WORD;
                     end
+            
         endcase
     end
+
     `INST_TYPE_R:begin
+        op1 = reg1_r_data_i;
+        op2 = reg2_r_data_i;
         case(funct3)
         `INST_ADD_SUB:begin
             jump_flag_o = `JUMP_DISABLE;
@@ -172,7 +184,7 @@ always@(*)begin
             if (inst_i[30] == 1'b0) begin
                 reg_w_data_o = op1_add_op2_res;
             end else begin
-                reg_w_data_o = op1_i - op2_i;
+                reg_w_data_o = op1 - op2;
                 end
         end
         `INST_SLL: begin
@@ -181,7 +193,7 @@ always@(*)begin
             mem_w_data_o = `ZERO_WORD;
             mem_r_addr_o = `ZERO_WORD;
             mem_w_addr_o = `ZERO_WORD;
-            reg_w_data_o = op1_i << op2_i[4:0];
+            reg_w_data_o = op1 << op2[4:0];
         end
         `INST_SLT: begin
             jump_flag_o = `JUMP_DISABLE;
@@ -205,7 +217,7 @@ always@(*)begin
                 mem_w_data_o = `ZERO_WORD;
                 mem_r_addr_o = `ZERO_WORD;
                 mem_w_addr_o = `ZERO_WORD;
-                reg_w_data_o = op1_i ^ op2_i;
+                reg_w_data_o = op1 ^ op2;
             end
         `INST_SR: begin
                 jump_flag_o = `JUMP_DISABLE;
@@ -225,7 +237,7 @@ always@(*)begin
                 mem_w_data_o = `ZERO_WORD;
                 mem_r_addr_o = `ZERO_WORD;
                 mem_w_addr_o = `ZERO_WORD;
-                reg_w_data_o = op1_i | op2_i;
+                reg_w_data_o = op1 | op2;
                 end
         `INST_AND: begin
                 jump_flag_o = `JUMP_DISABLE;
@@ -233,7 +245,7 @@ always@(*)begin
                 mem_w_data_o = `ZERO_WORD;
                 mem_r_addr_o = `ZERO_WORD;
                 mem_w_addr_o = `ZERO_WORD;
-                reg_w_data_o = op1_i & op2_i;
+                reg_w_data_o = op1 & op2;
                 end
         default: begin
                 jump_flag_o = `JUMP_DISABLE;
@@ -246,6 +258,8 @@ always@(*)begin
         endcase
     end
     `INST_TYPE_I_2 :begin               //访存指令
+                op1 = reg1_r_data_i;
+                op2 = {{20{inst_i[31]}}, inst_i[31:20]};
                 jump_flag_o = `JUMP_DISABLE;
                 jump_addr_o = `ZERO_WORD;
                 mem_w_data_o = `ZERO_WORD;
@@ -260,16 +274,22 @@ always@(*)begin
                 mem_w_data_o =`ZERO_WORD;
                 mem_w_addr_o = op1_add_op2_res;
                 mem_r_addr_o = op1_add_op2_res;    
-                mem_w_data_o = reg2_r_data_i;       
+                mem_w_data_o = reg2_r_data_i; 
+                op1 = reg1_r_data_i;
+                op2 = {{20{inst_i[31]}}, inst_i[31:25], inst_i[11:7]};      
     end
     `INST_TYPE_B:begin                  //条件跳转指令
+        op1 = reg1_r_data_i;
+        op2 = reg2_r_data_i;
+        op1_jump = inst_addr_i;
+        op2_jump = {{20{inst_i[31]}}, inst_i[7], inst_i[30:25], inst_i[11:8], 1'b0};
         case(funct3)
              `INST_BEQ: begin
                         mem_w_data_o = `ZERO_WORD;
                         mem_r_addr_o = `ZERO_WORD;
                         mem_w_addr_o = `ZERO_WORD;
                         reg_w_data_o = `ZERO_WORD;
-                        jump_flag_o = op1_i == op2_i ;
+                        jump_flag_o = op1 == op2 ;
                         jump_addr_o = op1_jump_add_op2_jump_res;
                     end
             `INST_BEQ: begin
@@ -277,7 +297,7 @@ always@(*)begin
                         mem_r_addr_o = `ZERO_WORD;
                         mem_w_addr_o = `ZERO_WORD;
                         reg_w_data_o = `ZERO_WORD;
-                        jump_flag_o = op1_i != op2_i ;
+                        jump_flag_o = op1 != op2 ;
                         jump_addr_o = op1_jump_add_op2_jump_res;
                     end
             `INST_BGE: begin
@@ -322,21 +342,49 @@ always@(*)begin
                     end                        
         endcase
     end  
-    `INST_JAL,  `INST_JALR:begin
+    `INST_JAL:begin
         mem_w_data_o = `ZERO_WORD;
         mem_r_addr_o = `ZERO_WORD;
         mem_w_addr_o = `ZERO_WORD;
         jump_flag_o = `JUMP_ENABLE;
         jump_addr_o = op1_jump_add_op2_jump_res;
         reg_w_data_o = op1_add_op2_res;
+        op1 = inst_addr_i;
+        op2 = 32'h4;
+        op1_jump = inst_addr_i;
+        op2_jump = {{12{inst_i[31]}}, inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0};
     end
-    `INST_LUI,`INST_AUIPC:begin
+    `INST_JALR:begin
+        mem_w_data_o = `ZERO_WORD;
+        mem_r_addr_o = `ZERO_WORD;
+        mem_w_addr_o = `ZERO_WORD;
+        jump_flag_o = `JUMP_ENABLE;
+        jump_addr_o = op1_jump_add_op2_jump_res;
+        reg_w_data_o = op1_add_op2_res;
+        op1 = inst_addr_i;
+        op2 = 32'h4;
+        op1_jump = reg1_r_data_i;
+        op2_jump = {{20{inst_i[31]}}, inst_i[31:20]};    
+    end
+    `INST_LUI:begin
         mem_w_data_o = `ZERO_WORD;
         mem_r_addr_o = `ZERO_WORD;
         mem_w_addr_o = `ZERO_WORD;
         jump_addr_o = `ZERO_WORD;
         jump_flag_o = `JUMP_DISABLE;
         reg_w_data_o = op1_add_op2_res;
+        op1 = {inst_i[31:12], 12'b0};
+        op2 = `ZERO_WORD;
+    end
+    `INST_AUIPC:begin
+        mem_w_data_o = `ZERO_WORD;
+        mem_r_addr_o = `ZERO_WORD;
+        mem_w_addr_o = `ZERO_WORD;
+        jump_addr_o = `ZERO_WORD;
+        jump_flag_o = `JUMP_DISABLE;
+        reg_w_data_o = op1_add_op2_res;
+        op1 = inst_addr_i;
+        op2 = {inst_i[31:12], 12'b0};
     end
     default:
     begin
