@@ -6,7 +6,7 @@ module risc_v_soc_tb();
     reg hold;
 
     initial begin
-        #200 $readmemb ("C:/Users/shadow/Desktop/inst.data", u_risc_v_soc.u_rom._rom);
+        $readmemb ("inst.data", u_risc_v_soc.u_rom._rom);
     end
 
 	initial
@@ -19,7 +19,7 @@ module risc_v_soc_tb();
 	begin
         hold = 1'b0;
 		arst_n = 1'b0;
-		#20 arst_n = 1'b1;
+		#25 arst_n = 1'b1;
 		#4000 $stop;
 	end
 

@@ -15,7 +15,7 @@ module ex_stage(
     input   wire    [`REG_ADDR] id_reg2_r_addr_i    ,
     input   wire    [`REG_ADDR] id_ex_reg_w_addr_i  ,
     input   wire                id_ex_mem_r_ena_i   ,
-    input   wire                id_mem_r_ena_i      ,
+    input   wire                id_mem_w_ena_i      ,
     input   wire                id_ex_reg_w_ena_i   ,
 
     input   wire    [`REG]      ex_mem_reg_w_data_i ,
@@ -50,7 +50,7 @@ module ex_stage(
         .rs2_id_ex_i_i          ( id_reg2_r_addr_i    ),          		
         .rd_id_ex_o_i           ( id_ex_reg_w_addr_i  ),         		
         .mem_r_ena_id_ex_o_i    ( id_ex_mem_r_ena_i   ),                	
-        .mem_w_ena_id_ex_i_i    ( id_mem_r_ena_i      ),                	
+        .mem_w_ena_id_ex_i_i    ( id_mem_w_ena_i      ),                	
         .reg_w_ena_id_ex_o_i    ( id_ex_reg_w_ena_i   ),       
 
         .forwardA_o             ( forwardA            ),       			
