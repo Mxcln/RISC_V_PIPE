@@ -292,7 +292,7 @@ always@(*)begin
                         jump_flag_o = op1 == op2 ;
                         jump_addr_o = op1_jump_add_op2_jump_res;
                     end
-            `INST_BEQ: begin
+            `INST_BNE: begin
                         mem_w_data_o = `ZERO_WORD;
                         mem_r_addr_o = `ZERO_WORD;
                         mem_w_addr_o = `ZERO_WORD;
