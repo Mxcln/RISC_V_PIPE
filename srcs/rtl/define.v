@@ -20,6 +20,8 @@
 `define     WRITE_ENABLE        1'b1
 `define     WRITE_DISABLE       1'b0
 `define     FORWARDC_DISABLE    1'b0
+`define     DIV_ENABLE          1'b1
+`define     DIV_DISABLE         1'b0
 //reg
 `define     REG_NUM             0:31
 `define     REG                 31:0
@@ -33,6 +35,8 @@
 `define     ZERO_WORD           32'b0           //操作数的值
 /// R  type inst
 `define     INST_TYPE_R         7'b0110011
+`define     INST_DIV            3'b011
+`define     INST_DIVU           3'b010
 `define     INST_MULU           3'b000          //无符号数乘法
 `define     INST_MUL            3'b001          //有符号数乘法
 `define     INST_ADD_SUB        3'b000  

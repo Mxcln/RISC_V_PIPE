@@ -29,6 +29,7 @@ module risc_v_pipe_top(
     wire                    ctrl_id_ex_clr  ;       //id_ex的冲刷信号
     wire                    ctrl_jump_ena   ;       //跳转信号
     wire    [`INST_ADDR]    ctrl_jump_addr  ;       //跳转指令地址
+    wire                    ctrl_div_hold   ;       //除法模块要求的暂停
 
     wire                    wb_reg_w_ena    ;       //写入通用寄存器的使能
     wire    [`REG_ADDR]     wb_reg_w_addr   ;       //写入通用寄存器的地址
@@ -95,6 +96,11 @@ module risc_v_pipe_top(
     wire    [`MEM]          ex_mem_mem_w_data   ;      
     wire                    ex_mem_mem_w_ena    ;  
     wire                    ex_mem_forwardC     ; 
+    wire    [`REG]          ex_div_dividend ;
+    wire    [`REG]          ex_div_divisor  ;
+    wire                    ex_div_start    ;
+    wire    [2:0]           ex_div_funct    ;  
+    wire                    ex_ctrl_div_hold;
 
     wire    [`MEM]          mem_in_w_data       ;   
 
@@ -124,6 +130,10 @@ module risc_v_pipe_top(
     wire    [`MEM_ADDR]     wb_mem_w_addr   ;
     wire    [`MEM]          wb_mem_w_data   ;
 
+    wire    [`REG]          div_ex_result   ;           //从div中输出的数据
+    wire                    div_ex_ready    ;
+                  
+
     assign  origin_inst         = rom_r_data_i  ;
     assign  origin_inst_addr    = pc_pc_addr    ;    
 
@@ -144,6 +154,7 @@ module risc_v_pipe_top(
         .arst_n                             ( arst_n                ),
         .hold                               ( hold                  ),
 
+        .ex_div_hold_i                      ( ex_ctrl_div_hold      ),
         .hazard_hold_i                      ( hazard_hold           ),
         .ex_jump_i                          ( ex_jump_ena           ),
         .ex_jump_addr_i                     ( ex_jump_addr          ),
@@ -153,7 +164,8 @@ module risc_v_pipe_top(
         .jump_addr_o                        ( ctrl_jump_addr        ),
         .pc_hold_o                          ( ctrl_pc_hold          ),
         .pc_id_clr_o                        ( ctrl_pc_id_clr        ),
-        .id_ex_clr_o                        ( ctrl_id_ex_clr        )
+        .id_ex_clr_o                        ( ctrl_id_ex_clr        ),
+        .div_hold_o                         ( ctrl_div_hold         )
     );
 
 
@@ -179,6 +191,7 @@ module risc_v_pipe_top(
         .clk_100MHz                 ( clk_100MHz        ),
         .arst_n                     ( arst_n            ),
 
+        .pc_div_hold                ( ctrl_div_hold     ),
         .jump_ena_i                 ( ctrl_jump_ena     ),
         .jump_addr_i                ( ctrl_jump_addr    ),
         .hold_ena_i                 ( ctrl_pc_hold      ),
@@ -192,6 +205,7 @@ module risc_v_pipe_top(
         .clk_100MHz         ( clk_100MHz        ),
         .arst_n             ( arst_n            ),
 
+        .pc_id_div_hold     ( ctrl_div_hold     ),
         .inst_i             ( origin_inst       ),
         .inst_addr_i        ( origin_inst_addr  ),
         .hold_ena_i         ( ctrl_pc_hold      ),
@@ -233,6 +247,7 @@ module risc_v_pipe_top(
         .clk_100MHz         ( clk_100MHz    ),
         .arst_n             ( arst_n        ),
 
+        .id_ex_div_hold     ( ctrl_div_hold),
         .inst_i             ( id_inst      ), 
         .inst_addr_i        ( id_inst_addr      ), 
         .reg1_r_addr_i      ( id_reg1_r_addr),
@@ -331,7 +346,7 @@ module risc_v_pipe_top(
     //ex模块：执行模块，组合逻辑
     ex u_ex(
         .arst_n             ( arst_n        ),      
-             
+    
         .inst_i             ( id_ex_inst        ),     
         .inst_addr_i        ( id_ex_inst_addr   ),     
         .reg_w_ena_i        ( id_ex_reg_w_ena   ),     
@@ -340,6 +355,9 @@ module risc_v_pipe_top(
         .reg2_r_data_i      ( ex_in_reg2_r_data ),    
         .mem_r_ena_i        ( id_ex_mem_r_ena   ),     
         .mem_w_ena_i        ( id_ex_mem_w_ena   ),     
+
+        .ready_i            ( div_ex_ready      ),
+        .result_i           ( div_ex_result     ),
 
         .forwardC_i         ( forwardC          ),
 
@@ -354,10 +372,28 @@ module risc_v_pipe_top(
         .mem_w_addr_o       ( ex_mem_w_addr     ),     
         .mem_w_data_o       ( ex_mem_w_data     ),     
         .mem_w_ena_o        ( ex_mem_w_ena      ),
+        
+        .dividend_o         ( ex_div_dividend   ),
+        .divisor_o          ( ex_div_divisor    ),
+        .start_o            ( ex_div_start      ),
+        .div_func_o         ( ex_div_funct      ),
+        .div_hold_o         ( ex_ctrl_div_hold  ),
 
         .forwardC_o         ( ex_forwardC       )                 
     );
 
+    div    u_div    (
+        .clk_100MHz         ( clk_100MHz        ),
+        .arst_n             ( arst_n            ),
+        
+        .dividend_i         ( ex_div_dividend   ),
+        .divisor_i          ( ex_div_divisor    ),
+        .start_i            ( ex_div_start      ),
+        .div_func           ( ex_div_funct      ),
+        
+        .result_o           ( div_ex_result     ),
+        .ready_o            ( div_ex_ready      )
+    );
 
     //ex_mem模块：ex与mem之间的连接寄存器，时序逻辑
     ex_mem u_ex_mem(
