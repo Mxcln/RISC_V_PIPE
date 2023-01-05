@@ -78,6 +78,15 @@ module id (
                             reg1_r_addr_o = rs1;
                             reg2_r_addr_o = rs2;
                         end
+                    `INST_DIV,`INST_DIVU:
+                    begin
+                        reg_w_ena_o = `WRITE_DISABLE;
+                        mem_w_ena_o = `WRITE_DISABLE;
+                        mem_r_ena_o = `READ_DISABLE ;
+                        reg_w_addr_o = rd;
+                        reg1_r_addr_o = rs1;
+                        reg2_r_addr_o = rs2;
+                        end
                     default: begin
                             reg_w_addr_o = `ZERO_REG;
                             reg1_r_addr_o = `ZERO_REG;

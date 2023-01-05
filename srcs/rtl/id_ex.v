@@ -8,6 +8,7 @@ module id_ex (
     input   wire  [`INST]           inst_i,         //指令内容
     input   wire  [`INST_ADDR]      inst_addr_i,    //指令地址
 
+    
     input   wire    [`REG_ADDR]     reg1_r_addr_i,     // 读通用寄存器1地址
     input   wire    [`REG_ADDR]     reg2_r_addr_i,     // 读通用寄存器2地址
     input   wire  [`REG]            reg1_r_data_i,  // 通用寄存器1数据
@@ -18,6 +19,7 @@ module id_ex (
     input   wire                    mem_r_ena_i ,
     input   wire                    mem_w_ena_i ,
     
+    input wire                      id_ex_div_hold,
     input wire                      hold_ena_i,      //系统暂停
     input wire                      jump_ena_i,      //表示冲刷流水线或者跳转信号
 
@@ -46,7 +48,7 @@ module id_ex (
             mem_r_ena_o  <= `READ_DISABLE;
             mem_w_ena_o <= `WRITE_DISABLE;
         end
-        else if (hold_ena_i == `HOLD_ENABLE) begin
+        else if (hold_ena_i == `HOLD_ENABLE || id_ex_div_hold == `HOLD_ENABLE ) begin
             inst_o <= inst_o ;
             inst_addr_o <= inst_addr_o ;
             reg1_r_addr_o <= reg1_r_addr_o;

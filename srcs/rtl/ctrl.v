@@ -6,6 +6,7 @@ module ctrl(
     input   wire            arst_n      ,
     input   wire            hold        ,
 
+    input   wire                        ex_div_hold_i     ,   //除法要求的暂停
     input   wire                        hazard_hold_i     ,   //ex前端数据选择模块输出的解决数据冒险所需要的流水线冲刷信号
     input   wire                        ex_jump_i       ,   //ex模块输出的跳转信号
     input   wire    [`MEM_ADDR]         ex_jump_addr_i  ,   //ex模块输出的跳转地址
@@ -16,8 +17,8 @@ module ctrl(
 
     output  wire                        pc_hold_o       ,       //系统暂停&解决数据冒险暂停，在pc,pc_id模块中
     output  wire                        pc_id_clr_o     ,       //跳转时需要冲刷
-    output  wire                        id_ex_clr_o             //解决数据冒险时需要冲刷
-
+    output  wire                        id_ex_clr_o     ,            //解决数据冒险时需要冲刷
+    output  wire                        div_hold_o 
 );
 
     assign  hold_ena_o  =   hold;
@@ -26,10 +27,11 @@ module ctrl(
 
     assign  jump_addr_o =   ex_jump_addr_i;
 
-    assign  pc_hold_o   =   hold | hazard_hold_i;
+    assign  pc_hold_o   =   hold | hazard_hold_i  ;
 
     assign  pc_id_clr_o =   ex_jump_i;
 
-    assign  id_ex_clr_o =   hazard_hold_i | ex_jump_i ;
+    assign  id_ex_clr_o =   hazard_hold_i | ex_jump_i  ;
 
+    assign  div_hold_o  =   ex_div_hold_i   ;
 endmodule

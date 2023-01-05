@@ -18,12 +18,16 @@ module ex(
 
     input   wire                    forwardC_i,
 
+    //from  div
+    input   wire    [`REG]          result_i,       //除法的结果
+    input   wire                    ready_i,        //除法是否完成
+
     //to    mem                                     //向访存模块发出指令
     output  wire                    mem_r_ena_o   ,   //需要访问mem读取数据的信号
     output  reg     [`MEM_ADDR]     mem_r_addr_o,    //需要读取的信号地址
     output  reg      [`REG_ADDR]     reg_w_addr_o,    //需要写回的寄存器地址
     output  wire    [`INST]         inst_o,         //将指令传到下一级，让访存和写回操作判定需要读写类型
-    output  reg                     reg_w_ena_o,    //将写寄存器的使能信号
+    output  wire                     reg_w_ena_o,    //将写寄存器的使能信号
     output  reg      [`INST]         reg_w_data_o,   //输出写回寄存器的数据，即不需要访存的数据    
 
     output  wire                     forwardC_o,
@@ -31,14 +35,20 @@ module ex(
  
     output  reg                      jump_flag_o,    //是否跳转
     output  reg      [`INST_ADDR]    jump_addr_o,     //跳转的位置;  
-    
+    output  reg                      div_hold_o   ,     //除法需要的暂停
+
     //to    wb
     output  reg     [`MEM_ADDR]     mem_w_addr_o,    //需要写的地址                                  
     output  reg      [`REG]          mem_w_data_o,    //需要写回的寄存器数据
     output  wire                    mem_w_ena_o,       //需要写回的使能信号
 
-    //for risk
-    output  wire                hold_risk 
+
+    //to div 
+    output  reg                 start_o,
+    output  reg     [`REG]      dividend_o,
+    output  reg     [`REG]      divisor_o,
+    output  reg     [2:0]       div_func_o
+    
 );
 
 reg    [`REG]          op1;          //数据操作数1
@@ -61,7 +71,8 @@ wire    [`INST_ADDR]  op1_jump_add_op2_jump_res; //跳转的地址之和
 wire    [`REG]  reg1_r_data_com;                 //reg1的补码
 wire    [`REG]  reg2_r_data_com;                 //reg2的补码   
 reg    [`DOUBLE_REG]   mul_temp;                //乘法的结果，由于两个32位相乘结果为64位，所以用DOUBLE_REG
-      
+
+reg                    div_w_ena;               //表明除法结束，可以进行写操作      
 
 assign opcode = inst_i[6:0];
 assign funct3 = inst_i[14:12];
@@ -87,14 +98,17 @@ assign  mem_w_ena_o = mem_w_ena_i;
 
 assign  forwardC_o = forwardC_i;
 assign  inst_o = inst_i;
+assign  reg_w_ena_o = reg_w_ena_i || div_w_ena ;
 
 always@(*)begin
-    reg_w_ena_o = reg_w_ena_i ;
+   
     reg_w_addr_o = reg_w_addr_i ;
     op1 = `ZERO_WORD;
     op2 = `ZERO_WORD;
     op1_jump = `ZERO_WORD;
     op2_jump = `ZERO_WORD;
+    div_w_ena = `DIV_DISABLE ;
+
     case(opcode)
     `INST_TYPE_I_1:begin
         op1 = reg1_r_data_i;
@@ -214,6 +228,27 @@ always@(*)begin
                         reg_w_data_o = mul_temp[ 31:0 ] ;
                     end     
                 end
+                `INST_DIV , `INST_DIVU:
+                    begin
+                    dividend_o = reg1_r_data_i ;
+                    divisor_o =  reg2_r_data_i ;
+                    jump_flag_o = `JUMP_DISABLE;
+                    jump_addr_o = `ZERO_WORD;
+                    mem_w_data_o = `ZERO_WORD;
+                    mem_r_addr_o = `ZERO_WORD;
+                    mem_w_addr_o = `ZERO_WORD;
+                    div_func_o  = funct3        ;
+                    reg_w_data_o = result_i   ;
+                    if( ready_i == `DIV_DISABLE )begin
+                        div_hold_o  = `DIV_ENABLE   ;
+                        start_o   = `DIV_ENABLE   ;
+                    end
+                    else begin
+                        div_hold_o  = `DIV_DISABLE   ;
+                        start_o   = `DIV_DISABLE   ;
+                        div_w_ena = `DIV_ENABLE    ;
+                    end
+                    end 
             endcase
         end
         else begin
