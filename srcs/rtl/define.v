@@ -25,7 +25,7 @@
 `define     REG                 31:0
 `define     REG_ADDR            4:0
 `define     ZERO_REG            5'h0
-
+`define     DOUBLE_REG           63:0
 //ROM RAM
 `define     MEM_DEEPTH          4096
 `define     MEM                 31:0
@@ -33,8 +33,9 @@
 `define     ZERO_WORD           32'b0           //操作数的值
 /// R  type inst
 `define     INST_TYPE_R         7'b0110011
-
-`define     INST_ADD_SUB        3'b000
+`define     INST_MULU           3'b000          //无符号数乘法
+`define     INST_MUL            3'b001          //有符号数乘法
+`define     INST_ADD_SUB        3'b000  
 `define     INST_SLL            3'b001
 `define     INST_SLT            3'b010
 `define     INST_SLTU           3'b011

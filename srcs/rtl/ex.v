@@ -29,7 +29,7 @@ module ex(
     output  wire                     forwardC_o,
     //to    ctrl
  
-    output  reg                     jump_flag_o,    //是否跳转
+    output  reg                      jump_flag_o,    //是否跳转
     output  reg      [`INST_ADDR]    jump_addr_o,     //跳转的位置;  
     
     //to    wb
@@ -58,20 +58,29 @@ wire    [`REG]  sri_shift;                        //将rs1右移imm[24:20]
 wire    [`REG]  sr_shift_mask;                   //将32‘hfffffff右移reg2[4:0]位
 wire    [`REG]  sr_shift;                        //将rs1右移reg2[4:0]位                               
 wire    [`INST_ADDR]  op1_jump_add_op2_jump_res; //跳转的地址之和   
+wire    [`REG]  reg1_r_data_com;                 //reg1的补码
+wire    [`REG]  reg2_r_data_com;                 //reg2的补码   
+reg    [`DOUBLE_REG]   mul_temp;                //乘法的结果，由于两个32位相乘结果为64位，所以用DOUBLE_REG
+      
 
 assign opcode = inst_i[6:0];
 assign funct3 = inst_i[14:12];
 assign funct7 = inst_i[31:25];
 assign rd     = inst_i[11:7];
 assign op1_add_op2_res = op1 + op2 ;
+//有符号数的比较
 assign op1_ge_op2_signed = $signed(op1) < $signed(op2) ;
+//无符号数的比较
 assign op1_ge_op2_unsigned = op1 < op2 ;
+
 assign sri_shift_mask = 32'hffffffff >> inst_i[24:20];
 assign sri_shift = reg1_r_data_i >> inst_i[24:20];
 assign sr_shift_mask = 32'hffffffff >> reg2_r_data_i[4:0];
 assign sr_shift = reg1_r_data_i >> reg2_r_data_i[4:0];
-assign op1_jump_add_op2_jump_res = op1_jump + op2_jump ;
-
+assign op1_jump_add_op2_jump_res = op1_jump + op2_jump ;    //跳转的目的地址
+//将reg1与reg2取补码
+assign reg1_r_data_com = ~reg1_r_data_i + 1 ;
+assign reg2_r_data_com = ~reg2_r_data_i + 1 ;
 
 assign  mem_r_ena_o = mem_r_ena_i;
 assign  mem_w_ena_o = mem_w_ena_i;
@@ -172,6 +181,42 @@ always@(*)begin
     end
 
     `INST_TYPE_R:begin
+        if( funct7 == 7'b0000001)           //对于乘法运算有误符号位操作数取得不一样，需要单独处理 
+        begin
+            case (funct3)
+                `INST_MULU:begin
+                    op1 = reg1_r_data_i ;
+                    op2 = reg2_r_data_i ;
+                    jump_flag_o = `JUMP_DISABLE;
+                    jump_addr_o = `ZERO_WORD;
+                    mem_w_data_o = `ZERO_WORD;
+                    mem_r_addr_o = `ZERO_WORD;
+                    mem_w_addr_o = `ZERO_WORD;
+                    mul_temp = op1 * op2;
+                    reg_w_data_o = mul_temp[31:0];     //只取最低32位                      
+                end
+                `INST_MUL:begin
+                    op1 = (reg1_r_data_i[31] == 1'b1)?reg1_r_data_com:reg1_r_data_i;
+                    op2 = (reg2_r_data_i[31] == 1'b1)?reg2_r_data_com:reg2_r_data_i;    //有符号数的乘法对操作数进行判断正负，如果是负的就取补码即绝对值
+                    jump_flag_o = `JUMP_DISABLE;
+                    jump_addr_o = `ZERO_WORD;
+                    mem_w_data_o = `ZERO_WORD;
+                    mem_r_addr_o = `ZERO_WORD;
+                    mem_w_addr_o = `ZERO_WORD;
+                    if (reg1_r_data_i[31] ^ reg2_r_data_i[31])
+                    begin                                                              //异号相乘为负数，所以将得到的结果取补码，并且将符号位置为1 
+                        mul_temp = ~ (op1 * op2) + 1 ; 
+                        reg_w_data_o = {1'b1,mul_temp[ 30:0 ]};
+                    end 
+                    else
+                    begin             
+                        mul_temp = op1 * op2 ;    
+                        reg_w_data_o = mul_temp[ 31:0 ] ;
+                    end     
+                end
+            endcase
+        end
+        else begin
         op1 = reg1_r_data_i;
         op2 = reg2_r_data_i;
         case(funct3)
@@ -257,6 +302,7 @@ always@(*)begin
                 end                   
         endcase
     end
+    end
     `INST_TYPE_I_2 :begin               //访存指令
                 op1 = reg1_r_data_i;
                 op2 = {{20{inst_i[31]}}, inst_i[31:20]};
@@ -341,6 +387,7 @@ always@(*)begin
                         reg_w_data_o = `ZERO_WORD;
                     end                        
         endcase
+        
     end  
     `INST_JAL:begin
         mem_w_data_o = `ZERO_WORD;

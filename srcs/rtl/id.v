@@ -67,6 +67,24 @@ module id (
                         end
                     endcase
                 end 
+                else if ( funct7 == 7'b0000001 ) begin             //扩充的乘除法指令
+                    case(funct3)
+                    `INST_MUL,`INST_MULU:                          //有符号数和无符号数的乘法
+                     begin
+                            reg_w_ena_o = `WRITE_ENABLE;
+                            mem_w_ena_o = `WRITE_DISABLE;
+                            mem_r_ena_o = `READ_DISABLE ;
+                            reg_w_addr_o = rd;
+                            reg1_r_addr_o = rs1;
+                            reg2_r_addr_o = rs2;
+                        end
+                    default: begin
+                            reg_w_addr_o = `ZERO_REG;
+                            reg1_r_addr_o = `ZERO_REG;
+                            reg2_r_addr_o = `ZERO_REG;
+                        end
+                    endcase
+                end
                 else begin
                     reg_w_addr_o = `ZERO_REG;
                     reg1_r_addr_o = `ZERO_REG;
