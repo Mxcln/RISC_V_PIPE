@@ -100,10 +100,7 @@ module wb(
                     reg_w_data_o = `ZERO_WORD;
                 end
             endcase
-        end
-        else if(reg_w_ena_i) begin
-            reg_w_data_o = reg_w_data_i ;
-        end        
+        end      
         //不是L型指令的情况，将ex输入的结果写入通用寄存器
         else if(reg_w_ena_i) begin
             reg_w_data_o = reg_w_data_i ;
@@ -141,7 +138,7 @@ module wb(
         else if(mem_w_ena_i) begin
             case(funct3)
                 `INST_SB : begin
-                    case(mem_r_addr_i[1:0])
+                    case(mem_w_addr_i[1:0])
                         2'b00 : mem_w_data_o = {mem_r_data_i[31:8], mem_w_data_i[7:0]}                     ;
                         2'b01 : mem_w_data_o = {mem_r_data_i[31:16], mem_w_data_i[7:0], mem_r_data_i[7:0]}  ;
                         2'b10 : mem_w_data_o = {mem_r_data_i[31:24], mem_w_data_i[7:0], mem_r_data_i[15:0]} ;
@@ -149,7 +146,7 @@ module wb(
                     endcase
                 end
                 `INST_SH : begin
-                    case(mem_r_addr_i[1:0])
+                    case(mem_w_addr_i[1:0])
                         2'b00   : mem_w_data_o = {mem_r_data_i[31:16], mem_w_data_i[15:0]}    ;
                         default : mem_w_data_o = {mem_w_data_i[15:0], mem_r_data_i[15:0]}     ;
                     endcase

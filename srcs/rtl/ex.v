@@ -317,7 +317,7 @@ always@(*)begin
                 jump_flag_o = `JUMP_DISABLE;
                 jump_addr_o = `ZERO_WORD;
                 reg_w_data_o = `ZERO_WORD;
-                mem_w_data_o =`ZERO_WORD;
+                //mem_w_data_o =`ZERO_WORD;
                 mem_w_addr_o = op1_add_op2_res;
                 mem_r_addr_o = op1_add_op2_res;    
                 mem_w_data_o = reg2_r_data_i; 

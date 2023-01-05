@@ -59,7 +59,7 @@ module  mem(
     assign  mem_r_addr_o = mem_r_addr_i   ;
 
     assign  reg_w_ena_o  = reg_w_ena_i    ;
-    assign  reg_w_data_o = reg_w_data_i   ;
+    assign  reg_w_data_o = (reg_w_ena_i && mem_r_ena_i) ? mem_r_data : reg_w_data_i   ;
     assign  reg_w_addr_o = reg_w_addr_i   ;
 
     assign  mem_w_ena_o  = mem_w_ena_i    ;
