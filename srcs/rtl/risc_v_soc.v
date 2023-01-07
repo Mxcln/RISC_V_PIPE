@@ -4,7 +4,10 @@
 module  risc_v_soc(
     input   wire            clk_100MHz  ,
     input   wire            arst_n      ,
-    input   wire            hold           
+    input   wire            hold        ,
+
+    output  wire    [31:0]  ram_data_1  ,
+    output  wire    [31:0]  ram_data_2    
 );
     wire    [`MEM]          ram_r_data  ;
     wire    [`MEM]          rom_r_data  ;
@@ -44,12 +47,15 @@ module  risc_v_soc(
         .w_ena_i            ( ram_w_ena         ),
         .w_addr_i           ( ram_w_addr        ),
         .w_data_i           ( ram_w_data        ),
-        .r_data_o           ( ram_r_data        )
+        .r_data_o           ( ram_r_data        ),
+        .ram_data_1         ( ram_data_1        ),
+        .ram_data_2         ( ram_data_2        )
     );
 
     rom u_rom(
         .clk_100MHz         ( clk_100MHz        ),
         .arst_n             ( arst_n            ),
+        .hold               ( hold              ),
         .r_addr_i           ( rom_r_addr        ),
         .w_ena_i            ( `WRITE_DISABLE    ),
         .w_addr_i           ( `ZERO_WORD        ),

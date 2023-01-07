@@ -4,6 +4,8 @@ module risc_v_soc_tb();
 	reg clk_100MHz;
 	reg arst_n;
     reg hold;
+	wire [31:0]	ram_data_1;
+	wire [31:0]	ram_data_2;
 
     initial begin
         $readmemb ("inst.data", u_risc_v_soc.u_rom._rom);
@@ -27,6 +29,9 @@ module risc_v_soc_tb();
 	(	
 		.clk_100MHz(clk_100MHz),
 		.arst_n(arst_n),
-        .hold(hold)
+        .hold(hold),
+
+		.ram_data_1(ram_data_1),
+		.ram_data_2(ram_data_2)
 	);
 endmodule

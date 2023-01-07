@@ -29,7 +29,7 @@
 `define     ZERO_REG            5'h0
 `define     DOUBLE_REG           63:0
 //ROM RAM
-`define     MEM_DEEPTH          4096
+`define     MEM_DEEPTH          64
 `define     MEM                 31:0
 `define     MEM_ADDR            31:0            //操作数的位数
 `define     ZERO_WORD           32'b0           //操作数的值

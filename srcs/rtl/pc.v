@@ -19,6 +19,8 @@ module pc(
         else if (jump_ena_i == `JUMP_ENABLE) begin
             pc_addr_o <= jump_addr_i;
         end
+        else if(pc_addr_o[7:2]==6'd60)
+            pc_addr_o <= pc_addr_o;
         else begin
             pc_addr_o <= pc_addr_o +4;
         end
