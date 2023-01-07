@@ -1,0 +1,945 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Sat Jan  7 22:11:40 2023
+# Process ID: 59016
+# Current directory: C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1
+# Command line: vivado.exe -log top_module.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_module.tcl
+# Log file: C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/top_module.vds
+# Journal file: C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source top_module.tcl -notrace
+Command: synth_design -top top_module -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 85660 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 713.191 ; gain = 178.133
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'top_module' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/top/top_module.v:1]
+INFO: [Synth 8-6157] synthesizing module 'risc_v_soc' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/risc_v_soc.v:4]
+INFO: [Synth 8-6157] synthesizing module 'risc_v_pipe_top' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/risc_v_pipe_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'ctrl' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ctrl.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'ctrl' (1#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ctrl.v:4]
+INFO: [Synth 8-6157] synthesizing module 'regs' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:4]
+WARNING: [Synth 8-5788] Register regs_reg[0] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[1] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[2] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[3] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[4] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[5] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[6] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[7] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[8] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[9] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[10] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[11] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[12] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[13] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[14] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[15] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[16] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[17] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[18] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[19] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[20] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[21] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[22] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[23] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[24] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[25] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[26] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[27] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[28] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[29] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[30] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+WARNING: [Synth 8-5788] Register regs_reg[31] in module regs is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:24]
+INFO: [Synth 8-6155] done synthesizing module 'regs' (2#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/regs.v:4]
+INFO: [Synth 8-6157] synthesizing module 'pc' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/pc.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'pc' (3#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/pc.v:3]
+INFO: [Synth 8-6157] synthesizing module 'pc_id' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/pc_id.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'pc_id' (4#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/pc_id.v:3]
+INFO: [Synth 8-6157] synthesizing module 'id' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/id.v:8]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/id.v:52]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/id.v:104]
+INFO: [Synth 8-6155] done synthesizing module 'id' (5#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/id.v:8]
+INFO: [Synth 8-6157] synthesizing module 'id_ex' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/id_ex.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'id_ex' (6#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/id_ex.v:4]
+INFO: [Synth 8-6157] synthesizing module 'ex_stage' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex_stage.v:5]
+INFO: [Synth 8-6157] synthesizing module 'forward_unit' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/forward_unit.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'forward_unit' (7#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/forward_unit.v:8]
+INFO: [Synth 8-6157] synthesizing module 'mux3_1' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/mux3_1.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux3_1' (8#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/mux3_1.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'ex_stage' (9#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex_stage.v:5]
+INFO: [Synth 8-6157] synthesizing module 'ex' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:2]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:114]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:267]
+INFO: [Synth 8-6155] done synthesizing module 'ex' (10#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:2]
+WARNING: [Synth 8-7023] instance 'u_ex' of module 'ex' has 31 connections declared, but only 29 given [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/risc_v_pipe_top.v:347]
+INFO: [Synth 8-6157] synthesizing module 'div' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/div.v:2]
+	Parameter STATE_IDLE bound to: 2'b00 
+	Parameter STATE_START bound to: 2'b01 
+	Parameter STATE_ZERO bound to: 2'b10 
+	Parameter STATE_END bound to: 2'b11 
+WARNING: [Synth 8-6014] Unused sequential element dividend_temp_reg was removed.  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/div.v:61]
+WARNING: [Synth 8-6014] Unused sequential element divisor_temp_reg was removed.  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/div.v:66]
+WARNING: [Synth 8-5788] Register cnt_reg in module div is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/div.v:59]
+WARNING: [Synth 8-5788] Register dividend_reg in module div is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/div.v:36]
+WARNING: [Synth 8-5788] Register divisor_reg in module div is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/div.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'div' (11#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/div.v:2]
+INFO: [Synth 8-6157] synthesizing module 'ex_mem' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex_mem.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'ex_mem' (12#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex_mem.v:2]
+INFO: [Synth 8-6157] synthesizing module 'mem_stage' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/mem_stage.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'mem_stage' (13#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/mem_stage.v:2]
+INFO: [Synth 8-6157] synthesizing module 'mem' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/mem.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'mem' (14#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/mem.v:4]
+INFO: [Synth 8-6157] synthesizing module 'mem_wb' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/mem_wb.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'mem_wb' (15#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/mem_wb.v:3]
+INFO: [Synth 8-6157] synthesizing module 'wb' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/wb.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'wb' (16#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/wb.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'risc_v_pipe_top' (17#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/risc_v_pipe_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'ram' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ram.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'ram' (18#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ram.v:4]
+INFO: [Synth 8-6157] synthesizing module 'rom' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/rom.v:4]
+INFO: [Synth 8-6157] synthesizing module 'code' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/.Xil/Vivado-59016-LAPTOP-9152C9NR/realtime/code_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'code' (19#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/.Xil/Vivado-59016-LAPTOP-9152C9NR/realtime/code_stub.v:6]
+WARNING: [Synth 8-689] width (11) of port connection 'addra' does not match port width (5) of module 'code' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/rom.v:50]
+INFO: [Synth 8-6155] done synthesizing module 'rom' (20#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/rom.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'risc_v_soc' (21#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/risc_v_soc.v:4]
+INFO: [Synth 8-6157] synthesizing module 'vga_top' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_top.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vga_clk' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/.Xil/Vivado-59016-LAPTOP-9152C9NR/realtime/vga_clk_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'vga_clk' (22#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/.Xil/Vivado-59016-LAPTOP-9152C9NR/realtime/vga_clk_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'vga_control' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_control.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'vga_control' (23#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_control.v:3]
+INFO: [Synth 8-6157] synthesizing module 'vga_drive' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_drive.v:6]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_drive.v:74]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_drive.v:83]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_drive.v:92]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_drive.v:125]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_drive.v:134]
+INFO: [Synth 8-226] default block is never used [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_drive.v:143]
+INFO: [Synth 8-6157] synthesizing module 'pic_drive' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/pic_drive.v:5]
+INFO: [Synth 8-6157] synthesizing module 'zero_cell' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/.Xil/Vivado-59016-LAPTOP-9152C9NR/realtime/zero_cell_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'zero_cell' (24#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/.Xil/Vivado-59016-LAPTOP-9152C9NR/realtime/zero_cell_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'one_cell' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/.Xil/Vivado-59016-LAPTOP-9152C9NR/realtime/one_cell_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'one_cell' (25#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/.Xil/Vivado-59016-LAPTOP-9152C9NR/realtime/one_cell_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'pic_drive' (26#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/pic_drive.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'vga_drive' (27#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_drive.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'vga_top' (28#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/vga/vga_top.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'top_module' (29#1) [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/top/top_module.v:1]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[11]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[10]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[9]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[8]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[7]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[6]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[5]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[4]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[3]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[2]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[1]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_h[0]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[11]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[10]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[9]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[8]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[7]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[6]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[5]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[4]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[3]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[2]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[1]
+WARNING: [Synth 8-3331] design pic_drive has unconnected port addr_v[0]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[31]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[30]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[29]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[28]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[27]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[26]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[25]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[24]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[23]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[22]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[21]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[20]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[19]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[18]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[17]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[16]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[15]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[14]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[13]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[12]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_1[11]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[31]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[30]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[29]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[28]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[27]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[26]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[25]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[24]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[23]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[22]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[21]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[20]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[19]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[18]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[17]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[16]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[15]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[14]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[13]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[12]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[11]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[10]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[9]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[8]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[7]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[6]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[5]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[4]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[3]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[2]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[1]
+WARNING: [Synth 8-3331] design vga_drive has unconnected port ram_data_2[0]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[31]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[30]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[29]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[28]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[27]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[26]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[25]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[24]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[23]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[22]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[21]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[20]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[19]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[18]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[17]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[16]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[15]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[14]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[13]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[12]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[11]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[10]
+WARNING: [Synth 8-3331] design rom has unconnected port r_addr_i[9]
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 783.926 ; gain = 248.867
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 783.926 ; gain = 248.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 783.926 ; gain = 248.867
+---------------------------------------------------------------------------------
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/zero_cell/zero_cell/zero_cell_in_context.xdc] for cell 'u_vga_top/u_vga_drive/u_pic_drive/u_zero_cell'
+Finished Parsing XDC File [c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/zero_cell/zero_cell/zero_cell_in_context.xdc] for cell 'u_vga_top/u_vga_drive/u_pic_drive/u_zero_cell'
+Parsing XDC File [c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/one_cell/one_cell/one_cell_in_context.xdc] for cell 'u_vga_top/u_vga_drive/u_pic_drive/u_one_cell'
+Finished Parsing XDC File [c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/one_cell/one_cell/one_cell_in_context.xdc] for cell 'u_vga_top/u_vga_drive/u_pic_drive/u_one_cell'
+Parsing XDC File [c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/code/code/code_in_context.xdc] for cell 'u_risc_v_soc/u_rom/u_code'
+Finished Parsing XDC File [c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/code/code/code_in_context.xdc] for cell 'u_risc_v_soc/u_rom/u_code'
+Parsing XDC File [c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/vga_clk/vga_clk/vga_clk_in_context.xdc] for cell 'u_vga_top/u_vga_clk'
+Finished Parsing XDC File [c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/vga_clk/vga_clk/vga_clk_in_context.xdc] for cell 'u_vga_top/u_vga_clk'
+Parsing XDC File [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/constrs_1/imports/cnstr/cnstr.xdc]
+WARNING: [Constraints 18-619] A clock with name 'clk_100MHz' already exists, overwriting the previous clock with the same name. [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/constrs_1/imports/cnstr/cnstr.xdc:17]
+Finished Parsing XDC File [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/constrs_1/imports/cnstr/cnstr.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/constrs_1/imports/cnstr/cnstr.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/top_module_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/top_module_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 944.633 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.029 . Memory (MB): peak = 944.633 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 944.633 ; gain = 409.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 944.633 ; gain = 409.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property IO_BUFFER_TYPE = NONE for clk_100MHz. (constraint file  c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/vga_clk/vga_clk/vga_clk_in_context.xdc, line 3).
+Applied set_property CLOCK_BUFFER_TYPE = NONE for clk_100MHz. (constraint file  c:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/ip/vga_clk/vga_clk/vga_clk_in_context.xdc, line 4).
+Applied set_property DONT_TOUCH = true for u_vga_top/u_vga_drive/u_pic_drive/u_zero_cell. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for u_vga_top/u_vga_drive/u_pic_drive/u_one_cell. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for u_risc_v_soc/u_rom/u_code. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for u_vga_top/u_vga_clk. (constraint file  auto generated constraint, line ).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 944.633 ; gain = 409.574
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'div'
+WARNING: [Synth 8-327] inferring latch for variable 'div_hold_o_reg' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:241]
+WARNING: [Synth 8-327] inferring latch for variable 'dividend_o_reg' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:231]
+WARNING: [Synth 8-327] inferring latch for variable 'divisor_o_reg' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:232]
+WARNING: [Synth 8-327] inferring latch for variable 'div_func_o_reg' [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:238]
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+              STATE_IDLE |                               00 |                               00
+              STATE_ZERO |                               01 |                               10
+             STATE_START |                               10 |                               01
+               STATE_END |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'div'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 944.633 ; gain = 409.574
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     33 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 8     
+	   3 Input     32 Bit       Adders := 1     
+	   2 Input     31 Bit       Adders := 1     
+	   2 Input     12 Bit       Adders := 2     
+	   2 Input     11 Bit       Adders := 1     
+	   2 Input     10 Bit       Adders := 1     
+	   3 Input     10 Bit       Adders := 11    
+	   2 Input      6 Bit       Adders := 2     
++---XORs : 
+	   2 Input     32 Bit         XORs := 2     
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
+	               65 Bit    Registers := 1     
+	               32 Bit    Registers := 116   
+	               16 Bit    Registers := 2     
+	               12 Bit    Registers := 2     
+	               11 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 5     
+	                1 Bit    Registers := 14    
++---Multipliers : 
+	                32x32  Multipliers := 2     
+	                31x31  Multipliers := 1     
++---Muxes : 
+	   2 Input     65 Bit        Muxes := 11    
+	   4 Input     65 Bit        Muxes := 2     
+	   2 Input     32 Bit        Muxes := 86    
+	   4 Input     32 Bit        Muxes := 11    
+	   7 Input     32 Bit        Muxes := 2     
+	   5 Input     32 Bit        Muxes := 1     
+	  10 Input     32 Bit        Muxes := 6     
+	   2 Input     16 Bit        Muxes := 24    
+	   2 Input     12 Bit        Muxes := 2     
+	   2 Input     11 Bit        Muxes := 1     
+	   4 Input      8 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 1     
+	   4 Input      6 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 22    
+	   3 Input      5 Bit        Muxes := 3     
+	   6 Input      5 Bit        Muxes := 1     
+	   4 Input      5 Bit        Muxes := 1     
+	  10 Input      3 Bit        Muxes := 3     
+	   2 Input      3 Bit        Muxes := 1     
+	   4 Input      3 Bit        Muxes := 1     
+	  10 Input      2 Bit        Muxes := 2     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 115   
+	   3 Input      1 Bit        Muxes := 2     
+	  10 Input      1 Bit        Muxes := 7     
+	   4 Input      1 Bit        Muxes := 10    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module regs 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 32    
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 41    
+	   2 Input      1 Bit        Muxes := 32    
+Module pc 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   3 Input      1 Bit        Muxes := 1     
+Module pc_id 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+Module id 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      5 Bit        Muxes := 17    
+	   3 Input      5 Bit        Muxes := 3     
+	   6 Input      5 Bit        Muxes := 1     
+	   4 Input      5 Bit        Muxes := 1     
+	  10 Input      3 Bit        Muxes := 1     
+	  10 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 6     
+	   3 Input      1 Bit        Muxes := 1     
+	  10 Input      1 Bit        Muxes := 3     
+Module id_ex 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 4     
+	                5 Bit    Registers := 3     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input      5 Bit        Muxes := 3     
+Module mux3_1 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+Module ex 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 4     
+	   3 Input     32 Bit       Adders := 1     
+	   2 Input     31 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 2     
+	   2 Input      1 Bit         XORs := 1     
++---Multipliers : 
+	                32x32  Multipliers := 2     
+	                31x31  Multipliers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 14    
+	   4 Input     32 Bit        Muxes := 6     
+	   7 Input     32 Bit        Muxes := 2     
+	   5 Input     32 Bit        Muxes := 1     
+	  10 Input     32 Bit        Muxes := 6     
+	  10 Input      3 Bit        Muxes := 2     
+	   2 Input      3 Bit        Muxes := 1     
+	   4 Input      3 Bit        Muxes := 1     
+	  10 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 6     
+	   4 Input      1 Bit        Muxes := 3     
+	  10 Input      1 Bit        Muxes := 4     
+Module div 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     33 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 3     
+	   2 Input      6 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               65 Bit    Registers := 1     
+	               32 Bit    Registers := 2     
+	                6 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     65 Bit        Muxes := 11    
+	   4 Input     65 Bit        Muxes := 2     
+	   2 Input     32 Bit        Muxes := 4     
+	   4 Input     32 Bit        Muxes := 2     
+	   2 Input      6 Bit        Muxes := 1     
+	   4 Input      6 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 2     
+	   4 Input      1 Bit        Muxes := 7     
+Module ex_mem 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 5     
+	                5 Bit    Registers := 1     
+	                1 Bit    Registers := 4     
+Module mem_stage 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+Module mem 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+Module mem_wb 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 6     
+	                5 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
+Module wb 
+Detailed RTL Component Info : 
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 3     
+	   2 Input     32 Bit        Muxes := 10    
+	   2 Input     16 Bit        Muxes := 1     
+	   4 Input      8 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 2     
+Module ram 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 64    
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 64    
+Module rom 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     11 Bit       Adders := 1     
+	   2 Input      6 Bit       Adders := 1     
++---Registers : 
+	               11 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   2 Input     11 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module vga_control 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     12 Bit       Adders := 2     
++---Registers : 
+	               16 Bit    Registers := 1     
+	               12 Bit    Registers := 2     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input     12 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 4     
+Module vga_drive 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     10 Bit       Adders := 1     
+	   3 Input     10 Bit       Adders := 11    
++---Registers : 
+	               16 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 22    
+	   2 Input      1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:225]
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:220]
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.srcs/sources_1/imports/srcs/rtl/ex.v:207]
+DSP Report: Generating DSP reg_w_data_o2, operation Mode is: A*B.
+DSP Report: operator reg_w_data_o2 is absorbed into DSP reg_w_data_o2.
+DSP Report: operator reg_w_data_o2 is absorbed into DSP reg_w_data_o2.
+DSP Report: Generating DSP reg_w_data_o2, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator reg_w_data_o2 is absorbed into DSP reg_w_data_o2.
+DSP Report: operator reg_w_data_o2 is absorbed into DSP reg_w_data_o2.
+DSP Report: Generating DSP reg_w_data_o0, operation Mode is: A*B.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: Generating DSP reg_w_data_o2, operation Mode is: C+A*B.
+DSP Report: operator reg_w_data_o2 is absorbed into DSP reg_w_data_o2.
+DSP Report: operator reg_w_data_o2 is absorbed into DSP reg_w_data_o2.
+DSP Report: Generating DSP reg_w_data_o0, operation Mode is: A*B.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: Generating DSP reg_w_data_o0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: Generating DSP reg_w_data_o0, operation Mode is: C+A*B.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: Generating DSP reg_w_data_o0, operation Mode is: A*B.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: Generating DSP reg_w_data_o0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: Generating DSP reg_w_data_o0, operation Mode is: A*B.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: Generating DSP reg_w_data_o0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+DSP Report: operator reg_w_data_o0 is absorbed into DSP reg_w_data_o0.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_ex/\div_func_o_reg[2] )
+WARNING: [Synth 8-3332] Sequential element (div_func_o_reg[2]) is unused and will be removed from module ex.
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[8]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[10]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[11]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[12]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[13]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[14]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[15]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[16]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[17]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[18]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[19]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[20]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[21]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[22]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[23]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[24]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[25]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[26]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[27]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[28]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[29]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[30]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[9]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[7]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[6]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[0]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[1]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[2]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[3]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[4]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[31]_LDC )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\u_risc_v_soc/u_risc_v_pipe_top /u_div/\dividend_reg[5]_LDC )
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[31]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[31]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[30]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[30]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[29]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[29]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[28]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[28]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[27]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[27]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[26]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[26]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[25]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[25]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[24]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[24]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[23]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[23]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[22]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[22]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[21]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[21]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[20]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[20]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[19]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[19]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[18]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[18]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[17]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[17]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[16]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[16]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[15]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[15]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[14]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[14]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[13]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[13]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[12]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[12]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[11]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[11]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[10]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[10]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[9]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[9]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[8]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[8]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[7]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[7]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[6]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[6]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[5]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[5]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[4]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[4]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[3]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[3]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[2]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[2]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[1]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[1]_C) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[0]_LDC) is unused and will be removed from module div.
+WARNING: [Synth 8-3332] Sequential element (dividend_reg[0]_C) is unused and will be removed from module div.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:37 . Memory (MB): peak = 944.633 ; gain = 409.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping  Report (see note below)
++------------+-----------------------------+-----------+----------------------+---------------+
+|Module Name | RTL Object                  | Inference | Size (Depth x Width) | Primitives    | 
++------------+-----------------------------+-----------+----------------------+---------------+
+|top_module  | u_risc_v_soc/u_rom/_rom_reg | Implied   | 64 x 32              | RAM64M x 11   | 
++------------+-----------------------------+-----------+----------------------+---------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+
+DSP: Preliminary Mapping  Report (see note below)
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|ex          | A*B            | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ex          | (PCIN>>17)+A*B | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ex          | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ex          | C+A*B          | 18     | 15     | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ex          | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ex          | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ex          | C+A*B          | 18     | 16     | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ex          | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ex          | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ex          | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|ex          | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5578] Moved timing constraint from pin 'u_vga_top/u_vga_clk/clk_out1' to pin 'u_vga_top/u_vga_clk/bbstub_clk_out1/O'
+WARNING: [Synth 8-565] redefining clock 'clk_100MHz'
+INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 951.770 ; gain = 416.711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1148.660 ; gain = 613.602
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping  Report
++------------+-----------------------------+-----------+----------------------+---------------+
+|Module Name | RTL Object                  | Inference | Size (Depth x Width) | Primitives    | 
++------------+-----------------------------+-----------+----------------------+---------------+
+|top_module  | u_risc_v_soc/u_rom/_rom_reg | Implied   | 64 x 32              | RAM64M x 11   | 
++------------+-----------------------------+-----------+----------------------+---------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 1193.203 ; gain = 658.145
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:01 ; elapsed = 00:01:02 . Memory (MB): peak = 1197.816 ; gain = 662.758
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:01 ; elapsed = 00:01:02 . Memory (MB): peak = 1197.816 ; gain = 662.758
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:02 ; elapsed = 00:01:02 . Memory (MB): peak = 1197.816 ; gain = 662.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:02 ; elapsed = 00:01:02 . Memory (MB): peak = 1197.816 ; gain = 662.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:02 ; elapsed = 00:01:03 . Memory (MB): peak = 1197.816 ; gain = 662.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:02 ; elapsed = 00:01:03 . Memory (MB): peak = 1197.816 ; gain = 662.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |code          |         1|
+|2     |vga_clk       |         1|
+|3     |zero_cell     |         1|
+|4     |one_cell      |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+----------+------+
+|      |Cell      |Count |
++------+----------+------+
+|1     |code      |     1|
+|2     |one_cell  |     1|
+|3     |vga_clk   |     1|
+|4     |zero_cell |     1|
+|5     |BUFG      |     1|
+|6     |CARRY4    |   151|
+|7     |DSP48E1   |     6|
+|8     |DSP48E1_1 |     2|
+|9     |LUT1      |   205|
+|10    |LUT2      |   954|
+|11    |LUT3      |   282|
+|12    |LUT4      |   470|
+|13    |LUT5      |   850|
+|14    |LUT6      |  2174|
+|15    |MUXF7     |   520|
+|16    |MUXF8     |   128|
+|17    |RAM64M    |    11|
+|18    |FDCE      |  3713|
+|19    |FDRE      |   124|
+|20    |LD        |    67|
+|21    |IBUF      |     2|
+|22    |OBUF      |    14|
++------+----------+------+
+
+Report Instance Areas: 
++------+----------------------+----------------+------+
+|      |Instance              |Module          |Cells |
++------+----------------------+----------------+------+
+|1     |top                   |                |  9739|
+|2     |  u_risc_v_soc        |risc_v_soc      |  9312|
+|3     |    u_ram             |ram             |  3023|
+|4     |    u_risc_v_pipe_top |risc_v_pipe_top |  6178|
+|5     |      u_div           |div             |   335|
+|6     |      u_ex            |ex              |   328|
+|7     |      u_ex_mem        |ex_mem          |   895|
+|8     |      u_id_ex         |id_ex           |   979|
+|9     |      u_mem_stage     |mem_stage       |    32|
+|10    |      u_mem_wb        |mem_wb          |  1431|
+|11    |      u_pc            |pc              |    75|
+|12    |      u_pc_id         |pc_id           |   247|
+|13    |      u_regs          |regs            |  1856|
+|14    |    u_rom             |rom             |   110|
+|15    |  u_vga_top           |vga_top         |   410|
+|16    |    u_vga_control     |vga_control     |   351|
+|17    |    u_vga_drive       |vga_drive       |    58|
+|18    |      u_pic_drive     |pic_drive       |    32|
++------+----------------------+----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:02 ; elapsed = 00:01:03 . Memory (MB): peak = 1197.816 ; gain = 662.758
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 141 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:54 ; elapsed = 00:01:00 . Memory (MB): peak = 1197.816 ; gain = 502.051
+Synthesis Optimization Complete : Time (s): cpu = 00:01:02 ; elapsed = 00:01:03 . Memory (MB): peak = 1197.816 ; gain = 662.758
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 885 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-140] Inserted 1 IBUFs to IO ports without IO buffers.
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1197.816 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 78 instances were transformed.
+  LD => LDCE: 67 instances
+  RAM64M => RAM64M (RAMD64E, RAMD64E, RAMD64E, RAMD64E): 11 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+122 Infos, 210 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:08 ; elapsed = 00:01:09 . Memory (MB): peak = 1197.816 ; gain = 895.793
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1197.816 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/synth_1/top_module.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file top_module_utilization_synth.rpt -pb top_module_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Jan  7 22:12:55 2023...
