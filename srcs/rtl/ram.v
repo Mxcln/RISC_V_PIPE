@@ -18,7 +18,6 @@ module ram(
 
     reg     [`MEM_ADDR]   r_data;
 
-
     //访存：组合逻辑
     always@(*) begin
         if(arst_n == `RST_ENABLE) begin
@@ -29,7 +28,7 @@ module ram(
                 r_data = w_data_i;
             end
             else begin
-                r_data = _ram[r_addr_i[31:2]];
+                r_data = _ram[r_addr_i[13:2]];
             end
         end
         else begin
@@ -48,7 +47,7 @@ module ram(
             end
         end
         else if(w_ena_i) begin
-            _ram[w_addr_i[31:2]] <= w_data_i;
+            _ram[w_addr_i[13:2]] <= w_data_i;
         end
     end
 
