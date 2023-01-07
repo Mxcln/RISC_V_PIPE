@@ -1,0 +1,2 @@
+zero_cell.v,verilog,xil_defaultlib,../../../../RISC_V_PIPE.srcs/sources_1/ip/zero_cell/sim/zero_cell.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v

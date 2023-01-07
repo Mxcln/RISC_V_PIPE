@@ -12,7 +12,10 @@ module ram(
     input   wire    [`MEM_ADDR]             w_addr_i ,       //写入地址
     input   wire    [`MEM]                  w_data_i ,       //写入数据
 
-    output  wire    [`MEM]                  r_data_o         //访存输出数据
+    output  wire    [`MEM]                  r_data_o ,       //访存输出数据
+
+    output  wire    [31:0]                  ram_data_1,
+    output  wire    [31:0]                  ram_data_2
 );
     reg     [`MEM_ADDR]     _ram[0 : `MEM_DEEPTH - 1] ;
 
@@ -28,7 +31,7 @@ module ram(
                 r_data = w_data_i;
             end
             else begin
-                r_data = _ram[r_addr_i[13:2]];
+                r_data = _ram[r_addr_i[7:2]];
             end
         end
         else begin
@@ -47,8 +50,11 @@ module ram(
             end
         end
         else if(w_ena_i) begin
-            _ram[w_addr_i[13:2]] <= w_data_i;
+            _ram[w_addr_i[7:2]] <= w_data_i;
         end
     end
+
+    assign  ram_data_1 = _ram[59];
+    assign  ram_data_2 = _ram[58];
 
 endmodule

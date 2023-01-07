@@ -1,0 +1,452 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
+| Date         : Sat Jan  7 22:14:22 2023
+| Host         : LAPTOP-9152C9NR running 64-bit major release  (build 9200)
+| Command      : report_methodology -file top_module_methodology_drc_routed.rpt -pb top_module_methodology_drc_routed.pb -rpx top_module_methodology_drc_routed.rpx
+| Design       : top_module
+| Device       : xc7a35tcpg236-1
+| Speed File   : -1
+| Design State : Fully Routed
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max violations: <unlimited>
+             Violations found: 82
++-----------+------------------+----------------------------------------------------+------------+
+| Rule      | Severity         | Description                                        | Violations |
++-----------+------------------+----------------------------------------------------+------------+
+| TIMING-4  | Critical Warning | Invalid primary clock redefinition on a clock tree | 1          |
+| TIMING-6  | Critical Warning | No common primary clock between related clocks     | 1          |
+| TIMING-7  | Critical Warning | No common node between related clocks              | 1          |
+| TIMING-27 | Critical Warning | Invalid primary clock on hierarchical pin          | 1          |
+| LUTAR-1   | Warning          | LUT drives async reset alert                       | 1          |
+| SYNTH-10  | Warning          | Wide multiplier                                    | 8          |
+| TIMING-18 | Warning          | Missing input or output delay                      | 2          |
+| TIMING-20 | Warning          | Non-clocked latch                                  | 67         |
++-----------+------------------+----------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+TIMING-4#1 Critical Warning
+Invalid primary clock redefinition on a clock tree  
+Invalid clock redefinition on a clock tree. The primary clock u_vga_top/u_vga_clk/inst/clk_in1 is defined downstream of clock clk_100MHz and overrides its insertion delay and/or waveform definition
+Related violations: <none>
+
+TIMING-6#1 Critical Warning
+No common primary clock between related clocks  
+The clocks clk_100MHz and clk_out1_vga_clk are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_100MHz] -to [get_clocks clk_out1_vga_clk]
+Related violations: <none>
+
+TIMING-7#1 Critical Warning
+No common node between related clocks  
+The clocks clk_100MHz and clk_out1_vga_clk are related (timed together) but they have no common node. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_100MHz] -to [get_clocks clk_out1_vga_clk]
+Related violations: <none>
+
+TIMING-27#1 Critical Warning
+Invalid primary clock on hierarchical pin  
+A primary clock u_vga_top/u_vga_clk/inst/clk_in1 is created on an inappropriate internal pin u_vga_top/u_vga_clk/inst/clk_in1. It is not recommended to create a primary clock on a hierarchical pin when its driver pin has a fanout connected to multiple clock pins
+Related violations: <none>
+
+LUTAR-1#1 Warning
+LUT drives async reset alert  
+LUT cell u_risc_v_soc/u_ram/rgb_data[10]_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) u_vga_top/u_vga_control/addr_h_reg[0]/CLR, u_vga_top/u_vga_control/addr_h_reg[10]/CLR, u_vga_top/u_vga_control/addr_h_reg[11]/CLR, u_vga_top/u_vga_control/addr_h_reg[1]/CLR, u_vga_top/u_vga_control/addr_h_reg[2]/CLR, u_vga_top/u_vga_control/addr_h_reg[3]/CLR, u_vga_top/u_vga_control/addr_h_reg[4]/CLR, u_vga_top/u_vga_control/addr_h_reg[5]/CLR, u_vga_top/u_vga_control/addr_h_reg[6]/CLR, u_vga_top/u_vga_control/addr_h_reg[7]/CLR, u_vga_top/u_vga_control/addr_h_reg[8]/CLR, u_vga_top/u_vga_control/addr_h_reg[9]/CLR, u_vga_top/u_vga_control/addr_v_reg[0]/CLR, u_vga_top/u_vga_control/addr_v_reg[10]/CLR, u_vga_top/u_vga_control/addr_v_reg[11]/CLR (the first 15 of 3713 listed). The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+SYNTH-10#1 Warning
+Wide multiplier  
+Detected multiplier at u_risc_v_soc/u_risc_v_pipe_top/u_ex/reg_w_data_o0 of size 18x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#2 Warning
+Wide multiplier  
+Detected multiplier at u_risc_v_soc/u_risc_v_pipe_top/u_ex/reg_w_data_o0__0 of size 16x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#3 Warning
+Wide multiplier  
+Detected multiplier at u_risc_v_soc/u_risc_v_pipe_top/u_ex/reg_w_data_o0__1 of size 18x16, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#4 Warning
+Wide multiplier  
+Detected multiplier at u_risc_v_soc/u_risc_v_pipe_top/u_ex/reg_w_data_o0__2 of size 16x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#5 Warning
+Wide multiplier  
+Detected multiplier at u_risc_v_soc/u_risc_v_pipe_top/u_ex/reg_w_data_o0__3 of size 18x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#6 Warning
+Wide multiplier  
+Detected multiplier at u_risc_v_soc/u_risc_v_pipe_top/u_ex/reg_w_data_o0__4 of size 18x16, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#7 Warning
+Wide multiplier  
+Detected multiplier at u_risc_v_soc/u_risc_v_pipe_top/u_ex/reg_w_data_o2 of size 15x18, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+SYNTH-10#8 Warning
+Wide multiplier  
+Detected multiplier at u_risc_v_soc/u_risc_v_pipe_top/u_ex/reg_w_data_o2__0 of size 18x15, it is decomposed from a wide multipler into 4 DSP blocks.
+Related violations: <none>
+
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on arst_n relative to clock(s) clk_100MHz
+Related violations: <none>
+
+TIMING-18#2 Warning
+Missing input or output delay  
+An input delay is missing on hold relative to clock(s) clk_100MHz
+Related violations: <none>
+
+TIMING-20#1 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/div_func_o_reg[0] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/div_func_o_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#2 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/div_func_o_reg[1] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/div_func_o_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#3 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/div_hold_o_reg cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/div_hold_o_reg/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#4 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[0] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#5 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[10] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[10]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#6 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[11] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[11]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#7 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[12] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[12]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#8 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[13] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[13]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#9 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[14] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[14]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#10 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[15] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[15]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#11 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[16] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[16]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#12 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[17] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[17]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#13 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[18] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[18]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#14 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[19] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[19]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#15 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[1] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#16 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[20] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[20]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#17 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[21] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[21]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#18 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[22] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[22]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#19 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[23] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[23]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#20 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[24] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[24]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#21 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[25] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[25]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#22 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[26] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[26]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#23 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[27] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[27]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#24 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[28] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[28]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#25 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[29] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[29]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#26 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[2] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[2]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#27 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[30] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[30]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#28 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[31] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[31]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#29 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[3] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[3]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#30 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[4] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[4]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#31 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[5] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[5]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#32 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[6] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[6]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#33 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[7] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[7]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#34 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[8] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[8]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#35 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[9] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/dividend_o_reg[9]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#36 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[0] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#37 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[10] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[10]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#38 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[11] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[11]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#39 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[12] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[12]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#40 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[13] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[13]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#41 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[14] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[14]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#42 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[15] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[15]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#43 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[16] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[16]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#44 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[17] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[17]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#45 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[18] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[18]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#46 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[19] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[19]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#47 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[1] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#48 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[20] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[20]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#49 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[21] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[21]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#50 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[22] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[22]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#51 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[23] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[23]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#52 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[24] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[24]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#53 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[25] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[25]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#54 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[26] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[26]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#55 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[27] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[27]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#56 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[28] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[28]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#57 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[29] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[29]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#58 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[2] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[2]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#59 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[30] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[30]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#60 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[31] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[31]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#61 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[3] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[3]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#62 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[4] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[4]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#63 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[5] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[5]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#64 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[6] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[6]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#65 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[7] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[7]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#66 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[8] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[8]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#67 Warning
+Non-clocked latch  
+The latch u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[9] cannot be properly analyzed as its control pin u_risc_v_soc/u_risc_v_pipe_top/u_ex/divisor_o_reg[9]/G is not reached by a timing clock
+Related violations: <none>
+
+

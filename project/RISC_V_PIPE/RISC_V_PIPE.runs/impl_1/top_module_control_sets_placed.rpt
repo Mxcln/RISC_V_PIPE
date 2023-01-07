@@ -1,0 +1,195 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.1 (win64) Build 2552052 Fri May 24 14:49:42 MDT 2019
+| Date         : Sat Jan  7 22:13:49 2023
+| Host         : LAPTOP-9152C9NR running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file top_module_control_sets_placed.rpt
+| Design       : top_module
+| Device       : xc7a35t
+---------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |   117 |
+|    Minimum number of control sets                        |   117 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    72 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |   117 |
+| >= 0 to < 4        |     5 |
+| >= 4 to < 6        |     1 |
+| >= 6 to < 8        |     0 |
+| >= 8 to < 10       |     0 |
+| >= 10 to < 12      |     2 |
+| >= 12 to < 14      |     2 |
+| >= 14 to < 16      |     0 |
+| >= 16              |   107 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              70 |           31 |
+| No           | No                    | Yes                    |              51 |           14 |
+| No           | Yes                   | No                     |              12 |            9 |
+| Yes          | No                    | No                     |              95 |           37 |
+| Yes          | No                    | Yes                    |            3662 |         1633 |
+| Yes          | Yes                   | No                     |              14 |            7 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------------------------------------------------+------------------------------------------------------------------+-----------------------------------------------------+------------------+----------------+
+|                       Clock Signal                       |                           Enable Signal                          |                   Set/Reset Signal                  | Slice Load Count | Bel Load Count |
++----------------------------------------------------------+------------------------------------------------------------------+-----------------------------------------------------+------------------+----------------+
+|  u_risc_v_soc/u_risc_v_pipe_top/u_id_ex/inst_o_reg[14]_2 |                                                                  |                                                     |                1 |              1 |
+|  u_vga_top/u_vga_clk/inst/clk_out1                       | u_vga_top/u_vga_control/h_sync                                   | u_risc_v_soc/u_ram/arst_n                           |                1 |              1 |
+|  u_vga_top/u_vga_clk/inst/clk_out1                       | u_vga_top/u_vga_control/v_sync                                   | u_risc_v_soc/u_ram/arst_n                           |                1 |              1 |
+|  clk_100MHz_IBUF_BUFG                                    |                                                                  |                                                     |                2 |              3 |
+|  clk_100MHz_IBUF_BUFG                                    |                                                                  | u_risc_v_soc/u_ram/arst_n                           |                2 |              3 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_div/cnt[5]_i_2_n_1              | u_risc_v_soc/u_risc_v_pipe_top/u_div/cnt[5]_i_1_n_1 |                1 |              4 |
+|  u_vga_top/u_vga_clk/inst/clk_out1                       | u_vga_top/u_vga_control/E[0]                                     | u_risc_v_soc/u_ram/arst_n                           |                6 |             10 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_rom/counter                                       | u_risc_v_soc/u_ram/arst_n                           |                3 |             11 |
+|  u_vga_top/u_vga_clk/inst/clk_out1                       |                                                                  | u_vga_top/u_vga_control/SR[0]                       |                9 |             12 |
+|  u_vga_top/u_vga_clk/inst/clk_out1                       | u_vga_top/u_vga_control/cnt_v[0]_i_1_n_1                         | u_risc_v_soc/u_ram/arst_n                           |                3 |             12 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_div/p_2_in[63]                  |                                                     |               11 |             31 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_42[0]    | u_risc_v_soc/u_ram/arst_n                           |               18 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_pc/pc_addr_o[31]_i_1_n_1        | u_risc_v_soc/u_ram/arst_n                           |                9 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_div/divisor[31]_i_1_n_1         |                                                     |                8 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_34[0]    | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_div/p_2_in[5]                   |                                                     |               18 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_35[0]    | u_risc_v_soc/u_ram/arst_n                           |               12 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_39[0]    | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_37[0]    | u_risc_v_soc/u_ram/arst_n                           |               19 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_14       | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/E[0]                     | u_risc_v_soc/u_ram/arst_n                           |               17 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[2]_1[0] | u_risc_v_soc/u_ram/arst_n                           |               25 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[3]_2[0] | u_risc_v_soc/u_ram/arst_n                           |               13 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[3]_3[0] | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[3]_5[0] | u_risc_v_soc/u_ram/arst_n                           |               20 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[3]_7[0] | u_risc_v_soc/u_ram/arst_n                           |               14 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[3]_8[0] | u_risc_v_soc/u_ram/arst_n                           |                8 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[4]_3[0] | u_risc_v_soc/u_ram/arst_n                           |               11 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[3]_0[0] | u_risc_v_soc/u_ram/arst_n                           |               12 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[3]_1[0] | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[3]_4[0] | u_risc_v_soc/u_ram/arst_n                           |               19 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[2]_0[0] | u_risc_v_soc/u_ram/arst_n                           |               21 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[3]_6[0] | u_risc_v_soc/u_ram/arst_n                           |                9 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[4]_0[0] | u_risc_v_soc/u_ram/arst_n                           |               14 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[4]_2[0] | u_risc_v_soc/u_ram/arst_n                           |               10 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[4]_1[0] | u_risc_v_soc/u_ram/arst_n                           |               18 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_8[0] | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_1[0] | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[6]_2[0] | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_2[0] | u_risc_v_soc/u_ram/arst_n                           |                6 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[6]_1[0] | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[4]_4[0] | u_risc_v_soc/u_ram/arst_n                           |               17 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[4]_5[0] | u_risc_v_soc/u_ram/arst_n                           |               18 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_4[0] | u_risc_v_soc/u_ram/arst_n                           |                8 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[5]_3[0] | u_risc_v_soc/u_ram/arst_n                           |               13 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[6]_7[0] | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[5]_2[0] | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[4]_6[0] | u_risc_v_soc/u_ram/arst_n                           |               11 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_6[0] | u_risc_v_soc/u_ram/arst_n                           |                7 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[5]_1[0] | u_risc_v_soc/u_ram/arst_n                           |               18 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[6]_4[0] | u_risc_v_soc/u_ram/arst_n                           |               11 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_3[0] | u_risc_v_soc/u_ram/arst_n                           |                9 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[6]_0[0] | u_risc_v_soc/u_ram/arst_n                           |               28 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[5]_0[0] | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_9[0] | u_risc_v_soc/u_ram/arst_n                           |                9 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[6]_3[0] | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[6]_5[0] | u_risc_v_soc/u_ram/arst_n                           |               22 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_7[0] | u_risc_v_soc/u_ram/arst_n                           |               22 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_0[0] | u_risc_v_soc/u_ram/arst_n                           |               12 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[7]_5[0] | u_risc_v_soc/u_ram/arst_n                           |               18 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_addr_o_reg[6]_6[0] | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_10[0]    | u_risc_v_soc/u_ram/arst_n                           |               13 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_11[0]    | u_risc_v_soc/u_ram/arst_n                           |                8 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_12[0]    | u_risc_v_soc/u_ram/arst_n                           |               13 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_0[0]     | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_9[0]     | u_risc_v_soc/u_ram/arst_n                           |               17 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_23[0]    | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_21[0]    | u_risc_v_soc/u_ram/arst_n                           |               14 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_6[0]     | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_19[0]    | u_risc_v_soc/u_ram/arst_n                           |               19 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_18[0]    | u_risc_v_soc/u_ram/arst_n                           |               11 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_22[0]    | u_risc_v_soc/u_ram/arst_n                           |               17 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_14[0]    | u_risc_v_soc/u_ram/arst_n                           |               18 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_8[0]     | u_risc_v_soc/u_ram/arst_n                           |               18 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_4[0]     | u_risc_v_soc/u_ram/arst_n                           |               12 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_2[0]     | u_risc_v_soc/u_ram/arst_n                           |               17 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_20[0]    | u_risc_v_soc/u_ram/arst_n                           |               12 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_5[0]     | u_risc_v_soc/u_ram/arst_n                           |               14 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_16[0]    | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_13[0]    | u_risc_v_soc/u_ram/arst_n                           |               17 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_3[0]     | u_risc_v_soc/u_ram/arst_n                           |               13 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_7[0]     | u_risc_v_soc/u_ram/arst_n                           |               14 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_15[0]    | u_risc_v_soc/u_ram/arst_n                           |               14 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/mem_w_ena_o_reg_17[0]    | u_risc_v_soc/u_ram/arst_n                           |               12 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_25[0]    | u_risc_v_soc/u_ram/arst_n                           |               17 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_18[0]    | u_risc_v_soc/u_ram/arst_n                           |                7 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_20[0]    | u_risc_v_soc/u_ram/arst_n                           |               19 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_24[0]    | u_risc_v_soc/u_ram/arst_n                           |               14 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_23[0]    | u_risc_v_soc/u_ram/arst_n                           |               12 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_21[0]    | u_risc_v_soc/u_ram/arst_n                           |               25 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_19[0]    | u_risc_v_soc/u_ram/arst_n                           |               12 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_17[0]    | u_risc_v_soc/u_ram/arst_n                           |               11 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_22[0]    | u_risc_v_soc/u_ram/arst_n                           |                8 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_26[0]    | u_risc_v_soc/u_ram/arst_n                           |               20 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_29[0]    | u_risc_v_soc/u_ram/arst_n                           |                8 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_27[0]    | u_risc_v_soc/u_ram/arst_n                           |               16 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_16[0]    | u_risc_v_soc/u_ram/arst_n                           |                9 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_15[0]    | u_risc_v_soc/u_ram/arst_n                           |               11 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_28[0]    | u_risc_v_soc/u_ram/arst_n                           |               22 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_30[0]    | u_risc_v_soc/u_ram/arst_n                           |               21 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_32[0]    | u_risc_v_soc/u_ram/arst_n                           |                9 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_38[0]    | u_risc_v_soc/u_ram/arst_n                           |               19 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_40[0]    | u_risc_v_soc/u_ram/arst_n                           |               19 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_41[0]    | u_risc_v_soc/u_ram/arst_n                           |               22 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_43[0]    | u_risc_v_soc/u_ram/arst_n                           |               21 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_44[0]    | u_risc_v_soc/u_ram/arst_n                           |               15 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_31[0]    | u_risc_v_soc/u_ram/arst_n                           |               11 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_33[0]    | u_risc_v_soc/u_ram/arst_n                           |               24 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_45[0]    | u_risc_v_soc/u_ram/arst_n                           |               11 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_mem_wb/reg_w_ena_o_reg_36[0]    | u_risc_v_soc/u_ram/arst_n                           |               18 |             32 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_div/result_o[31]_i_1_n_1        | u_risc_v_soc/u_ram/arst_n                           |               14 |             33 |
+|  clk_100MHz_IBUF_BUFG                                    | hold_IBUF                                                        |                                                     |               11 |             44 |
+|  u_vga_top/u_vga_clk/inst/clk_out1                       |                                                                  | u_risc_v_soc/u_ram/arst_n                           |               12 |             48 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_id_ex/E[0]                      | u_risc_v_soc/u_ram/arst_n                           |               14 |             64 |
+|  n_0_5133_BUFG                                           |                                                                  |                                                     |               28 |             66 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_ex/hold                         | u_risc_v_soc/u_ram/arst_n                           |               41 |            148 |
+|  clk_100MHz_IBUF_BUFG                                    | u_risc_v_soc/u_risc_v_pipe_top/u_ex_mem/p_0_in                   | u_risc_v_soc/u_ram/arst_n                           |              105 |            288 |
++----------------------------------------------------------+------------------------------------------------------------------+-----------------------------------------------------+------------------+----------------+
+
+

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Sat Jan  7 21:34:05 2023
+# Process ID: 83984
+# Current directory: C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/zero_cell_synth_1
+# Command line: vivado.exe -log zero_cell.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source zero_cell.tcl
+# Log file: C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/zero_cell_synth_1/zero_cell.vds
+# Journal file: C:/Users/Max/Desktop/RISC_V_PIPE/project/RISC_V_PIPE/RISC_V_PIPE.runs/zero_cell_synth_1\vivado.jou
+#-----------------------------------------------------------
+source zero_cell.tcl -notrace

@@ -249,6 +249,18 @@ always@(*)begin
                         div_w_ena = `DIV_ENABLE    ;
                     end
                     end 
+                    default: begin
+                        dividend_o = 0;
+                        divisor_o = 0;
+                        jump_flag_o =0;
+                        jump_addr_o =0;
+                        mem_w_data_o=0;
+                        mem_r_addr_o=0;
+                        mem_w_addr_o=0;
+                        div_func_o  =0;
+                        reg_w_data_o=0;
+                        div_w_ena = 0;
+                    end
             endcase
         end
         else begin
@@ -352,7 +364,7 @@ always@(*)begin
                 jump_flag_o = `JUMP_DISABLE;
                 jump_addr_o = `ZERO_WORD;
                 reg_w_data_o = `ZERO_WORD;
-                mem_w_data_o =`ZERO_WORD;
+                //mem_w_data_o =`ZERO_WORD;
                 mem_w_addr_o = op1_add_op2_res;
                 mem_r_addr_o = op1_add_op2_res;    
                 mem_w_data_o = reg2_r_data_i; 
