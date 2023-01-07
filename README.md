@@ -116,6 +116,25 @@
 | out    | mem_w_data_o  | 32    | 向 mem 写回的数据     |
 | out    | mem_w_ena_o   | 1     | 向 mem 写回的使能信号 |
 
+
+#### 除法模块  `div.v`
+| in/out | input/output | width | comments              |
+| ------ | ------------ | ----- | --------------------- |
+| in     | clk_100MHz   | 1     | 系统输入时钟          |
+| in     | arst_n       | 1     | 系统复位              |
+| in     | dividend_i   | 32    | 被除数               |
+| in     | divisor_i    | 32    | 除数                 |
+| in     | start_i      | 1     | 除法开始信号          |
+| in     | div_func     | 3     | 除法指令的类型        |
+| out    | result_o     | 32    | 除法结果              |
+| out    | ready_o      | 1     | 除法结束信号          |
+
+除法模块采用试商法实现除法，结构上是一个状态机，有STATE_IDLE(闲置)，STATE_START(运作)，STATE_ZERO(除数为0的无效输入)，STATE_END(计算结束)四个状态。
+在执行模块未收到除法指令时，停留在STATE_IDLE状态，输出均为0。当ex收到除法信号后，start_i信号为有效，判断除数是否为零，若为0则进入STATE_ZERO状态，若非0进入运作状态，并根据指令对输入的除数与被除数取补码原码。
+在STATE_START状态下，通过试商法对被除数每一位取部分商，每取一位将被除数左移，这个过程需要32个周期，在此时间内除法模块对外界输出ready_o=0,在执行模块中对收到的ready_i信号处理，转化为div_hold(除法保持信号)，输出到ctrl控制模块。ctrl模块对pc,pc_id以及id_ex模块输入保持信号，让新的指令不再输入到ex，直到除法完成，将结果根据输入指令取原码与补码，赋值给result_o。进入STATE_END状态。
+在STATE_ZERO状态下，将除法结果result_o赋为0，直接在下一个周期进入STATE_END状态。
+在STATE_END状态下，输出ready_o变为有效，ex模块在接受到ready_i有效之后，将start_i信号无效，使除法模块回到STATE_IDLE状态。同时div_hold信号无效，流水线继续流动。
+
 #### 执行-访存 `ex_mem.v`
 
 | in/out | input/output | width | comments              |
@@ -290,3 +309,4 @@
 | in     | w_addr_i     | 32    | 需要写入的地址       |
 | in     | w_data_i     | 32    | 需要写入的数据       |
 | out    | r_data_o     | 32    | 输出读取的数据       |
+

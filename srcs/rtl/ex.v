@@ -128,7 +128,7 @@ always@(*)begin
                 mem_w_data_o = `ZERO_WORD;
                 mem_r_addr_o = `ZERO_WORD;
                 mem_w_addr_o = `ZERO_WORD;
-                reg_w_data_o = {32{(op1_ge_op2_signed)}} & 32'h1;
+                reg_w_data_o = {32{()}} & 32'h1;
             end
             `INST_SLTIU: begin
                 jump_flag_o = `JUMP_DISABLE;
